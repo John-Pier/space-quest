@@ -1,6 +1,5 @@
 import {NgModule} from "@angular/core";
-import {BrowserModule, EVENT_MANAGER_PLUGINS} from "@angular/platform-browser";
-import {UxButtonModule, UxHammerPluginPatchA6} from "@netcracker/ux-ng2/library";
+import {BrowserModule} from "@angular/platform-browser";
 import {AppComponent} from "./app.component";
 
 @NgModule({
@@ -8,16 +7,9 @@ import {AppComponent} from "./app.component";
     AppComponent
   ],
   imports: [
-    BrowserModule,
-    UxButtonModule
+    BrowserModule
   ],
   providers: [
-      // fix hammerjs bugs http://wsm-0911:3003/patches/hammer-plugin
-      {
-          provide: EVENT_MANAGER_PLUGINS,
-          useClass: UxHammerPluginPatchA6,
-          multi: true
-      }
   ],
   bootstrap: [AppComponent]
 })
