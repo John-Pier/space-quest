@@ -1,0 +1,39 @@
+.font-face(@file-name, @font-family, @font-weight: 400, @font-style: normal) {
+    @font-face {
+        font-family: "@{font-family}";
+        src: url("../../fonts/@{file-name}.woff") format('woff');
+        font-weight: @font-weight;
+        font-style: @font-style;
+    }
+}
+
+.font-face(notosans_regular, NotoSans, 300);
+.font-face(notosans_regular, NotoSans, 400);
+.font-face(notosans_regular, NotoSans, 500);
+.font-face(notosans_bold, NotoSans, 700);
+
+@font-family: NotoSans, sans-serif;
+
+.font-light() {
+    font-family: @font-family;
+    font-weight: 300;
+    font-style: normal;
+}
+
+.font-regular() {
+    font-family: @font-family;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.font-medium() {
+    font-family: @font-family;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.font-bold() {
+    font-family: @font-family;
+    font-weight: 700;
+    font-style: normal;
+}

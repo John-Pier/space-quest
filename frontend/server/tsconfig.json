@@ -1,0 +1,17 @@
+{
+    "include": [
+        "./server.ts"
+    ],
+    "exclude": [],
+    "compilerOptions": {
+        "target": "es2015",
+        "module": "commonjs",
+         "lib": [
+             "es2017",
+             "dom",
+             "es6"
+         ],
+        "outDir": "./",
+        "rootDir": "./"
+    }
+}
