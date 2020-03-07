@@ -3,7 +3,7 @@
     "version": 1,
     "newProjectRoot": "projects",
     "projects": {
-        "a8": {
+        "space-quest": {
             "projectType": "application",
             "schematics": {
                 "@schematics/angular:component": {
@@ -17,7 +17,7 @@
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
-                        "outputPath": "dist/a8",
+                        "outputPath": "dist",
                         "index": "src/index.html",
                         "main": "src/main.ts",
                         "polyfills": "src/polyfills.ts",
@@ -55,6 +55,13 @@
                                     "maximumWarning": "2mb",
                                     "maximumError": "5mb"
                                 }
+                            ],
+                            "styles": [
+                                {
+                                    "input": "src/assets/themes/base/styles/base.less",
+                                    "bundleName": "base",
+                                    "lazy": true
+                                }
                             ]
                         },
                         "hmr": {
@@ -70,22 +77,22 @@
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "options": {
-                        "browserTarget": "a8:build"
+                        "browserTarget": "space-quest:build"
                     },
                     "configurations": {
                         "production": {
-                            "browserTarget": "a8:build:production"
+                            "browserTarget": "space-quest:build:production"
                         },
                         "hmr": {
                             "hmr": true,
-                            "browserTarget": "a8:build:hmr"
+                            "browserTarget": "space-quest:build:hmr"
                         }
                     }
                 },
                 "extract-i18n": {
                     "builder": "@angular-devkit/build-angular:extract-i18n",
                     "options": {
-                        "browserTarget": "a8:build"
+                        "browserTarget": "space-quest:build"
                     }
                 },
                 "test": {
@@ -122,16 +129,16 @@
                     "builder": "@angular-devkit/build-angular:protractor",
                     "options": {
                         "protractorConfig": "e2e/protractor.conf.js",
-                        "devServerTarget": "a8:serve"
+                        "devServerTarget": "space-quest:serve"
                     },
                     "configurations": {
                         "production": {
-                            "devServerTarget": "a8:serve:production"
+                            "devServerTarget": "space-quest:serve:production"
                         }
                     }
                 }
             }
         }
     },
-    "defaultProject": "a8"
+    "defaultProject": "space-quest"
 }
