@@ -3,13 +3,14 @@
     "version": "0.0.1",
     "scripts": {
         "ng": "ng",
-        "start": "ng serve -o",
+        "start": "gulp svg && ng serve --open --port 4201",
         "hmr": "ng serve --configuration hmr -o",
         "server": "tsc-watch --onSuccess \"node ./server/server.js\"  --onFailure \"echo Beep! Compilation Failed\" --compiler typescript/bin/tsc -p ./server/",
         "svg": "gulp svg",
         "build": "ng build --prod",
         "build:server": "webpack-dev-server --open --entry /webpack-dev-server --output-path dist/space-quest --compress --content-base dist/space-quest --history-api-fallback",
         "test": "ng test",
+        "less": "gulp less && gulp less:inject",
         "lint": "ng lint",
         "e2e": "ng e2e",
         "report": "webpack-bundle-analyzer dist/space-quest/stats-es2015.json"
@@ -45,6 +46,7 @@
         "gulp": "^4.0.2",
         "gulp-inject": "^5.0.4",
         "gulp-rename": "^1.4.0",
+        "gulp-rev": "^9.0.0",
         "gulp-svgmin": "^2.2.0",
         "gulp-svgstore": "^7.0.1",
         "jasmine-core": "~3.4.0",

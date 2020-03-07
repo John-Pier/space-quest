@@ -7,7 +7,7 @@ import {ChangeDetectionStrategy, Component, HostBinding} from "@angular/core";
 })
 export class SPQAuthComponent {
 
-    @HostBinding("class.rbm-auth")
+    @HostBinding("class.spq-auth")
     private hostClass: boolean = true;
 
     constructor() {

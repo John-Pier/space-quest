@@ -5,20 +5,17 @@ const gulp     = require("gulp"),
     svgmin     = require("gulp-svgmin"),
     rename     = require("gulp-rename"),
     inject     = require("gulp-inject"),
+    rev = require("gulp-rev"),
     svgstore   = require("gulp-svgstore");
-
 
 gulp.task("svg", () => {
     let svgs = gulp
-        .src("./src/assets/images/icons/*.svg")
+        .src("./src/assets/themes/base/images/icons/*.svg")
         .pipe(svgmin(function (file) {
             let prefix = path.basename(file.relative, path.extname(file.relative));
 
             return {
                 plugins: [
-                    {
-                        removeViewBox: false
-                    },
                     {
                         removeTitle: true
                     },
@@ -54,6 +51,25 @@ gulp.task("svg", () => {
         .pipe(gulp.dest("src"));
 });
 
+gulp.task("less", () =>
+    gulp.src("./dist/*.css")
+        .pipe(rev())
+        .pipe(rev.manifest())
+        .pipe(gulp.dest("dist/assets"))
+);
+
+gulp.task("less:inject", () => {
+    let target = gulp.src("./dist/index.html"),
+        src = gulp.src("./dist/base*.css", {read: false});
+
+    function fileContents(filePath, file) {
+        return `<link id="spqCurrentLinkStylesheetID" rel="stylesheet" href="./${filePath.split("/dist/")[1]}">`;
+    }
+
+    return target
+        .pipe(inject(src, {transform: fileContents}), {relative: false})
+        .pipe(gulp.dest("dist"));
+});
 
 /*HELPERS*/
 process.on("uncaughtException", (err) => {
@@ -67,4 +83,3 @@ gulp.on("err", (gulpErr) => {
         console.error("Gulp error details", [gulpErr.err.message, gulpErr.err.stack, gulpErr.err.errors].filter(Boolean));
     }
 });
-
