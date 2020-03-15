@@ -12,5 +12,5 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 `npm run build:server` - static web server watching at ./dist/* folder 
 `npm run report` - look at bundle
 
-##About
+## About
 `SPQ` - project prefix
