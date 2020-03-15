@@ -2,7 +2,7 @@ import {Component, HostBinding} from "@angular/core";
 
 @Component({
     selector: "spq-quest",
-    templateUrl: "quest.component.component.html",
+    templateUrl: "quest.component.html",
 })
 export class SPQQuesComponent {
 
