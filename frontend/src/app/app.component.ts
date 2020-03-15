@@ -1,7 +1,7 @@
-import {Component, ViewEncapsulation} from "@angular/core";
+import {Component, ViewEncapsulation} from '@angular/core';
 
 @Component({
-    selector: 'app-root',
+    selector: 'spq-root',
     templateUrl: './app.component.html',
     encapsulation: ViewEncapsulation.None
 })
