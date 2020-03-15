@@ -1,7 +1,7 @@
 import {NgModule} from "@angular/core";
 import {BrowserModule} from "@angular/platform-browser";
 import {RouterModule} from "@angular/router";
-import {appRoutes} from "./app-routers";
+import {spqRoutes} from "./app-routers";
 import {AppComponent} from "./app.component";
 
 @NgModule({
@@ -10,7 +10,7 @@ import {AppComponent} from "./app.component";
     ],
     imports: [
         BrowserModule,
-        RouterModule.forRoot(appRoutes)
+        RouterModule.forRoot(spqRoutes)
     ],
     providers: [],
     bootstrap: [AppComponent]

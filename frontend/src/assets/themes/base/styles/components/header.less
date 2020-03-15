@@ -3,6 +3,24 @@
 .spq-header {
     width: 100%;
     display: flex;
-
+    flex-flow: row nowrap;
     background-color: @light;
+
+    &__inner {
+        display: flex;
+        justify-content: center;
+        padding-bottom: 10px;
+    }
+
+    &__main-label {
+        padding: 5px;
+
+        &-text {
+            font-size: 18px;
+        }
+    }
+
+    &__tabs {
+        padding: 5px;
+    }
 }

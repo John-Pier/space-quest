@@ -6,7 +6,6 @@ import {SPQTimelineComponent} from "./timeline.component";
 const TimelineRouters: Routes = [
     {
         path: "",
-        pathMatch: "full",
         component: SPQTimelineComponent
     }
 ];
