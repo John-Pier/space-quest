@@ -1,5 +1,5 @@
 export type SPQTabsModel = {
-    tabsName: string,
+    tabName: string,
     route: string
-    customModel: any
+    customModel?: any
 }
