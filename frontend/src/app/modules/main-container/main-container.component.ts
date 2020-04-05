@@ -20,19 +20,19 @@ export class SPQMainContainerComponent implements OnInit {
         this._models = [
             {
                 tabName: "Main",
-                route: "/timeline",
+                route: "/main/timeline",
             },
             {
                 tabName: "game",
-                route: "/game",
+                route: "/main/game",
             },
             {
                 tabName: "LOL",
-                route: "/game",
+                route: "/main/game",
             },
             {
                 tabName: "404",
-                route: "/404",
+                route: "/main/404",
             }
         ];
 

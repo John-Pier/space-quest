@@ -11,5 +11,9 @@
 </div>
 
 <ng-template #tabTemplate let-model="model">
-    <button mat-button (click)="_navigateTo(model.route)">{{model.tabName}}</button>
+    <button mat-button
+            color="primary"
+            (click)="_navigateTo(model.route)">
+        {{model.tabName}}
+    </button>
 </ng-template>
