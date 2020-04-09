@@ -1,5 +1,6 @@
 import {Routes} from "@angular/router";
 import {SPQRoutesString} from "../../app-routers";
+import {SPQNotFoundComponent} from "../../components/not-found/not-found.component";
 
 export const MAIN_ROUTES: Routes = [
     {
@@ -16,7 +17,15 @@ export const MAIN_ROUTES: Routes = [
         loadChildren: () => import("../quest/quest.module").then(m => m.SPQQuestModule)
     },
     {
+        path: SPQRoutesString.SPQ_USER_PROFILE,
+        loadChildren: () => import("../user-profile/user-profile.module").then(m => m.SPQUserProfileModule)
+    },
+    {
+        path: SPQRoutesString.SPQ_NOT_FOUND,
+        component: SPQNotFoundComponent
+    },
+    {
         path: '**',
-        redirectTo: SPQRoutesString.SPQ_TIMELINE
+        redirectTo: SPQRoutesString.SPQ_NOT_FOUND
     }
 ];

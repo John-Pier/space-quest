@@ -1,30 +1,12 @@
-import {Routes} from "@angular/router";
-
 export enum SPQRoutesString {
     SPQ_MAIN = "main",
     SPQ_AUTH = "auth",
     SPQ_TIMELINE = "timeline",
-    SPQ_QUEST ="quest"
+    SPQ_QUEST = "quest",
+    SPQ_QUEST_STEP = "quest:id",
+    SPQ_USER_PROFILE = "profile",
+    SPQ_NOT_FOUND = "not-found"
 }
 
-export const spqRoutes: Routes = [
-    {
-        path: SPQRoutesString.SPQ_AUTH,
-        loadChildren: () => import("./modules/auth/auth.module").then(m => m.SPQAuthModule)
-    },
-    {
-        path: SPQRoutesString.SPQ_MAIN,
-        loadChildren: () => import("./modules/main-container/main-container.module").then(m => m.SPQMainContainerModule)
-    },
-    {
-        path: "",
-        pathMatch: "full",
-        redirectTo: SPQRoutesString.SPQ_MAIN
-    },
-    {
-        path: "**",
-        redirectTo: SPQRoutesString.SPQ_MAIN
-    }
-];
 
 

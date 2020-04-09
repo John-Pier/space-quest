@@ -23,16 +23,16 @@ export class SPQMainContainerComponent implements OnInit {
                 route: "/main/timeline",
             },
             {
-                tabName: "game",
-                route: "/main/game",
+                tabName: "quest",
+                route: "/main/quest",
             },
             {
-                tabName: "LOL",
-                route: "/main/game",
+                tabName: "profile",
+                route: "/main/profile",
             },
             {
                 tabName: "404",
-                route: "/main/404",
+                route: "/main/lol",
             }
         ];
 
