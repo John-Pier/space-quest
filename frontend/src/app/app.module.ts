@@ -32,7 +32,7 @@ export const spqRoutes: Routes = [
     ],
     imports: [
         BrowserModule,
-        RouterModule.forRoot(spqRoutes, {preloadingStrategy: PreloadAllModules, onSameUrlNavigation: "reload", enableTracing: true}),
+        RouterModule.forRoot(spqRoutes, {preloadingStrategy: PreloadAllModules, onSameUrlNavigation: "reload"}),
         MatSliderModule,
         BrowserAnimationsModule
     ],

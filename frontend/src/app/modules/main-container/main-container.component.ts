@@ -1,4 +1,5 @@
 import {Component, HostBinding, OnInit} from "@angular/core";
+import {SPQRoutesMap, SPQRoutesString} from "../../app-routers";
 import {SPQTabsModel} from "../../components/header/model/tabs.type";
 import {SPQNavigationService} from "../../services/navigation.service";
 
@@ -20,18 +21,18 @@ export class SPQMainContainerComponent implements OnInit {
         this._models = [
             {
                 tabName: "Main",
-                route: "/main/timeline",
+                route: SPQRoutesMap[SPQRoutesString.SPQ_TIMELINE],
             },
             {
-                tabName: "quest",
-                route: "/main/quest",
+                tabName: "Quest",
+                route: SPQRoutesMap[SPQRoutesString.SPQ_QUEST],
             },
             {
-                tabName: "profile",
-                route: "/main/profile",
+                tabName: "Profile",
+                route: SPQRoutesMap[SPQRoutesString.SPQ_USER_PROFILE],
             },
             {
-                tabName: "404",
+                tabName: "Test 404",
                 route: "/main/lol",
             }
         ];
