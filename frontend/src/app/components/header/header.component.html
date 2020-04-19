@@ -1,8 +1,18 @@
 <div class="spq-header__inner">
     <div class="spq-header__main-label">
-       <div class="spq-header__main-label-text">Header типо</div>
+        <ng-template [ngTemplateOutlet]="logoLabelTemplate ? logoLabelTemplate : logoLabelTemplate">
+        </ng-template>
     </div>
     <div class="spq-header__tabs">
-        Табы
+        <div class="spq-header__tab"
+        *ngFor="let model of models">
+            <ng-template [ngTemplateOutlet]="template"
+                         [ngTemplateOutletContext]="{model: model}">
+            </ng-template>
+        </div>
     </div>
 </div>
+
+<ng-template #logoLabelTemplate>
+    <div class="spq-header__main-label-text">{{logoLabel}}</div>
+</ng-template>
