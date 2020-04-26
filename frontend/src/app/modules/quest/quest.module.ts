@@ -1,6 +1,8 @@
 import {CommonModule} from "@angular/common";
-import {NgModule} from "@angular/core";
+import {NgModule, Type} from "@angular/core";
+import {MatRippleModule} from "@angular/material";
 import {RouterModule, Routes} from "@angular/router";
+import {SPQQuestStepCubeComponent} from "./components/quest-step-cube.component";
 import {SPQQuesComponent} from "./quest.component";
 
 const QuestRoutes: Routes = [
@@ -10,16 +12,22 @@ const QuestRoutes: Routes = [
     }
 ];
 
+const matModules: Array<Type<any>> = [
+    MatRippleModule
+];
+
 @NgModule({
     declarations: [
-        SPQQuesComponent
+        SPQQuesComponent,
+        SPQQuestStepCubeComponent
     ],
     exports: [
         SPQQuesComponent
     ],
     imports: [
         CommonModule,
-        RouterModule.forChild(QuestRoutes)
+        RouterModule.forChild(QuestRoutes),
+        ...matModules
     ],
     providers: []
 
