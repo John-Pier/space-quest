@@ -1,10 +1,12 @@
 @import "./../../common/colors.less";
+@import "./../../common/mixins.less";
 
 .spq-main-container {
     width: 100%;
     display: flex;
     flex-flow: row nowrap;
-    overflow: hidden;
+    height: 100%;
+    overflow-x: hidden;
 
     &__inner {
         padding: 0 10px;
@@ -19,6 +21,18 @@
     &__wrapper {
         width: 94%;
         margin: 0 3%;
-        background-color: @lighter;
+        background-color: @main-background-color-light;
+        overflow: auto;
+        height: calc(100% - var(--spq-heder-height, 45));
+        -webkit-overflow-scrolling: touch;
+        overflow-scrolling: touch;
+    }
+
+    &__wrapper::-webkit-scrollbar-thumb {
+        .webkit-scrollbar-thumb();
+    }
+
+    &__wrapper::-webkit-scrollbar {
+        .webkit-scrollbar();
     }
 }

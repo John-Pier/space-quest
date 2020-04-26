@@ -3,6 +3,11 @@
 @import "./mixins.less";
 @import "./normalize.less";
 
+//Variables
+:root {
+    --spq-heder-height: 45px;
+}
+
 * {
     box-sizing: border-box;
 
@@ -18,4 +23,5 @@ html, body {
 body {
     .font-regular();
     color: @main;
+    background-color: @main-background-color;
 }
