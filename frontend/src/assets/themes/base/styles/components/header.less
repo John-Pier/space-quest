@@ -2,9 +2,12 @@
 
 .spq-header {
     width: 100%;
+    height: var(--spq-heder-height, 45);
     display: flex;
     flex-flow: row nowrap;
-    background-color: @light;
+    background-color: @nav-color;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 
     &__inner {
         display: flex;
@@ -15,8 +18,8 @@
     &__main-label {
         display: flex;
         justify-content: center;
-        margin: 0 auto;
         padding: 5px;
+        margin: auto 0;
 
         &-text {
             font-size: 18px;
@@ -28,6 +31,7 @@
         margin: 0 5px;
         display: flex;
         flex-flow: row nowrap;
+        align-items: center;
     }
 
     &__tab {

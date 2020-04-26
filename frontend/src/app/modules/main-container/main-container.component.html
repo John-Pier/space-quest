@@ -12,7 +12,7 @@
 
 <ng-template #tabTemplate let-model="model">
     <button mat-button
-            color="primary"
+            disableRipple="true"
             (click)="_navigateTo(model.route)">
         {{model.tabName}}
     </button>
