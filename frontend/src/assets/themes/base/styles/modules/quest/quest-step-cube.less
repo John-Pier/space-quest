@@ -1,4 +1,5 @@
 @import "./../../common/colors.less";
+@import "./../../common/common.less";
 
 .spq-quest-step-cube {
     display: flex;
@@ -14,14 +15,34 @@
         // border: 1px solid @primary-light-80;
         // background-color: @primary-light-20;
         background: linear-gradient(to bottom, @primary-light-20, @primary);
+        user-select: none;
 
+        &.selected {
+            background: @primary-light-80 none;
+
+            .spq-quest-step-cube__text {
+                color: @primary;
+            }
+
+            .spq-quest-step-cube__text-subtitle {
+                color: @primary-light-20;
+            }
+
+            .spq-quest-step-cube__serial-number {
+                .hidden;
+            }
+        }
+
+        &:hover {
+            .selected;
+        }
     }
 
     &__text {
         display: flex;
         flex-flow: column nowrap;
         justify-content: center;
-        align-items: center;
+        align-items: flex-start;
         z-index: 10;
         width: 100%;
         height: 100%;
@@ -45,16 +66,16 @@
     }
 
     &__serial-number {
+        position: absolute;
+        height: 104px;
         left:20px;
         top: -10px;
-        height: 104px;
-        position: absolute;
-        color: @primary-light-80;
         font-style: normal;
         font-weight: 800;
         font-size: 100px;
         line-height: 122px;
         text-align: center;
         opacity: 0.4;
+        color: @primary-light-80;
     }
 }

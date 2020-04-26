@@ -1,4 +1,5 @@
 <div class="spq-quest-step-cube__inner"
+     [class.selected]="isSelected"
      matRipple>
     <div class="spq-quest-step-cube__text">
         <div class="spq-quest-step-cube__text-title">
@@ -8,7 +9,6 @@
             {{subtitle}}
         </div>
     </div>
-
     <div class="spq-quest-step-cube__serial-number">
         {{serialNumber}}
     </div>

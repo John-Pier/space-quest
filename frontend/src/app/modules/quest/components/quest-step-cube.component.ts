@@ -1,8 +1,9 @@
-import {Component, HostBinding, Input} from "@angular/core";
+import {ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output} from "@angular/core";
 
 @Component({
     selector: "spq-quest-step-cube",
     templateUrl: "quest-step-cube.component.html",
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SPQQuestStepCubeComponent {
 
@@ -14,6 +15,12 @@ export class SPQQuestStepCubeComponent {
 
     @Input()
     public serialNumber: number;
+
+    @Input()
+    public isSelected: boolean = false
+
+    @Output()
+    public onClick: EventEmitter<string> = new EventEmitter<string>()
 
     @HostBinding("class.spq-quest-step-cube")
     private hostClass: boolean = true;
