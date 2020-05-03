@@ -1,3 +1,10 @@
-<div>
-    auth
+<div class="spq-auth__inner">
+    <div class="spq-auth__inner-form">
+        <div [formGroup]="_loginForm">
+            <mat-form-field appearance="standard">
+                <mat-label>Login</mat-label>
+                <input type="text" formControlName="email" matInput>
+            </mat-form-field>
+        </div>
+    </div>
 </div>

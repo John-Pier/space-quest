@@ -13,5 +13,6 @@ export const SPQRoutesMap = {
     [SPQRoutesString.SPQ_TIMELINE]: "/" + SPQRoutesString.SPQ_MAIN + "/" + SPQRoutesString.SPQ_TIMELINE,
     [SPQRoutesString.SPQ_USER_PROFILE]: "/" + SPQRoutesString.SPQ_MAIN + "/" + SPQRoutesString.SPQ_USER_PROFILE,
     [SPQRoutesString.SPQ_QUEST]: "/" + SPQRoutesString.SPQ_MAIN + "/" + SPQRoutesString.SPQ_QUEST,
+    [SPQRoutesString.SPQ_AUTH]: "/" + SPQRoutesString.SPQ_AUTH,
 };
 

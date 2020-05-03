@@ -1,11 +1,10 @@
 import {CommonModule} from "@angular/common";
-import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {NgModule} from "@angular/core";
+import {ReactiveFormsModule} from "@angular/forms";
+import {MatFormFieldModule, MatInputModule, MatTabsModule} from "@angular/material/";
 import {RouterModule, Routes} from "@angular/router";
-import {SPQStorageService} from "../../services/storage.service";
+import {SPQAuthDataService} from "../../services/data/auth-data.service";
 import {SPQAuthComponent} from "./auth.component";
-import {SPQAuthInterceptor} from "./services/auth-interceptor.service";
-import {SessionStorageService} from "./services/session-storage.service";
 
 const authRouters: Routes = [
     {
@@ -14,18 +13,14 @@ const authRouters: Routes = [
     }
 ];
 
-const httpInterceptorProviders = [
-    {
-        provide: HTTP_INTERCEPTORS,
-        useClass: SPQAuthInterceptor,
-        multi: true
-    }
-];
-
 @NgModule({
     imports: [
         CommonModule,
-        RouterModule.forChild(authRouters)
+        RouterModule.forChild(authRouters),
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatTabsModule
     ],
     declarations: [
         SPQAuthComponent
@@ -34,11 +29,7 @@ const httpInterceptorProviders = [
         SPQAuthComponent
     ],
     providers: [
-        {
-            provide: SPQStorageService,
-            useClass: SessionStorageService
-        },
-        ...httpInterceptorProviders
+        SPQAuthDataService
     ]
 })
 export class SPQAuthModule {}

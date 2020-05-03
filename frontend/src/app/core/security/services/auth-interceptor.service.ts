@@ -1,14 +1,14 @@
 import {HttpHandler, HttpInterceptor, HttpRequest} from "@angular/common/http";
 import {Injectable} from "@angular/core";
+import {TOKEN_HEADER_KEY} from "../../../modules/auth/types/auth.type";
 import {SPQStorageService} from "../../../services/storage.service";
-import {TOKEN_HEADER_KEY} from "../types/auth.type";
 
 @Injectable()
 export class SPQAuthInterceptor implements HttpInterceptor {
 
     constructor(private token: SPQStorageService) {}
 
-    intercept(httpRequest: HttpRequest<any>, next: HttpHandler) {
+    public intercept(httpRequest: HttpRequest<any>, next: HttpHandler) {
         let authRequest = httpRequest;
         const token = this.token.getToken();
         if (token != null) {

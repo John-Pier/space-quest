@@ -1,9 +1,9 @@
 import {Injectable} from "@angular/core";
+import {AUTHORITIES_KEY, TOKEN_KEY, USER_ID_KEY, USERNAME_KEY} from "../../../modules/auth/types/auth.type";
 import {SPQStorageService} from "../../../services/storage.service";
-import {AUTHORITIES_KEY, TOKEN_KEY, USER_ID_KEY, USERNAME_KEY} from "../types/auth.type";
 
 @Injectable()
-export class SessionStorageService implements SPQStorageService {
+export class SPQSessionStorageService implements SPQStorageService {
 
     private roles: Array<string>;
 
