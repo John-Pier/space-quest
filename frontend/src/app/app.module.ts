@@ -5,6 +5,9 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {PreloadAllModules, RouterModule, Routes} from "@angular/router";
 import {SPQRoutesString} from "./app-routers";
 import {AppComponent} from "./app.component";
+import {localAppAPIConfig, SPQ_APP_API_CONFIG} from "./app.config";
+import {SPQAuthGuard} from "./modules/auth/auth.guard";
+import {SPQAuthModule} from "./modules/auth/auth.module";
 
 export const spqRoutes: Routes = [
     {
@@ -13,6 +16,7 @@ export const spqRoutes: Routes = [
     },
     {
         path: SPQRoutesString.SPQ_MAIN,
+        canActivate: [SPQAuthGuard],
         loadChildren: () => import("./modules/main-container/main-container.module").then(m => m.SPQMainContainerModule)
     },
     {
@@ -32,11 +36,17 @@ export const spqRoutes: Routes = [
     ],
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
         RouterModule.forRoot(spqRoutes, {preloadingStrategy: PreloadAllModules, onSameUrlNavigation: "reload"}),
-        MatSliderModule,
-        BrowserAnimationsModule
+        SPQAuthModule,
+        MatSliderModule
     ],
-    providers: [],
+    providers: [
+        {
+            provide: SPQ_APP_API_CONFIG,
+            useValue: localAppAPIConfig
+        }
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {}

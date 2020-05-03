@@ -2,8 +2,10 @@ import {CommonModule} from "@angular/common";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {NgModule} from "@angular/core";
 import {RouterModule, Routes} from "@angular/router";
+import {SPQAuthDataService} from "../../services/data/auth-data.service";
 import {SPQStorageService} from "../../services/storage.service";
 import {SPQAuthComponent} from "./auth.component";
+import {SPQAuthGuard} from "./auth.guard";
 import {SPQAuthInterceptor} from "./services/auth-interceptor.service";
 import {SessionStorageService} from "./services/session-storage.service";
 
@@ -38,6 +40,8 @@ const httpInterceptorProviders = [
             provide: SPQStorageService,
             useClass: SessionStorageService
         },
+        SPQAuthGuard,
+        SPQAuthDataService,
         ...httpInterceptorProviders
     ]
 })
