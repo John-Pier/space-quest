@@ -47,7 +47,7 @@ export const spqRoutes: Routes = [
         {
             provide: SPQ_APP_API_CONFIG,
             useValue: localAppAPIConfig
-        },
+        }
     ],
     bootstrap: [AppComponent]
 })
