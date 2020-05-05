@@ -1,9 +1,12 @@
 import {CommonModule} from "@angular/common";
 import {NgModule} from "@angular/core";
+import {ReactiveFormsModule} from "@angular/forms";
+import {MatButtonModule, MatFormFieldModule, MatInputModule, MatTabsModule} from "@angular/material/";
 import {RouterModule, Routes} from "@angular/router";
+import {SPQAuthDataService} from "../../services/data/auth-data.service";
 import {SPQAuthComponent} from "./auth.component";
 
-const AuthRouters: Routes = [
+const authRouters: Routes = [
     {
         path: "",
         component: SPQAuthComponent
@@ -13,7 +16,12 @@ const AuthRouters: Routes = [
 @NgModule({
     imports: [
         CommonModule,
-        RouterModule.forChild(AuthRouters)
+        RouterModule.forChild(authRouters),
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatTabsModule,
+        MatButtonModule
     ],
     declarations: [
         SPQAuthComponent
@@ -22,7 +30,7 @@ const AuthRouters: Routes = [
         SPQAuthComponent
     ],
     providers: [
-
+        SPQAuthDataService
     ]
 })
 export class SPQAuthModule {}

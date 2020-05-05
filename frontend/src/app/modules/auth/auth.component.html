@@ -1,3 +1,80 @@
-<div>
-    auth
+<div class="spq-auth__inner">
+    <div class="spq-auth__inner-form">
+        <mat-tab-group [dynamicHeight]="true"
+                       mat-align-tabs="center">
+            <mat-tab label="Вход">
+                <form class="spq-auth__form"
+                      [formGroup]="_loginForm"
+                      (ngSubmit)="onValidLoginClick()">
+                    <mat-form-field appearance="outline"
+                                    [hideRequiredMarker]="false">
+                        <mat-label>Email</mat-label>
+                        <input type="text"
+                               placeholder="Введите ваш Email"
+                               formControlName="email"
+                               matInput>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Пароль</mat-label>
+                        <input type="password"
+                               placeholder="Введите ваш пароль"
+                               formControlName="password"
+                               matInput>
+                        <mat-error *ngIf="_loginForm.invalid">{{getErrorMessage()}}</mat-error>
+                    </mat-form-field>
+                    <button class="spq-auth__form-submit"
+                            mat-button
+                            color="accent"
+                            type="submit"
+                            mat-raised-button
+                            [disabled]="!_loginForm.valid">
+                        Войти
+                    </button>
+                </form>
+            </mat-tab>
+            <mat-tab label="Регистрация">
+                <form class="spq-auth__form"
+                      [formGroup]="_registrationForm"
+                      (ngSubmit)="onValidRegisterClick()">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Ваше Имя</mat-label>
+                        <input type="text"
+                               placeholder="Имя"
+                               formControlName="firstName"
+                               matInput>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Ваша Фамилия</mat-label>
+                        <input type="text"
+                               placeholder="Фамилия"
+                               formControlName="lastName"
+                               matInput>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Email</mat-label>
+                        <input type="text"
+                               placeholder="Введите ваш Email"
+                               formControlName="email"
+                               matInput>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Пароль</mat-label>
+                        <input type="password"
+                               placeholder="Введите ваш пароль"
+                               formControlName="password"
+                               matInput>
+                    </mat-form-field>
+                    <button class="spq-auth__form-submit"
+                            mat-button
+                            color="accent"
+                            mat-raised-button
+                            [formAction]="'submit'"
+                            [disabled]="!_registrationForm.valid">
+                        Зарегистрироваться
+                    </button>
+                </form>
+            </mat-tab>
+        </mat-tab-group>
+
+    </div>
 </div>

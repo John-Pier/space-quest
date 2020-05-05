@@ -13,8 +13,6 @@ const allowCrossDomain = (req, res, next) => {
     next();
 };
 
-
-// Add your mock router here
 const routers = [
     {
         url: 'home',
@@ -23,6 +21,10 @@ const routers = [
     {
         url: 'assets/i18n',
         middleware: appRouters.localizationRouter
+    },
+    {
+        url: 'api/v/n/1',
+        middleware: appRouters.authRouter
     }
 ];
 
