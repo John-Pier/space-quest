@@ -1,0 +1,11 @@
+<div class="spq-quest-flow__inner">
+    <div class="spq-quest-flow__flow">
+        <spq-quest-step-cube *ngFor="let node of values.nodes; trackBy:  _trackCubeById"
+                             class="spq-quest-flow__flow-cube"
+                             [title]="node.title"
+                             [subtitle]="node.subtitle"
+                             [serialNumber]="node.serialNumber"
+                             [isSelected]="node.isSelected">
+        </spq-quest-step-cube>
+    </div>
+</div>
