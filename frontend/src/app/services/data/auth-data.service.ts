@@ -13,6 +13,7 @@ const httpOptions = {
 export class SPQAuthDataService extends SPQDataService{
 
     private loginURL = "login";
+    private logoutURL = "logout";
     private registrationURL = "registration";
 
     public attemptAuthentication(authDataModel: SPQAuthDataModel): Observable<SPQJwtResponseModel> {
@@ -21,5 +22,9 @@ export class SPQAuthDataService extends SPQDataService{
 
     public attemptRegistration(registrationDataModel: SPQRegistrationDataModel): Observable<SPQJwtResponseModel> {
         return this.post<SPQRegistrationDataModel, SPQJwtResponseModel>(this.registrationURL, registrationDataModel, httpOptions);
+    }
+
+    public logout(): Observable<void> {
+        return this.post<void>(this.logoutURL, null);
     }
 }

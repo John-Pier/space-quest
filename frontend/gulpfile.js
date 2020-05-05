@@ -39,8 +39,6 @@ gulp.task("svg", () => {
         .pipe(rename({prefix: "icon-"}))
         .pipe(svgstore({inlineSvg: true}));
 
-    console.log(svgs.contents);
-
     function fileContents(filePath, file) {
         return file.contents.toString();
     }

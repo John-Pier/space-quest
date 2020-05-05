@@ -23,7 +23,7 @@ const routers = [
         middleware: appRouters.localizationRouter
     },
     {
-        url: '/api/v/n/1.0/',
+        url: 'api/v/n/1',
         middleware: appRouters.authRouter
     }
 ];

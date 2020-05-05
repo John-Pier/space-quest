@@ -8,7 +8,7 @@ export class SPQSessionStorageService implements SPQStorageService {
     private roles: Array<string>;
 
     public goOut(): void {
-        window.sessionStorage.clear();
+        [TOKEN_KEY, USERNAME_KEY, USER_ID_KEY, AUTHORITIES_KEY].forEach(window.sessionStorage.removeItem);
     }
 
     public saveToken(token: string): void {

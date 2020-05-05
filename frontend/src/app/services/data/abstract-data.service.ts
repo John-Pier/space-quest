@@ -13,12 +13,14 @@ export class SPQDataService {
         return `${this.config.PROTOCOL}://${this.config.HOST_NAME}:${this.config.PORT}${this.config.API_ADDRESS}${this.config.API_VERSION}/`;
     }
 
-    public get<T>(address: string, options: any = {}): Observable<T> {
-        return this.http.get<T>(this.makeURL(address), ...options);
+    public get<T>(address: string, options?: any): Observable<T> {
+        // @ts-ignore
+        return this.http.get<T>(this.makeURL(address), options ? options : {});
     }
 
     public post<T,M=T>(address: string, value: T, options: any = {}): Observable<M> {
-        return this.http.post<M>(this.makeURL(address), value, ...options);
+        // @ts-ignore
+        return this.http.post<M>(this.makeURL(address), value, options);
     }
 
     private makeURL(address: string): string {
