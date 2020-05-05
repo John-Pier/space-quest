@@ -19,7 +19,7 @@ export class SPQAuthDataService extends SPQDataService{
         return this.post<SPQAuthDataModel, SPQJwtResponseModel>(this.loginURL, authDataModel, httpOptions);
     }
 
-    public attemptRegistration(registrationDataModel: SPQRegistrationDataModel): Observable<string> {
-        return this.post<SPQRegistrationDataModel, string>(this.registrationURL, registrationDataModel, httpOptions);
+    public attemptRegistration(registrationDataModel: SPQRegistrationDataModel): Observable<SPQJwtResponseModel> {
+        return this.post<SPQRegistrationDataModel, SPQJwtResponseModel>(this.registrationURL, registrationDataModel, httpOptions);
     }
 }

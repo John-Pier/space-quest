@@ -10,7 +10,7 @@ export class SPQDataService {
     }
 
     public getAbsoluteAddress(): string {
-        return `${this.config.PROTOCOL}://${this.config.HOST_NAME}:${this.config.PORT}${this.config.API_ADDRESS}/`;
+        return `${this.config.PROTOCOL}://${this.config.HOST_NAME}:${this.config.PORT}${this.config.API_ADDRESS}${this.config.API_VERSION}/`;
     }
 
     public get<T>(address: string, options: any = {}): Observable<T> {

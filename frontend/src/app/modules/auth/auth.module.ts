@@ -1,7 +1,7 @@
 import {CommonModule} from "@angular/common";
 import {NgModule} from "@angular/core";
 import {ReactiveFormsModule} from "@angular/forms";
-import {MatFormFieldModule, MatInputModule, MatTabsModule} from "@angular/material/";
+import {MatButtonModule, MatFormFieldModule, MatInputModule, MatTabsModule} from "@angular/material/";
 import {RouterModule, Routes} from "@angular/router";
 import {SPQAuthDataService} from "../../services/data/auth-data.service";
 import {SPQAuthComponent} from "./auth.component";
@@ -20,7 +20,8 @@ const authRouters: Routes = [
         ReactiveFormsModule,
         MatFormFieldModule,
         MatInputModule,
-        MatTabsModule
+        MatTabsModule,
+        MatButtonModule
     ],
     declarations: [
         SPQAuthComponent
