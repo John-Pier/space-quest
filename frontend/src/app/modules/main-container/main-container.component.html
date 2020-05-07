@@ -1,7 +1,8 @@
 <div class="spq-main-container__inner">
     <div class="spq-main-container__header">
         <spq-header [logoLabel]="'Space Quest'"
-                    [template]="tabTemplate"
+                    [tabTemplate]="tabTemplate"
+                    [rightBarTemplate]="userInfoTemplate"
                     [models]="_models">
         </spq-header>
     </div>
@@ -15,5 +16,14 @@
             disableRipple="true"
             (click)="_navigateTo(model.route)">
         {{model.tabName}}
+    </button>
+</ng-template>
+
+<ng-template #userInfoTemplate>
+    <span class="spq-main-container__header-email">{{_userEmail}}</span>
+    <button mat-button
+            disableRipple="true"
+            (click)="_logoutClick()">
+        Выйти
     </button>
 </ng-template>

@@ -21,7 +21,7 @@ export class SPQSessionStorageService implements SPQStorageService {
         return sessionStorage.getItem(TOKEN_KEY);
     }
 
-    public saveUsername(username: string): void {
+    public saveUserEmail(username: string): void {
         window.sessionStorage.removeItem(USERNAME_KEY);
         window.sessionStorage.setItem(USERNAME_KEY, username);
     }
@@ -35,7 +35,7 @@ export class SPQSessionStorageService implements SPQStorageService {
         return Number(sessionStorage.getItem(USER_ID_KEY));
     }
 
-    public getUsername(): string {
+    public getUserEmail(): string {
         return sessionStorage.getItem(USERNAME_KEY);
     }
 

@@ -11,9 +11,11 @@
     user-select: none;
 
     &__inner {
+        width: 100%;
         display: flex;
-        justify-content: center;
-        padding-bottom: 10px;
+        align-items: center;
+        justify-content: space-around;
+        padding: 0 10px 10px;
     }
 
     &__main-label {
@@ -37,5 +39,12 @@
 
     &__tab {
         margin: 0 5px;
+    }
+
+    &__right-bar {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: center;
+        padding-left: 10px;
     }
 }

@@ -18,13 +18,11 @@ export class SPQHeaderComponent {
     public models: SPQTabsModel[];
 
     @Input()
-    public template: TemplateRef<any>;
+    public tabTemplate: TemplateRef<any>;
+
+    @Input()
+    public rightBarTemplate: TemplateRef<any>;
 
     @HostBinding("class.spq-header")
     private hostClass: boolean = true;
-
-    constructor() {
-    }
-
-
 }

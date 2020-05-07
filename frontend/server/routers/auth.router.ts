@@ -6,7 +6,6 @@ const errorAuthorization = "Error Authorization"
 const authRouter = express.Router();
 
 authRouter.post("/login", (req, res) => {
-    console.log(req.body)
     if (authStore.login.email === req.body.login) {
         res.status(200).json(mocks.authStore.login);
     } else {

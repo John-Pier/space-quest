@@ -28,7 +28,7 @@ export class SPQAuthGuard implements CanActivate, CanActivateChild, CanLoad {
 
     private isLogged(): boolean {
         return !!this.storageService.getToken()
-            && !!this.storageService.getUsername()
+            && !!this.storageService.getUserEmail()
             && !!this.storageService.getId();
     }
 }

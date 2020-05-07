@@ -28,13 +28,13 @@ export class SPQAuthService {
     }
 
     public setResponseModelToStore(response: SPQJwtResponseModel): void {
-        this.storageService.saveUsername(response.email);
+        this.storageService.saveUserEmail(response.email);
         this.storageService.saveId(response.id);
         this.storageService.saveToken(response.accessToken);
         this.storageService.saveAuthorities(response.authorities)
     }
 
     public isLoggedIn(): boolean {
-        return !!this.storageService.getToken() && !!this.storageService.getId() && !!this.storageService.getUsername();
+        return !!this.storageService.getToken() && !!this.storageService.getId() && !!this.storageService.getUserEmail();
     }
 }
