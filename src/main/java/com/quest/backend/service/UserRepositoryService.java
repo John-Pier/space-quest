@@ -17,12 +17,16 @@ public class UserRepositoryService{
         this.repository = repository;
     }
 
-    public List<User> findAllByLogin(String login) {
+    public User findAllByLogin(String login) {
         return repository.findAllByLogin(login);
     }
 
     public List<User> getAll() {
         log.info("get all users");
         return repository.findAll();
+    }
+
+    public User getUser(String login) {
+        return this.repository.findAllByEmail(login);
     }
 }

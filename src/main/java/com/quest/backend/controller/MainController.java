@@ -21,7 +21,7 @@ public class MainController {
     }
 
     @GetMapping(path = "/{login}")
-    public List<User> findByLogin(@PathVariable("login") String login) throws Exception{
+    public User findByLogin(@PathVariable("login") String login) throws Exception{
         return userService.findAllByLogin(login);
     }
 }
