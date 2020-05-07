@@ -17,6 +17,7 @@ export const spqRoutes: Routes = [
     {
         path: SPQRoutesString.SPQ_MAIN,
         canActivate: [SPQAuthGuard],
+        canActivateChild: [SPQAuthGuard],
         loadChildren: () => import("./modules/main-container/main-container.module").then(m => m.SPQMainContainerModule)
     },
     {

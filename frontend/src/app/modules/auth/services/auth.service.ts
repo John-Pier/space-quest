@@ -19,8 +19,8 @@ export class SPQAuthService {
         return this.dataService.attemptRegistration(registrationDataModel);
     }
 
-    public logout(): Observable<void> {
-        if (!this.isLoggedIn()) {
+    public logoutIfLogged(): Observable<void> {
+        if (this.isLoggedIn()) {
             this.storageService.goOut();
             return this.dataService.logout();
         }
@@ -28,13 +28,13 @@ export class SPQAuthService {
     }
 
     public setResponseModelToStore(response: SPQJwtResponseModel): void {
-        this.storageService.saveUsername(response.username);
+        this.storageService.saveUserEmail(response.email);
         this.storageService.saveId(response.id);
         this.storageService.saveToken(response.accessToken);
         this.storageService.saveAuthorities(response.authorities)
     }
 
     public isLoggedIn(): boolean {
-        return !!this.storageService.getToken() && !!this.storageService.getId() && !!this.storageService.getUsername();
+        return !!this.storageService.getToken() && !!this.storageService.getId() && !!this.storageService.getUserEmail();
     }
 }

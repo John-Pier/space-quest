@@ -11,17 +11,17 @@ export const MAIN_ROUTES: Routes = [
     },
     {
         path: SPQRoutesString.SPQ_TIMELINE,
-        canActivate: [SPQAuthGuard],
+        canLoad: [SPQAuthGuard],
         loadChildren: () => import("../timeline/timeline.module").then(m => m.SPQTimelineModule)
     },
     {
         path: SPQRoutesString.SPQ_QUEST,
-        canActivate: [SPQAuthGuard],
+        canLoad: [SPQAuthGuard],
         loadChildren: () => import("../quest/quest.module").then(m => m.SPQQuestModule)
     },
     {
         path: SPQRoutesString.SPQ_USER_PROFILE,
-        canActivate: [SPQAuthGuard],
+        canLoad: [SPQAuthGuard],
         loadChildren: () => import("../user-profile/user-profile.module").then(m => m.SPQUserProfileModule)
     },
     {

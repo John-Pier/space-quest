@@ -16,7 +16,7 @@ export class SPQAuthGuard implements CanActivate, CanActivateChild {
                 state: RouterStateSnapshot): boolean {
         return Boolean(
             this.storageService.getToken()
-            && this.storageService.getUsername()
+            && this.storageService.getUserEmail()
             && this.storageService.getId()
         );
     }

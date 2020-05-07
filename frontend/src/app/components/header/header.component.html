@@ -6,10 +6,13 @@
     <div class="spq-header__tabs">
         <div class="spq-header__tab"
         *ngFor="let model of models">
-            <ng-template [ngTemplateOutlet]="template"
+            <ng-template [ngTemplateOutlet]="tabTemplate"
                          [ngTemplateOutletContext]="{model: model}">
             </ng-template>
         </div>
+    </div>
+    <div class="spq-header__right-bar">
+        <template [ngTemplateOutlet]="rightBarTemplate"></template>
     </div>
 </div>
 

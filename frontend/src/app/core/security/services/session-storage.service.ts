@@ -8,7 +8,8 @@ export class SPQSessionStorageService implements SPQStorageService {
     private roles: Array<string>;
 
     public goOut(): void {
-        [TOKEN_KEY, USERNAME_KEY, USER_ID_KEY, AUTHORITIES_KEY].forEach(window.sessionStorage.removeItem);
+        Array.from([TOKEN_KEY, USERNAME_KEY, USER_ID_KEY, AUTHORITIES_KEY])
+            .forEach(key => window.sessionStorage.removeItem(key));
     }
 
     public saveToken(token: string): void {
@@ -20,7 +21,7 @@ export class SPQSessionStorageService implements SPQStorageService {
         return sessionStorage.getItem(TOKEN_KEY);
     }
 
-    public saveUsername(username: string): void {
+    public saveUserEmail(username: string): void {
         window.sessionStorage.removeItem(USERNAME_KEY);
         window.sessionStorage.setItem(USERNAME_KEY, username);
     }
@@ -34,7 +35,7 @@ export class SPQSessionStorageService implements SPQStorageService {
         return Number(sessionStorage.getItem(USER_ID_KEY));
     }
 
-    public getUsername(): string {
+    public getUserEmail(): string {
         return sessionStorage.getItem(USERNAME_KEY);
     }
 
