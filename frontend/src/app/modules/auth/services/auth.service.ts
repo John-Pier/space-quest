@@ -19,7 +19,7 @@ export class SPQAuthService {
         return this.dataService.attemptRegistration(registrationDataModel);
     }
 
-    public logout(): Observable<void> {
+    public logoutIfLogged(): Observable<void> {
         if (!this.isLoggedIn()) {
             this.storageService.goOut();
             return this.dataService.logout();

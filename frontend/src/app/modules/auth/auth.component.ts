@@ -29,6 +29,7 @@ export class SPQAuthComponent implements OnInit {
     public ngOnInit() {
         this.createLoginForm();
         this.createRegistrationForm();
+        this.subscribeToLogoutIfLogged();
     }
 
     public onValidRegisterClick(): void {
@@ -93,6 +94,10 @@ export class SPQAuthComponent implements OnInit {
             email: new FormControl("", [...this.getValidatorsForFields(), Validators.email]),
             password: new FormControl("", this.getValidatorsForFields()),
         });
+    }
+
+    private subscribeToLogoutIfLogged(): void {
+        this.authService.logoutIfLogged().subscribe();
     }
 
     private getValidatorsForFields(): ValidatorFn[] {

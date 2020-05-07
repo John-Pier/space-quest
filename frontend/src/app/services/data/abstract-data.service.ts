@@ -1,7 +1,11 @@
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Inject} from "@angular/core";
 import {Observable} from "rxjs";
 import {SPQ_APP_API_CONFIG, SPQAppAPIConfig} from "../../app.config";
+
+export const defaultHttpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 export class SPQDataService {
 
@@ -13,14 +17,14 @@ export class SPQDataService {
         return `${this.config.PROTOCOL}://${this.config.HOST_NAME}:${this.config.PORT}${this.config.API_ADDRESS}${this.config.API_VERSION}/`;
     }
 
-    public get<T>(address: string, options?: any): Observable<T> {
+    public get<T>(address: string, options: any = defaultHttpOptions): Observable<T> {
         // @ts-ignore
-        return this.http.get<T>(this.makeURL(address), options ? options : {});
+        return this.http.get<T>(this.makeURL(address), options);
     }
 
-    public post<T,M=T>(address: string, value: T, options: any = {}): Observable<M> {
+    public post<T>(address: string, value: any, options: any = defaultHttpOptions): Observable<T> {
         // @ts-ignore
-        return this.http.post<M>(this.makeURL(address), value, options);
+        return this.http.post<T>(this.makeURL(address), value, options);
     }
 
     private makeURL(address: string): string {
