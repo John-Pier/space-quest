@@ -28,7 +28,7 @@ export class SPQAuthService {
     }
 
     public setResponseModelToStore(response: SPQJwtResponseModel): void {
-        this.storageService.saveUsername(response.username);
+        this.storageService.saveUsername(response.email);
         this.storageService.saveId(response.id);
         this.storageService.saveToken(response.accessToken);
         this.storageService.saveAuthorities(response.authorities)
