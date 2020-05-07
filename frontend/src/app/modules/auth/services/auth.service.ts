@@ -20,7 +20,7 @@ export class SPQAuthService {
     }
 
     public logoutIfLogged(): Observable<void> {
-        if (!this.isLoggedIn()) {
+        if (this.isLoggedIn()) {
             this.storageService.goOut();
             return this.dataService.logout();
         }
