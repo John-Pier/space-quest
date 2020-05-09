@@ -1,3 +1,5 @@
+import {ID} from "../core/base.types";
+
 export abstract class SPQStorageService {
 
     abstract goOut(): void;
@@ -8,7 +10,7 @@ export abstract class SPQStorageService {
 
     abstract saveUserEmail(username: string): void;
 
-    abstract saveId(id: number): void;
+    abstract saveId(id: ID): void;
 
     abstract getId(): number;
 
@@ -17,4 +19,6 @@ export abstract class SPQStorageService {
     abstract saveAuthorities(authorities: string[]): void;
 
     abstract getAuthorities(): string[];
+
+    abstract isLoggedIn(): boolean;
 }

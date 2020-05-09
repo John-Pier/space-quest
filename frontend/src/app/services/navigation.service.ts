@@ -1,13 +1,34 @@
 import {Injectable} from "@angular/core";
 import {Router} from "@angular/router";
+import {defaultAbsoluteRoute} from "../app-routers";
+import {SPQNavigationHistoryService} from "./navigation-history.service";
 
-@Injectable({
-    providedIn: "root"
-})
+@Injectable()
 export class SPQNavigationService {
-    constructor(private routerExt: Router) {}
 
-    public navigateTo(rote: string): void {
-        this.routerExt.navigateByUrl(rote).then(console.log);
+    constructor(private router: Router,
+                private historyService: SPQNavigationHistoryService) {
+    }
+
+    public navigateTo(rote: string): Promise<boolean> {
+        return this.router.navigateByUrl(rote);
+    }
+
+    public navigateToWithParams(rote: string, params: any): Promise<boolean> {
+        return this.router.navigate([rote, params]);
+    }
+
+    public navigateWithoutHistory(rote: string): Promise<boolean> {
+        return this.router.navigateByUrl(rote);
+    }
+
+    public navigateToDefault(defaultRoute?: string): Promise<boolean> {
+        return defaultRoute ? this.navigateWithoutHistory(defaultRoute) : this.navigateWithoutHistory(defaultAbsoluteRoute);
+    }
+
+    public back(defaultRoute?: string): Promise<boolean> {
+        return this.historyService.isHistoryEmpty() ?
+            this.navigateToDefault() :
+            this.navigateWithoutHistory(this.historyService.popRouteFromHistory());
     }
 }

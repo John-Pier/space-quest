@@ -1,6 +1,7 @@
 <div class="spq-quest-step-cube__inner"
+     matRipple
      [class.selected]="isSelected"
-     matRipple>
+     (click)="_onStepCubeClick()">
     <div class="spq-quest-step-cube__text">
         <div class="spq-quest-step-cube__text-title">
             {{title}}

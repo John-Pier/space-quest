@@ -8,6 +8,8 @@ import {AppComponent} from "./app.component";
 import {localAppAPIConfig, SPQ_APP_API_CONFIG} from "./app.config";
 import {SPQAuthGuard} from "./core/security/guards/auth.guard";
 import {SPQSecurityModule} from "./core/security/security.module";
+import {SPQNavigationHistoryService} from "./services/navigation-history.service";
+import {SPQNavigationService} from "./services/navigation.service";
 
 export const spqRoutes: Routes = [
     {
@@ -46,7 +48,9 @@ export const spqRoutes: Routes = [
         {
             provide: SPQ_APP_API_CONFIG,
             useValue: localAppAPIConfig
-        }
+        },
+        SPQNavigationHistoryService,
+        SPQNavigationService
     ],
     bootstrap: [AppComponent]
 })
