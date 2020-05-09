@@ -5,9 +5,9 @@ export class SPQNavigationHistoryService {
 
     public maxCapacity: number = 50;
 
-    private lastUrl: string
+    private lastUrl: string;
 
-    private previousUrl: string
+    private previousUrl: string;
 
     private history: string[] = [];
 
@@ -20,17 +20,24 @@ export class SPQNavigationHistoryService {
     }
 
     public addRouteToHistory(absoluteUrl: string): void {
-        this.setPreviousUrl();
-        this.resetIfOverflowing();
-        this.history.push(absoluteUrl);
-        this.lastUrl = absoluteUrl;
+        if (this.isUniqueUrl(absoluteUrl)) {
+            this.setPreviousUrl();
+            this.resetIfOverflowing();
+            this.history.push(absoluteUrl);
+            this.lastUrl = absoluteUrl;
+        } else {
+            this.popIfNonUnique(absoluteUrl);
+        }
     }
 
     public popRouteFromHistory(): string {
         if (!this.isHistoryEmpty()) {
-            return this.history.pop();
+            this.lastUrl = this.previousUrl;
+            const url = this.history.pop();
+            this.setPreviousUrl();
+            return url;
         } else {
-            throw "Routes history is empty!"
+            throw "Routes history is empty!";
         }
     }
 
@@ -46,6 +53,16 @@ export class SPQNavigationHistoryService {
     private setPreviousUrl(): void {
         if (!this.isHistoryEmpty()) {
             this.previousUrl = this.history[this.history.length - 1];
+        }
+    }
+
+    private isUniqueUrl(url: string): boolean {
+        return this.lastUrl !== url && this.previousUrl !== url;
+    }
+
+    private popIfNonUnique(url: string): void {
+        if (this.previousUrl === url) {
+            this.popRouteFromHistory();
         }
     }
 
