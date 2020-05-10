@@ -17,12 +17,9 @@ import java.util.Set;
 @Service
 @Slf4j
 public class UserDetailsServiceImpl implements UserDetailsService {
-    private final UserRepositoryService userRepositoryService;
 
     @Autowired
-    public UserDetailsServiceImpl(UserRepositoryService userRepositoryService) {
-        this.userRepositoryService = userRepositoryService;
-    }
+    private UserRepositoryService userRepositoryService;
 
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
@@ -35,11 +32,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         // указываем роли для этого пользователя
         Set<GrantedAuthority> roles = new HashSet();
         if (user.getAdmin()) {
-            roles.add(new SimpleGrantedAuthority(UserRoleEnum.ADMIN.name()));
-            roles.add(new SimpleGrantedAuthority(UserRoleEnum.USER.name()));
+            roles.add(new SimpleGrantedAuthority(UserRoleEnum.ROLE_ADMIN.name()));
+            roles.add(new SimpleGrantedAuthority(UserRoleEnum.ROLE_USER.name()));
+            log.info("1");
         }
         else {
-            roles.add(new SimpleGrantedAuthority(UserRoleEnum.USER.name()));
+            roles.add(new SimpleGrantedAuthority(UserRoleEnum.ROLE_USER.name()));
+            log.info("2");
         }
 
         // на основании полученных данных формируем объект UserDetails
@@ -50,4 +49,5 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 user.getPassword(),
                 roles);
     }
+
 }

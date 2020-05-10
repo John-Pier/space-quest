@@ -1,8 +1,11 @@
 package com.quest.backend.entity;
 import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
+import java.util.UUID;
 
 @Entity
 @Table(name = "users")
@@ -11,7 +14,10 @@ import javax.validation.constraints.Email;
 @AllArgsConstructor
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid")
+    @Column(name = "UUID")
+    @Size(max = 32)
     private String uuid;
 
     @Column(name = "login", nullable = false)
@@ -44,4 +50,5 @@ public class User {
 
     @Column(name = "age")
     private Integer age;
+
 }

@@ -38,7 +38,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // по которым будет определятся доступ к ресурсам и остальным данным
                 .authorizeRequests()
                 .antMatchers("/resources/**").permitAll()
-                .antMatchers("/test/**").authenticated()
+                .antMatchers("/test/").hasRole("USER")
+                .antMatchers("/test/admin").hasRole("ADMIN")
                 //.anyRequest().permitAll()
                 .and();
 
@@ -77,5 +78,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder getBCryptPasswordEncoder(){
         return new BCryptPasswordEncoder();
     }
-
 }
