@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/test")
+@RequestMapping("/")
 public class MainController {
 
     private UserRepositoryService userService;
@@ -15,13 +15,18 @@ public class MainController {
         this.userService = userService;
     }
 
-    @GetMapping()
+    @GetMapping("/test/admin")
     public List<User> findAll() throws Exception{
         return userService.getAll();
     }
 
-    @GetMapping(path = "/{login}")
-    public List<User> findByLogin(@PathVariable("login") String login) throws Exception{
-        return userService.findAllByLogin(login);
+    @GetMapping()
+    public String message() {
+        return "NICE BALLS";
+    }
+
+    @GetMapping("/test")
+    public User findByLogin() throws Exception{
+        return userService.findAllByLogin("test");
     }
 }
