@@ -20,7 +20,7 @@ export class SPQAuthService {
     }
 
     public logoutIfLogged(): Observable<void> {
-        if (this.isLoggedIn()) {
+        if (this.storageService.isLoggedIn()) {
             this.storageService.goOut();
             return this.dataService.logout();
         }
@@ -32,9 +32,5 @@ export class SPQAuthService {
         this.storageService.saveId(response.id);
         this.storageService.saveToken(response.accessToken);
         this.storageService.saveAuthorities(response.authorities)
-    }
-
-    public isLoggedIn(): boolean {
-        return !!this.storageService.getToken() && !!this.storageService.getId() && !!this.storageService.getUserEmail();
     }
 }

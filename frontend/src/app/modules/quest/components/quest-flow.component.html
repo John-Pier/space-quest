@@ -2,10 +2,12 @@
     <div class="spq-quest-flow__flow">
         <spq-quest-step-cube *ngFor="let node of values.nodes; trackBy:  _trackCubeById"
                              class="spq-quest-flow__flow-cube"
+                             [id]="node.id"
                              [title]="node.title"
                              [subtitle]="node.subtitle"
                              [serialNumber]="node.serialNumber"
-                             [isSelected]="node.isSelected">
+                             [isSelected]="node.isSelected"
+                             (onClick)="_navigateToClickedQuestDetails($event)">
         </spq-quest-step-cube>
     </div>
 </div>

@@ -54,4 +54,8 @@ export class SPQSessionStorageService implements SPQStorageService {
         }
         return this.roles;
     }
+
+    public isLoggedIn(): boolean {
+        return !!this.getToken() && !!this.getId() && !!this.getUserEmail();
+    }
 }

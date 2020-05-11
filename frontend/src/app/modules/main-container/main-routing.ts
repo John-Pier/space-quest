@@ -1,5 +1,5 @@
 import {Routes} from "@angular/router";
-import {SPQRoutesString} from "../../app-routers";
+import {defaultAbsoluteRoute, SPQRoutesString} from "../../app-routers";
 import {SPQNotFoundComponent} from "../../components/not-found/not-found.component";
 import {SPQAuthGuard} from "../../core/security/guards/auth.guard";
 
@@ -7,7 +7,7 @@ export const MAIN_ROUTES: Routes = [
     {
         path: "",
         pathMatch: "full",
-        redirectTo: SPQRoutesString.SPQ_TIMELINE
+        redirectTo: defaultAbsoluteRoute
     },
     {
         path: SPQRoutesString.SPQ_TIMELINE,
@@ -23,6 +23,11 @@ export const MAIN_ROUTES: Routes = [
         path: SPQRoutesString.SPQ_USER_PROFILE,
         canLoad: [SPQAuthGuard],
         loadChildren: () => import("../user-profile/user-profile.module").then(m => m.SPQUserProfileModule)
+    },
+    {
+      path: SPQRoutesString.SPQ_QUEST_STEP,
+      canLoad: [SPQAuthGuard],
+      loadChildren: () => import("../quest-details/quest-details.module").then(m => m.SPQQuestDetailsModule)
     },
     {
         path: SPQRoutesString.SPQ_NOT_FOUND,

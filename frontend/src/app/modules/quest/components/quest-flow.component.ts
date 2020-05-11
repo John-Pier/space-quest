@@ -1,4 +1,6 @@
 import {Component, HostBinding, Input} from "@angular/core";
+import {ID} from "../../../core/base.types";
+import {SQPQuestFlowService} from "../services/quest-flow.service";
 import {SPQQuestCube, SPQQuestFlow, SPQQuestFlowConfig} from "../types/quest.type";
 
 @Component({
@@ -11,15 +13,19 @@ export class SPQQuestFlowComponent {
     public values: SPQQuestFlow;
 
     @Input()
-    public config: SPQQuestFlowConfig
+    public config: SPQQuestFlowConfig;
 
     @HostBinding("class.spq-quest-flow")
     private hostClass: boolean = true;
 
-    constructor() {
+    constructor(private questService: SQPQuestFlowService) {
     }
 
-    public _trackCubeById(index, node: SPQQuestCube) : string {
+    public _trackCubeById(index, node: SPQQuestCube): string {
         return node.id;
+    }
+
+    public _navigateToClickedQuestDetails(questId: ID): void {
+        this.questService.navigateToQuestDetails(questId);
     }
 }
