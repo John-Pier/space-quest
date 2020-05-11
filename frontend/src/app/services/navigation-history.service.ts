@@ -21,10 +21,12 @@ export class SPQNavigationHistoryService {
 
     public addRouteToHistory(absoluteUrl: string): void {
         if (this.isUniqueUrl(absoluteUrl)) {
-            this.setPreviousUrl();
             this.resetIfOverflowing();
-            this.history.push(absoluteUrl);
+            if (this.lastUrl) {
+                this.history.push(this.lastUrl);
+            }
             this.lastUrl = absoluteUrl;
+            this.setPreviousUrl();
         } else {
             this.popIfNonUnique(absoluteUrl);
         }
@@ -42,7 +44,7 @@ export class SPQNavigationHistoryService {
     }
 
     public isHistoryEmpty(): boolean {
-        return this.history.length < 1;
+        return !this.history.length;
     }
 
     public reset(): void {
@@ -53,17 +55,25 @@ export class SPQNavigationHistoryService {
     private setPreviousUrl(): void {
         if (!this.isHistoryEmpty()) {
             this.previousUrl = this.history[this.history.length - 1];
+        } else {
+            this.previousUrl = null;
         }
     }
 
     private isUniqueUrl(url: string): boolean {
-        return this.lastUrl !== url && this.previousUrl !== url;
+        return this.lastUrl !== url
+            && this.previousUrl !== url
+            && this.checkCircleUniqueUrl(url);
     }
 
     private popIfNonUnique(url: string): void {
-        if (this.previousUrl === url) {
+        if (this.previousUrl === url || !this.checkCircleUniqueUrl(url)) {
             this.popRouteFromHistory();
         }
+    }
+
+    private checkCircleUniqueUrl(url: string): boolean {
+        return !(this.history.length > 1 && this.history[this.history.length - 2] === url)
     }
 
     private resetIfOverflowing(): void {

@@ -2,7 +2,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {NgModule} from "@angular/core";
 import {BrowserModule} from "@angular/platform-browser";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {PreloadAllModules, RouterModule, Routes} from "@angular/router";
+import {PreloadAllModules, Router, RouterModule, Routes} from "@angular/router";
 import {SPQRoutesString} from "./app-routers";
 import {AppComponent} from "./app.component";
 import {localAppAPIConfig, SPQ_APP_API_CONFIG} from "./app.config";
@@ -40,7 +40,7 @@ export const spqRoutes: Routes = [
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
-        RouterModule.forRoot(spqRoutes, {preloadingStrategy: PreloadAllModules, onSameUrlNavigation: "reload"}),
+        RouterModule.forRoot(spqRoutes, { preloadingStrategy: PreloadAllModules, onSameUrlNavigation: "reload" }),
         HttpClientModule,
         SPQSecurityModule.forRoot()
     ],
@@ -50,7 +50,16 @@ export const spqRoutes: Routes = [
             useValue: localAppAPIConfig
         },
         SPQNavigationHistoryService,
-        SPQNavigationService
+        {
+            provide:  SPQNavigationService,
+            useClass: SPQNavigationService,
+            deps: [
+                Router,
+                SPQNavigationHistoryService,
+                // Location - use the platform's history
+            ]
+        }
+
     ],
     bootstrap: [AppComponent]
 })
