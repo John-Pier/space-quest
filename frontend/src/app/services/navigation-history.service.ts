@@ -39,7 +39,7 @@ export class SPQNavigationHistoryService {
             this.setPreviousUrl();
             return url;
         } else {
-            throw "Routes history is empty!";
+            throw new Error("Routes history is empty!");
         }
     }
 
