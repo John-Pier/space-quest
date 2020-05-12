@@ -16,13 +16,13 @@ import javax.validation.Valid;
 
 @Controller
 @Slf4j
+@CrossOrigin(origins = "*", maxAge = 4800, methods = {RequestMethod.POST, RequestMethod.GET, RequestMethod.PUT}, allowedHeaders = "*")
 public class RegistrationController {
 
     @Autowired
     private UserRepositoryService userService;
 
-    @CrossOrigin(origins = "*", maxAge = 4800, methods = {RequestMethod.POST, RequestMethod.GET, RequestMethod.PUT},
-            allowedHeaders = "*")
+
     @PostMapping(path = "/api/v/n/1/registration")
     public ResponseEntity<User> addPerson(@Valid @RequestBody User user) {
 

@@ -1,6 +1,7 @@
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Inject} from "@angular/core";
 import {Observable} from "rxjs";
+import {tap} from "rxjs/operators";
 import {SPQ_APP_API_CONFIG, SPQAppAPIConfig} from "../../app.config";
 
 export const defaultHttpOptions = {
@@ -24,7 +25,9 @@ export class SPQDataService {
 
     public post<T>(address: string, value: any, options: any = defaultHttpOptions): Observable<T> {
         // @ts-ignore
-        return this.http.post<T>(this.makeURL(address), value, options);
+        return this.http.post<T>(this.makeURL(address), value, options).pipe(
+            tap(console.log)
+        );
     }
 
     private makeURL(address: string): string {

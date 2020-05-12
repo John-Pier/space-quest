@@ -8,7 +8,7 @@ export abstract class SPQStorageService {
 
     abstract getToken(): string;
 
-    abstract saveUserEmail(username: string): void;
+    abstract saveLogin(username: string): void;
 
     abstract saveId(id: ID): void;
 

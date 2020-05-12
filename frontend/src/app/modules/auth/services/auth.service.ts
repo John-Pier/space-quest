@@ -1,5 +1,6 @@
 import {Injectable} from "@angular/core";
 import {Observable, of} from "rxjs";
+import {SPQUserModel} from "../../../core/models/user.model";
 import {SPQJwtResponseModel} from "../../../core/security/types/jwt-response.type";
 import {SPQAuthDataService} from "../../../services/data/auth-data.service";
 import {SPQStorageService} from "../../../services/storage.service";
@@ -11,11 +12,11 @@ export class SPQAuthService {
                 private storageService: SPQStorageService) {
     }
 
-    public attemptAuthentication(authDataModel: SPQAuthDataModel): Observable<SPQJwtResponseModel> {
+    public attemptAuthentication(authDataModel: SPQAuthDataModel): Observable<SPQUserModel> {
         return this.dataService.attemptAuthentication(authDataModel);
     }
 
-    public attemptRegistration(registrationDataModel: SPQRegistrationDataModel): Observable<SPQJwtResponseModel> {
+    public attemptRegistration(registrationDataModel: SPQRegistrationDataModel): Observable<SPQUserModel> {
         return this.dataService.attemptRegistration(registrationDataModel);
     }
 
@@ -28,7 +29,7 @@ export class SPQAuthService {
     }
 
     public setResponseModelToStore(response: SPQJwtResponseModel): void {
-        this.storageService.saveUserEmail(response.email);
+        this.storageService.saveLogin(response.login);
         this.storageService.saveId(response.id);
         this.storageService.saveToken(response.accessToken);
         this.storageService.saveAuthorities(response.authorities)

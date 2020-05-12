@@ -11,6 +11,11 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
@@ -32,7 +37,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // включаем защиту от CSRF атак
-        http.csrf()
+        http.cors()
+                .and()
+                .csrf()
                 .disable()
                 // указываем правила запросов
                 // по которым будет определятся доступ к ресурсам и остальным данным
@@ -43,9 +50,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //.anyRequest().permitAll()
                 .and();
 
-        http.formLogin()
+        http.cors()
+                .and().formLogin()
                 // указываем страницу с формой логина
-                //.loginPage("/login")
+                //.loginPage("/auth")
                 // указываем action с формы логина
                 .loginProcessingUrl("/api/v/n/1/login")
                 // указываем URL при неудачном логине
@@ -57,7 +65,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // даем доступ к форме логина всем
                 .permitAll();
 
-        http.logout()
+        http.cors()
+                .and().logout()
                 // разрешаем делать логаут всем
                 .permitAll()
                 // указываем URL логаута
@@ -77,5 +86,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public PasswordEncoder getBCryptPasswordEncoder(){
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.addAllowedOrigin("*");
+        configuration.setAllowedMethods(Arrays.asList("GET","POST", "PUT"));
+        configuration.setAllowCredentials(true);
+        configuration.setAllowedHeaders(Arrays.asList("Access-Control-Allow-Headers","Access-Control-Allow-Origin","Access-Control-Request-Method", "Access-Control-Request-Headers","Origin","Cache-Control", "Content-Type", "Authorization"));
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 }

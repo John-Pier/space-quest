@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs";
-import {SPQJwtResponseModel} from "../../core/security/types/jwt-response.type";
+import {SPQUserModel} from "../../core/models/user.model";
 import {SPQAuthDataModel, SPQRegistrationDataModel} from "../../modules/auth/types/auth.type";
 import {SPQDataService} from "./abstract-data.service";
 
@@ -11,12 +11,12 @@ export class SPQAuthDataService extends SPQDataService{
     private logoutURL = "logout";
     private registrationURL = "registration";
 
-    public attemptAuthentication(authDataModel: SPQAuthDataModel): Observable<SPQJwtResponseModel> {
-        return this.post<SPQJwtResponseModel>(this.loginURL, authDataModel);
+    public attemptAuthentication(authDataModel: SPQAuthDataModel): Observable<SPQUserModel> {
+        return this.post<SPQUserModel>(this.loginURL, authDataModel, {withCredentials: true});
     }
 
-    public attemptRegistration(registrationDataModel: SPQRegistrationDataModel): Observable<SPQJwtResponseModel> {
-        return this.post<SPQJwtResponseModel>(this.registrationURL, registrationDataModel);
+    public attemptRegistration(registrationDataModel: SPQRegistrationDataModel): Observable<SPQUserModel> {
+        return this.post<SPQUserModel>(this.registrationURL, registrationDataModel);
     }
 
     public logout(): Observable<void> {

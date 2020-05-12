@@ -49,7 +49,8 @@ export class SPQAuthComponent implements OnInit {
             )
             .subscribe(
                 (response) => {
-                    this.authService.setResponseModelToStore(response);
+                    console.log(response);
+                    // this.authService.setResponseModelToStore(response);
                     this.navigationService.navigateTo(defaultAbsoluteRoute);
                 },
                 () => {
@@ -73,7 +74,8 @@ export class SPQAuthComponent implements OnInit {
             )
             .subscribe(
                 (response) => {
-                    this.authService.setResponseModelToStore(response);
+                    console.log(response);
+                    // this.authService.setResponseModelToStore(response);
                     this.navigationService.back();
                 },
                 () => {
