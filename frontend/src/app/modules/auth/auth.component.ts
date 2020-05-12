@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, Component, HostBinding, OnInit} from "@angular/core";
 import {FormControl, FormGroup, ValidatorFn, Validators} from "@angular/forms";
-import {tap} from "rxjs/operators";
-import {SPQRoutesMap, SPQRoutesString} from "../../app-routers";
+import {finalize} from "rxjs/operators";
+import {defaultAbsoluteRoute} from "../../app-routers";
 import {SPQNavigationService} from "../../services/navigation.service";
 import {SPQAuthService} from "./services/auth.service";
 
@@ -14,6 +14,8 @@ import {SPQAuthService} from "./services/auth.service";
     ]
 })
 export class SPQAuthComponent implements OnInit {
+
+    public _loading: boolean = false
 
     public _loginForm: FormGroup;
 
@@ -33,21 +35,22 @@ export class SPQAuthComponent implements OnInit {
     }
 
     public onValidRegisterClick(): void {
+        this._loading = true;
         this.authService.attemptRegistration({
-            login: this._registrationForm.value["email"],
-            pass: this._registrationForm.value["password"],
+            login: this._registrationForm.value["login"],
+            password: this._registrationForm.value["password"],
+            email: this._registrationForm.value["email"],
             firstName: this._registrationForm.value["firstName"],
-            lastName: this._registrationForm.value["lastName"],
         })
             .pipe(
-                tap(() => {
-                    // loader.setLoad(false)
+                finalize(() => {
+                     this._loading = false
                 })
             )
             .subscribe(
                 (response) => {
                     this.authService.setResponseModelToStore(response);
-                    this.navigationService.navigateTo(SPQRoutesMap[SPQRoutesString.SPQ_MAIN])
+                    this.navigationService.navigateTo(defaultAbsoluteRoute);
                 },
                 () => {
                     this._registrationForm.setErrors({
@@ -58,19 +61,20 @@ export class SPQAuthComponent implements OnInit {
     }
 
     public onValidLoginClick(): void {
+        this._loading = true;
         this.authService.attemptAuthentication({
-            login: this._loginForm.value["email"],
-            pass: this._loginForm.value["password"],
+            login: this._loginForm.value["login"],
+            password: this._loginForm.value["password"],
         })
             .pipe(
-                tap(() => {
-                    // loader.setLoad(false)
+                finalize(() => {
+                    this._loading = false
                 })
             )
             .subscribe(
                 (response) => {
                     this.authService.setResponseModelToStore(response);
-                    this.navigationService.navigateTo(SPQRoutesMap[SPQRoutesString.SPQ_MAIN])
+                    this.navigationService.back();
                 },
                 () => {
                     this._loginForm.setErrors({
@@ -82,15 +86,15 @@ export class SPQAuthComponent implements OnInit {
 
     private createLoginForm(): void {
         this._loginForm = new FormGroup({
-            email: new FormControl("", [...this.getValidatorsForFields(), Validators.email]),
+            login: new FormControl("", this.getValidatorsForFields()),
             password: new FormControl("", this.getValidatorsForFields()),
         });
     }
 
     private createRegistrationForm(): void {
         this._registrationForm = new FormGroup({
-            firstName: new FormControl("", this.getValidatorsForFields()),
-            lastName: new FormControl("", [Validators.min(4)]),
+            firstName: new FormControl("", [Validators.required, Validators.min(2)]),
+            login: new FormControl("",  this.getValidatorsForFields()),
             email: new FormControl("", [...this.getValidatorsForFields(), Validators.email]),
             password: new FormControl("", this.getValidatorsForFields()),
         });

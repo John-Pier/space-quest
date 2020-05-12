@@ -19,7 +19,7 @@ export const localAppAPIConfig: SPQAppAPIConfig = {
 }
 
 export const deployAppAPIConfig: SPQAppAPIConfig = {
-    PORT: 8000,
+    PORT: 8080,
     HOST_NAME: location.hostname,
     PROTOCOL: "http",
     API_ADDRESS: "/api/v/n/",

@@ -1,5 +1,9 @@
 <div class="spq-auth__inner">
     <div class="spq-auth__inner-form">
+        <mat-progress-bar *ngIf="_loading"
+                          class="progress-line"
+                          mode="indeterminate">
+        </mat-progress-bar>
         <mat-tab-group [dynamicHeight]="true"
                        mat-align-tabs="center">
             <mat-tab label="Вход">
@@ -8,10 +12,10 @@
                       (ngSubmit)="onValidLoginClick()">
                     <mat-form-field appearance="outline"
                                     [hideRequiredMarker]="false">
-                        <mat-label>Email</mat-label>
+                        <mat-label>Логин</mat-label>
                         <input type="text"
                                placeholder="Введите ваш Email"
-                               formControlName="email"
+                               formControlName="login"
                                matInput>
                     </mat-form-field>
                     <mat-form-field appearance="outline">
@@ -27,7 +31,7 @@
                             color="accent"
                             type="submit"
                             mat-raised-button
-                            [disabled]="!_loginForm.valid">
+                            [disabled]="!_loginForm.valid || _loading">
                         Войти
                     </button>
                 </form>
@@ -44,17 +48,17 @@
                                matInput>
                     </mat-form-field>
                     <mat-form-field appearance="outline">
-                        <mat-label>Ваша Фамилия</mat-label>
-                        <input type="text"
-                               placeholder="Фамилия"
-                               formControlName="lastName"
-                               matInput>
-                    </mat-form-field>
-                    <mat-form-field appearance="outline">
                         <mat-label>Email</mat-label>
                         <input type="text"
                                placeholder="Введите ваш Email"
                                formControlName="email"
+                               matInput>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Логин</mat-label>
+                        <input type="text"
+                               placeholder="Фамилия"
+                               formControlName="login"
                                matInput>
                     </mat-form-field>
                     <mat-form-field appearance="outline">
@@ -69,7 +73,7 @@
                             color="accent"
                             mat-raised-button
                             [formAction]="'submit'"
-                            [disabled]="!_registrationForm.valid">
+                            [disabled]="!_registrationForm.valid || _loading">
                         Зарегистрироваться
                     </button>
                 </form>
