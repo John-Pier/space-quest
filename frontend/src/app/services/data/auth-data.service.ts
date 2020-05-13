@@ -12,7 +12,10 @@ export class SPQAuthDataService extends SPQDataService{
     private registrationURL = "registration";
 
     public attemptAuthentication(authDataModel: SPQAuthDataModel): Observable<SPQUserModel> {
-        return this.post<SPQUserModel>(this.loginURL, authDataModel, {withCredentials: true});
+        const loginForm: FormData = new FormData();
+        loginForm.append('login', authDataModel.login);
+        loginForm.append('password', authDataModel.password);
+        return this.post(this.loginURL, loginForm , {withCredentials: true});
     }
 
     public attemptRegistration(registrationDataModel: SPQRegistrationDataModel): Observable<SPQUserModel> {
