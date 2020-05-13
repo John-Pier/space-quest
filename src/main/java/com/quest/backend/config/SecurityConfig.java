@@ -57,11 +57,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // указываем action с формы логина
                 .loginProcessingUrl("/api/v/n/1/login")
                 // указываем URL при неудачном логине
-                .failureUrl("/login?error")
+                //.failureUrl("/login?error")
                 // Указываем параметры логина и пароля с формы логина
                 .usernameParameter("login")
                 .passwordParameter("password")
-                .defaultSuccessUrl("/test")
+                //.defaultSuccessUrl("/test")
                 // даем доступ к форме логина всем
                 .permitAll();
 
@@ -72,7 +72,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // указываем URL логаута
                 .logoutUrl("/api/v/n/1/logout")
                 // указываем URL при удачном логауте
-                .logoutSuccessUrl("/login?logout")
+                //.logoutSuccessUrl("/login?logout")
                 // делаем не валидной текущую сессию
                 .invalidateHttpSession(true);
         /*http.antMatcher("/test/**")
