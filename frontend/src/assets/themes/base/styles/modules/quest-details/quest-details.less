@@ -17,13 +17,15 @@
         align-items: center;
         width: 100%;
         height: fit-content;
+        background-color: @nav-color;
         padding: 5px 0;
         margin-bottom: 2px;
-        border-bottom: 1px @lighter solid;
+        border-bottom: 1px @addition-shadow-26 solid;
 
         &-caption {
             padding-left: 10px;
-            font-size: 13px;
+            font-size: 14px;
+            font-weight: 500;
             color: @white;
         }
 
@@ -33,5 +35,12 @@
             align-items: center;
             padding: 0 10px;
         }
+    }
+
+    &__wrapper {
+        display: flex;
+        flex-flow: column nowrap;
+        width: 100%;
+        height: 100%;
     }
 }

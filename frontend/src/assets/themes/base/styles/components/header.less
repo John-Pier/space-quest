@@ -5,17 +5,20 @@
     height: var(--spq-heder-height, 45);
     display: flex;
     flex-flow: row nowrap;
+    user-select: none;
     background-color: @nav-color;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
-    user-select: none;
 
     &__inner {
         width: 100%;
         display: flex;
         align-items: center;
         justify-content: space-around;
-        padding: 0 10px 10px;
+        padding: 0 10px 5px;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        box-shadow: 0 2px 1px -1px @addition-shadow-2, 0 3px 6px 0 @main-shadow, 0 1px 4px 0 @addition-shadow-12;
     }
 
     &__main-label {

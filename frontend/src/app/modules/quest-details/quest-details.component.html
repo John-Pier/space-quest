@@ -1,18 +1,23 @@
 <div class="spq-quest-details__inner">
     <div class="spq-quest-details__header">
         <div class="spq-quest-details__header-caption">
-            лабла
+            Название выбранной таски
         </div>
         <div class="spq-quest-details__header-actions">
-            <button mat-raised-button
+            <button mat-stroked-button
                     (click)="_onBackClick()">
                 Назад
             </button>
+<!--            <button mat-icon-button-->
+<!--                    (click)="_onBackClick()">-->
+<!--                <svg width="24px" height="24px" fill="black">-->
+<!--                    <use xlink:href="#icon-back"></use>-->
+<!--                </svg>-->
+<!--            </button>-->
         </div>
     </div>
-
-    Question
-    <spq-qd-question></spq-qd-question>
-    Answer
-    <spq-qd-answer></spq-qd-answer>
+    <div class="spq-quest-details__wrapper">
+        <spq-qd-question></spq-qd-question>
+        <spq-qd-answer></spq-qd-answer>
+    </div>
 </div>
