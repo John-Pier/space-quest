@@ -24,13 +24,13 @@ export class SPQAuthService {
             this.storageService.goOut();
             return this.dataService.logout();
         }
-        return of(this.storageService.goOut())
+        return of(this.storageService.goOut());
     }
 
     public setResponseModelToStore(response: SPQJwtResponseModel): void {
-        this.storageService.saveUserEmail(response.email);
+        this.storageService.saveLogin(response.login);
         this.storageService.saveId(response.id);
         this.storageService.saveToken(response.accessToken);
-        this.storageService.saveAuthorities(response.authorities)
+        this.storageService.saveAuthorities(response.authorities);
     }
 }

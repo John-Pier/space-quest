@@ -4,6 +4,7 @@ export type SPQJwtResponseModel = Readonly<{
   accessToken: string;
   type: string;
   id: ID;
-  email: string;
+  login: string;
+  firstName: string;
   authorities: string[];
-}>
+}>;

@@ -4,7 +4,9 @@ import {Observable} from "rxjs";
 import {SPQ_APP_API_CONFIG, SPQAppAPIConfig} from "../../app.config";
 
 export const defaultHttpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({ "Content-Type": "application/json" }),
+    observe: "body",
+    responseType: "json"
 };
 
 export class SPQDataService {

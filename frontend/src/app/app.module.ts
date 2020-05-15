@@ -48,6 +48,7 @@ export const spqRoutes: Routes = [
         {
             provide: SPQ_APP_API_CONFIG,
             useValue: localAppAPIConfig
+            // useValue: deployAppAPIConfig
         },
         SPQNavigationHistoryService,
         {
@@ -56,7 +57,7 @@ export const spqRoutes: Routes = [
             deps: [
                 Router,
                 SPQNavigationHistoryService,
-                // Location - use the platform's history
+                // Location - use the platform"s history
             ]
         }
 

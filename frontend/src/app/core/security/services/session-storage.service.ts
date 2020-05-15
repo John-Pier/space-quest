@@ -21,7 +21,7 @@ export class SPQSessionStorageService implements SPQStorageService {
         return sessionStorage.getItem(TOKEN_KEY);
     }
 
-    public saveUserEmail(username: string): void {
+    public saveLogin(username: string): void {
         window.sessionStorage.removeItem(USERNAME_KEY);
         window.sessionStorage.setItem(USERNAME_KEY, username);
     }
