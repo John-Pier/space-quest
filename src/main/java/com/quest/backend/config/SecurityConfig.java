@@ -43,7 +43,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordEncoder(getBCryptPasswordEncoder());
     }
 
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors()
@@ -69,7 +68,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // указываем URL логаута
                 .logoutUrl("/api/v/n/1/logout")
                 // указываем URL при удачном логауте
-                .logoutSuccessUrl("/login?logout")
+                //.logoutSuccessUrl("/login?logout")
                 // делаем не валидной текущую сессию
                 .invalidateHttpSession(true);
         /*http.antMatcher("/test/**")

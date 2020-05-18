@@ -34,7 +34,7 @@ export const MAIN_ROUTES: Routes = [
         component: SPQNotFoundComponent
     },
     {
-        path: '**',
+        path: "**",
         redirectTo: SPQRoutesString.SPQ_NOT_FOUND
     }
 ];
