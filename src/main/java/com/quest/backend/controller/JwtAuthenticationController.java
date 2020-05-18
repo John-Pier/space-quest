@@ -27,7 +27,8 @@ public class JwtAuthenticationController {
     private JwtTokenUtil jwtTokenUtil;
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
-    @PostMapping(path = "/authenticate")
+
+    @PostMapping(path = "/api/v/n/1/authenticate")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
         authenticate(authenticationRequest.getLogin(), authenticationRequest.getPassword());
         log.info(authenticationRequest.getLogin());
@@ -42,6 +43,7 @@ public class JwtAuthenticationController {
     public String message() {
         return "NICE BALLS";
     }
+
     private void authenticate(String username, String password) throws Exception {
         log.info(username);
         log.info(password);

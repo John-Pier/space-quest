@@ -7,15 +7,14 @@ import {SPQDataService} from "./abstract-data.service";
 @Injectable()
 export class SPQAuthDataService extends SPQDataService {
 
-    private loginURL = "login";
+    private loginURL = "authenticate";
 
     private logoutURL = "logout";
 
     private registrationURL = "registration";
 
     public attemptAuthentication(authDataModel: SPQAuthDataModel): Observable<SPQJwtResponseModel> {
-        const authData = this.makeLoginFormData(authDataModel);
-        return this.post<SPQJwtResponseModel>(this.loginURL, authDataModel ); // use authData, { withCredentials: true } in prod
+        return this.post<SPQJwtResponseModel>(this.loginURL, authDataModel); // use { withCredentials: true } in prod
     }
 
     public attemptRegistration(registrationDataModel: SPQRegistrationDataModel): Observable<SPQJwtResponseModel> {
@@ -24,12 +23,5 @@ export class SPQAuthDataService extends SPQDataService {
 
     public logout(): Observable<void> {
         return this.post<void>(this.logoutURL, {});
-    }
-
-    private makeLoginFormData(authDataModel: SPQAuthDataModel): FormData {
-        const loginForm: FormData = new FormData();
-        loginForm.append("login", authDataModel.login);
-        loginForm.append("password", authDataModel.password);
-        return loginForm;
     }
 }
