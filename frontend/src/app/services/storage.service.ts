@@ -1,24 +1,22 @@
-import {ID} from "../core/base.types";
-
 export abstract class SPQStorageService {
-
-    abstract goOut(): void;
-
-    abstract saveToken(token: string): void;
 
     abstract getToken(): string;
 
+    abstract saveToken(token: string): void;
+
+    abstract getLogin(): string;
+
     abstract saveLogin(username: string): void;
 
-    abstract saveId(id: ID): void;
+    abstract getFirstName(): string;
 
-    abstract getId(): number;
+    abstract saveFirstName(name: string): void;
 
-    abstract getUserEmail(): string;
+    abstract getRoles(): string[];
 
-    abstract saveAuthorities(authorities: string[]): void;
+    abstract saveRoles(roles: string[]): void;
 
-    abstract getAuthorities(): string[];
+    abstract goOut(): void;
 
     abstract isLoggedIn(): boolean;
 }

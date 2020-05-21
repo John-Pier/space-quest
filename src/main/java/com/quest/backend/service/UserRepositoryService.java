@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import java.util.Collections;
+
 import java.util.List;
 
 @Slf4j
@@ -21,8 +21,8 @@ public class UserRepositoryService{
         this.repository = repository;
     }
 
-    public User findAllByLogin(String login) {
-        return repository.findAllByLogin(login);
+    public User getUserByLogin(String login) {
+        return repository.getUserByLogin(login);
     }
 
     public List<User> getAll() {
@@ -35,7 +35,7 @@ public class UserRepositoryService{
     }
 
     public boolean saveUser(User user) {
-        User userFromDB = repository.findAllByLogin(user.getLogin());
+        User userFromDB = repository.getUserByLogin(user.getLogin());
 
         if (userFromDB != null) {
             return false;
@@ -51,5 +51,9 @@ public class UserRepositoryService{
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         repository.save(user);
         return true;
+    }
+
+    public String getFirstNameByLogin(String login) {
+        return this.getUserByLogin(login).getFirstName();
     }
 }

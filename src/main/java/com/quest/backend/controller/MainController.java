@@ -27,6 +27,6 @@ public class MainController {
 
     @GetMapping("/test")
     public User findByLogin() throws Exception{
-        return userService.findAllByLogin("test");
+        return userService.getUserByLogin("test");
     }
 }

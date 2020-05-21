@@ -1,61 +1,49 @@
 import {Injectable} from "@angular/core";
-import {AUTHORITIES_KEY, TOKEN_KEY, USER_ID_KEY, USERNAME_KEY} from "../../../modules/auth/types/auth.type";
+import {SPAStorageKeys} from "../../../modules/auth/types/auth.type";
 import {SPQStorageService} from "../../../services/storage.service";
 
 @Injectable()
 export class SPQSessionStorageService implements SPQStorageService {
 
-    private roles: Array<string>;
-
-    public goOut(): void {
-        Array.from([TOKEN_KEY, USERNAME_KEY, USER_ID_KEY, AUTHORITIES_KEY])
-            .forEach(key => window.sessionStorage.removeItem(key));
+    public getToken(): string {
+        return sessionStorage.getItem(SPAStorageKeys.TOKEN_KEY);
     }
 
     public saveToken(token: string): void {
-        window.sessionStorage.removeItem(TOKEN_KEY);
-        window.sessionStorage.setItem(TOKEN_KEY, token);
+        window.sessionStorage.setItem(SPAStorageKeys.TOKEN_KEY, token);
     }
 
-    public getToken(): string {
-        return sessionStorage.getItem(TOKEN_KEY);
+    public getLogin(): string {
+        return sessionStorage.getItem(SPAStorageKeys.LOGIN_KEY);
     }
 
-    public saveLogin(username: string): void {
-        window.sessionStorage.removeItem(USERNAME_KEY);
-        window.sessionStorage.setItem(USERNAME_KEY, username);
+    public saveLogin(login: string): void {
+        window.sessionStorage.setItem(SPAStorageKeys.LOGIN_KEY, login);
     }
 
-    public saveId(id: number): void {
-        window.sessionStorage.removeItem(USER_ID_KEY);
-        window.sessionStorage.setItem(USER_ID_KEY, String(id));
+    public getRoles(): string[] {
+        const roles = JSON.parse(sessionStorage.getItem(SPAStorageKeys.ROLES_KEY));
+        return roles ? roles : [];
     }
 
-    public getId(): number {
-        return Number(sessionStorage.getItem(USER_ID_KEY));
+    public saveRoles(roles: string[]): void {
+        window.sessionStorage.setItem(SPAStorageKeys.ROLES_KEY, JSON.stringify(roles));
     }
 
-    public getUserEmail(): string {
-        return sessionStorage.getItem(USERNAME_KEY);
+    public getFirstName(): string {
+        return sessionStorage.getItem(SPAStorageKeys.FIRST_NAME_KEY);
     }
 
-    public saveAuthorities(authorities: string[]): void {
-        window.sessionStorage.removeItem(AUTHORITIES_KEY);
-        window.sessionStorage.setItem(AUTHORITIES_KEY, JSON.stringify(authorities));
-    }
-
-    public getAuthorities(): string[] {
-        this.roles = [];
-        if (sessionStorage.getItem(TOKEN_KEY)) {
-            JSON.parse(sessionStorage.getItem(AUTHORITIES_KEY))
-                .forEach(authority => {
-                    this.roles.push(authority.authority);
-                });
-        }
-        return this.roles;
+    public saveFirstName(name: string) {
+        window.sessionStorage.setItem(SPAStorageKeys.FIRST_NAME_KEY, name);
     }
 
     public isLoggedIn(): boolean {
-        return !!this.getToken() && !!this.getId() && !!this.getUserEmail();
+        return !!this.getToken() && !!this.getLogin() && !!this.getFirstName();
+    }
+
+    public goOut(): void {
+        Array.from(Object.values(SPAStorageKeys))
+            .forEach(key => window.sessionStorage.removeItem(key));
     }
 }

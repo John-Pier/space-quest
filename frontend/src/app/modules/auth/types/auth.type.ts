@@ -1,7 +1,10 @@
-export const TOKEN_KEY = "AuthToken";
-export const USERNAME_KEY = "AuthUsername";
-export const USER_ID_KEY = "UserId";
-export const AUTHORITIES_KEY = "AuthAuthorities";
+export enum SPAStorageKeys {
+    TOKEN_KEY = "AuthToken",
+    LOGIN_KEY = "AuthLogin",
+    ROLES_KEY = "UserRoles",
+    FIRST_NAME_KEY = "FirstName",
+}
+
 export const TOKEN_HEADER_KEY = "Authorization";
 
 export type SPQAuthDataModel = Readonly<{

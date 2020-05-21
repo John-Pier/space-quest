@@ -23,7 +23,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-        User user = userRepositoryService.findAllByLogin(login);
+        User user = userRepositoryService.getUserByLogin(login);
         log.info("agashs", user.getPassword());
         if (user == null) {
             throw new UsernameNotFoundException("User or password invalid");

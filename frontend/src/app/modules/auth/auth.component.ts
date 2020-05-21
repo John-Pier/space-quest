@@ -46,7 +46,7 @@ export class SPQAuthComponent implements OnInit {
             .pipe(
                 tap(
                     (response) => {
-                        this.authService.setResponseModelToStore(response);
+                        this.authService.decodeResponseTokenAndSetToStore(response);
                         this.navigationService.navigateTo(defaultAbsoluteRoute);
                     },
                     () => {
@@ -75,7 +75,7 @@ export class SPQAuthComponent implements OnInit {
             )
             .subscribe(
                 (response) => {
-                    this.authService.setResponseModelToStore(response);
+                    this.authService.decodeResponseTokenAndSetToStore(response);
                     this.navigationService.back();
                 },
                 () => {
