@@ -1,7 +1,7 @@
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {ModuleWithProviders, NgModule, Provider} from "@angular/core";
-import {SPAAbstractTokenDecoderService} from "../../services/abstract-token-decoder.service";
 import {SPQStorageService} from "../../services/storage.service";
+import {SPATokenDecoderService} from "../../services/token-decoder.service";
 import {SPQAuthGuard} from "./guards/auth.guard";
 import {SPQAuthInterceptor} from "./services/auth-interceptor.service";
 import {SPAJwtTokenDecoderService} from "./services/jwt-token-decoder.service";
@@ -36,7 +36,7 @@ export class SPQSecurityModule {
                     },
                 SPQAuthGuard,
                 {
-                    provide: SPAAbstractTokenDecoderService,
+                    provide: SPATokenDecoderService,
                     useClass: SPAJwtTokenDecoderService
                 },
                 ...httpInterceptorProviders
