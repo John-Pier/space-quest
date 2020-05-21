@@ -12,7 +12,7 @@ export class SPQMainContainerComponent implements OnInit {
 
     public _models: SPQTabsModel[];
 
-    public _userEmail: string = this.storageService.getUserEmail();
+    public _username: string = this.storageService.getFirstName();
 
     @HostBinding("class.spq-main-container")
     private hostClass: boolean = true;
