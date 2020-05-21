@@ -1,10 +1,10 @@
-import {ID} from "../../base.types";
+export type SPAEncodedResponse = {
+    token: string
+};
 
-export type SPQJwtResponseModel = Readonly<{
+export type SPADecodedResponseModel = Readonly<{
   accessToken: string;
-  type: string;
-  id: ID;
   login: string;
   firstName: string;
-  authorities: string[];
+  roles: string[];
 }>;

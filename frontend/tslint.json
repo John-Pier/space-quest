@@ -90,7 +90,9 @@
         "no-unused-variable": true,
         "one-variable-per-declaration": false,
         "no-angle-bracket-type-assertion": false,
-        "no-string-literal": false
+        "no-string-literal": false,
+        "no-trailing-whitespace": false,
+        "jsdoc-format": false
     },
     "rulesDirectory": [
         "codelyzer"

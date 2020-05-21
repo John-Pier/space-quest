@@ -12,12 +12,14 @@ export class SPQAuthInterceptor implements HttpInterceptor {
         let authRequest = httpRequest;
         const token = this.token.getToken();
         if (token != null) {
-            authRequest = httpRequest.clone({ headers: httpRequest.headers.set(TOKEN_HEADER_KEY, this.makeAuthToken(token)) });
+            authRequest = httpRequest.clone({
+                headers: httpRequest.headers.set(TOKEN_HEADER_KEY, this.makeAuthToken(token))
+            });
         }
         return next.handle(authRequest);
     }
 
     private makeAuthToken(token: string): string {
-        return  "Bearer " + token;
+        return "Bearer " + token;
     }
 }
