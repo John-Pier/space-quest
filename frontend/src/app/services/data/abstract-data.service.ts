@@ -15,10 +15,6 @@ export class SPQDataService {
                 private http: HttpClient) {
     }
 
-    public getAbsoluteAddress(): string {
-        return `${this.config.PROTOCOL}://${this.config.HOST_NAME}:${this.config.PORT}${this.config.API_ADDRESS}${this.config.API_VERSION}/`;
-    }
-
     public get<T>(address: string, options: any = defaultHttpOptions): Observable<T> {
         // @ts-ignore
         return this.http.get<T>(this.makeURL(address), options);
@@ -27,6 +23,10 @@ export class SPQDataService {
     public post<T>(address: string, value: any, options: any = defaultHttpOptions): Observable<T> {
         // @ts-ignore
         return this.http.post<T>(this.makeURL(address), value, options);
+    }
+
+    protected getAbsoluteAddress(): string {
+        return `${this.config.PROTOCOL}://${this.config.HOST_NAME}:${this.config.PORT}${this.config.API_ADDRESS}${this.config.API_VERSION}/`;
     }
 
     private makeURL(address: string): string {
