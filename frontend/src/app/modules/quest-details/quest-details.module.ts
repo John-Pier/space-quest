@@ -7,11 +7,15 @@ import {SPQQuestDetailsAnswerComponent} from "./components/qd-answer.component";
 import {SPQQuestDetailsQuestionComponent} from "./components/qd-question.component";
 import {SPQQuestDetailsComponent} from "./quest-details.component";
 import {SPQQuestDetailsService} from "./services/quest-details.service";
+import {SPQQuestTaskResolver} from "./services/quest-task.resolver";
 
 const QuestDetailsRoutes: Routes = [
     {
         path: "",
-        component: SPQQuestDetailsComponent
+        component: SPQQuestDetailsComponent,
+        resolve: {
+            questTask: SPQQuestTaskResolver
+        }
     }
 ];
 
@@ -36,7 +40,8 @@ const matModules: Array<Type<any>> = [
     ],
     providers: [
         SPQQuestDetailsDataService,
-        SPQQuestDetailsService
+        SPQQuestDetailsService,
+        SPQQuestTaskResolver
     ]
 })
 export class SPQQuestDetailsModule {
