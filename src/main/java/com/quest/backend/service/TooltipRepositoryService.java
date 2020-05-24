@@ -1,6 +1,5 @@
 package com.quest.backend.service;
 
-import com.quest.backend.entity.Section;
 import com.quest.backend.entity.Tooltip;
 import com.quest.backend.repository.TooltipRepository;
 import lombok.extern.slf4j.Slf4j;

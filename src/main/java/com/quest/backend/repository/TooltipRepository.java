@@ -1,6 +1,5 @@
 package com.quest.backend.repository;
 
-import com.quest.backend.entity.Section;
 import com.quest.backend.entity.Tooltip;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
