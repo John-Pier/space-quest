@@ -1,16 +1,21 @@
 <div class="spq-qd-question__inner">
-    <div class="spq-qd-question__content">
-        <iframe *ngIf="questTask.type === _questUrlType.VIDEO"
-                style="width: 100%; min-height: 405px"
-                type="text/html"
-                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+    <div class="spq-qd-question__content"
+         [ngSwitch]="questTask.type">
+        <iframe class="spq-qd-question__content-video"
+                *ngSwitchCase="_questUrlType.VIDEO"
                 [src]="_trustedUrl"
-                frameborder="0">
+                frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture">
         </iframe>
-        <img *ngIf="questTask.type === _questUrlType.PICTURE"
-             [src]="_trustedUrl" alt="Question Picture">
+        <img class="spq-qd-question__content-picture"
+             *ngSwitchCase="_questUrlType.PICTURE"
+             [src]="_trustedUrl"
+             importance="high"
+             alt="Question Picture">
     </div>
     <div class="spq-qd-question__question">
-        {{questTask.question}}
+        <div class="spq-qd-question__question-caption">
+            {{questTask.question}}
+        </div>
     </div>
 </div>

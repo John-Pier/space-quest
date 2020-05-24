@@ -21,7 +21,7 @@ export class SPQQuestDetailsQuestionComponent  implements OnInit {
     constructor(private sanitizer: DomSanitizer) {}
 
     public ngOnInit() {
-        if (this.questTask.type === SPQQuestTaskUrlType.VIDEO) {
+        if (this.questTask.type === SPQQuestTaskUrlType.VIDEO) { // TODO -> refactoring
             this._trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.makeVideoUrl());
         } else {
             this._trustedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.makePictureUrl());

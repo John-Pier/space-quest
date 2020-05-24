@@ -1,6 +1,6 @@
 import {CommonModule} from "@angular/common";
 import {NgModule, Type} from "@angular/core";
-import {MatButtonModule, MatTabsModule} from "@angular/material";
+import {MatButtonModule, MatInputModule, MatTabsModule} from "@angular/material";
 import {RouterModule, Routes} from "@angular/router";
 import {SPQQuestDetailsDataService} from "../../services/data/quest-details-data.service";
 import {SPQQuestDetailsAnswerComponent} from "./components/qd-answer.component";
@@ -28,7 +28,8 @@ const matModules: Array<Type<any>> = [
         RouterModule.forChild(QuestDetailsRoutes),
         ...matModules,
         MatButtonModule,
-        MatTabsModule
+        MatTabsModule,
+        MatInputModule
     ],
     declarations: [
         SPQQuestDetailsComponent,

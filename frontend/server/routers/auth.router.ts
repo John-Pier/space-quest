@@ -4,7 +4,7 @@ import * as mocks from "../mocks";
 const authRouter = express.Router();
 const errorAuthorization = "Error Authorization";
 
-authRouter.post("/login", (req, res) => {
+authRouter.post("/authenticate", (req, res) => {
     if (mocks.DecodedResponseData.login === req.body.login) {
         res.status(200).json(mocks.authStore.login);
     } else {
