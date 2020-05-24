@@ -1,5 +1,6 @@
 package com.quest.backend.controller;
 
+import com.quest.backend.config.Constants;
 import com.quest.backend.entity.User;
 import com.quest.backend.service.UserDetailsServiceImpl;
 import com.quest.backend.service.UserRepositoryService;
@@ -18,7 +19,7 @@ import javax.validation.Valid;
 
 @Controller
 @Slf4j
-@RequestMapping("/")
+@RequestMapping(Constants.API_VERSION)
 @CrossOrigin(origins = "*", maxAge = 4800, methods = {RequestMethod.POST, RequestMethod.GET, RequestMethod.PUT}, allowedHeaders = "*")
 public class RegistrationController {
 
@@ -30,7 +31,7 @@ public class RegistrationController {
     private UserDetailsServiceImpl userDetailsService;
 
 
-    @PostMapping(path = "/api/v/n/1/registration")
+    @PostMapping(path = "/registration")
     public ResponseEntity<?> addPerson(@RequestBody User user) {
         userService.saveUser(user);
         final UserDetails userDetails = userDetailsService

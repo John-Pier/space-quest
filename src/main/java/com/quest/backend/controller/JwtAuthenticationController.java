@@ -1,5 +1,6 @@
 package com.quest.backend.controller;
 
+import com.quest.backend.config.Constants;
 import com.quest.backend.service.UserDetailsServiceImpl;
 import com.quest.backend.token.JwtRequest;
 import com.quest.backend.token.JwtResponse;
@@ -17,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @CrossOrigin
 @Slf4j
-@RequestMapping("/")
+@RequestMapping(Constants.API_VERSION)
 public class JwtAuthenticationController {
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -26,7 +27,7 @@ public class JwtAuthenticationController {
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
 
-    @PostMapping(path = "/api/v/n/1/authenticate")
+    @PostMapping(path = "/authenticate")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
         authenticate(authenticationRequest.getLogin(), authenticationRequest.getPassword());
         log.info(authenticationRequest.getLogin());
