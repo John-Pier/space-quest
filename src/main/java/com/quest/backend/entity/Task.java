@@ -32,7 +32,7 @@ public class Task {
     @Column(name = "serial_number")
     private int serialNumber;
 
-    @Column(name = "test")
+    @Column(name = "text")
     private String text;
 
     @Column(name = "url")

@@ -2,7 +2,6 @@ package com.quest.backend.service;
 
 import com.quest.backend.entity.Task;
 import com.quest.backend.repository.TaskRepository;
-import com.quest.backend.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +17,7 @@ public class TaskRepositoryService {
     }
 
     public Task getAllBysectionUUID(String sectionUUID) {
+        log.info("Get all tasks by section UUID");
         return repository.getAllBysectionUUID(sectionUUID);
     }
 }
