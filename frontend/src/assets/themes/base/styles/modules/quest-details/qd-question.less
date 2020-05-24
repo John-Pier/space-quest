@@ -1,11 +1,20 @@
+@import "./../../common/colors.less";
+
 .spq-qd-question {
     display: flex;
     flex: 1 0 auto;
     width: 100%;
 
-    &_inner {
+    &__inner {
         width: 100%;
         display: flex;
-        justify-content: center;
+        flex-flow: column nowrap;
+    }
+    &__content {
+        width: 100%;
+        display: flex;
+        flex-flow: column nowrap;
+        margin: 0 auto;
+        background-color: @main-background-color;
     }
 }

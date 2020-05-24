@@ -20,7 +20,9 @@ export class SPQQuestDetailsComponent implements OnInit {
         this.subscribeToGetQuestTask();
     }
 
-    public ngOnInit() {}
+    public ngOnInit() {
+
+    }
 
     public _onBackClick(): void {
         this.navigationService.back();
@@ -30,7 +32,6 @@ export class SPQQuestDetailsComponent implements OnInit {
         this.route.data
             .pipe(
                 map((data: { questTask: SPQQuestTask }) => {
-                    console.log(data);
                     return data.questTask;
                 }),
                 tap(task => {

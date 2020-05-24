@@ -11,7 +11,7 @@ export type SPQQuestTask = Readonly<{
     subtitle: string,
     type: SPQQuestTaskUrlType
     url: string,
-    text: string,
+    question: string,
     answer: any, // TODO -> specify
     serialNumber: number
 }>;

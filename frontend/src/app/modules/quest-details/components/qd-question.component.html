@@ -1,4 +1,16 @@
 <div class="spq-qd-question__inner">
-    Question Component
-    Not implemented
+    <div class="spq-qd-question__content">
+        <iframe *ngIf="questTask.type === _questUrlType.VIDEO"
+                style="width: 100%; min-height: 405px"
+                type="text/html"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                [src]="_trustedUrl"
+                frameborder="0">
+        </iframe>
+        <img *ngIf="questTask.type === _questUrlType.PICTURE"
+             [src]="_trustedUrl" alt="Question Picture">
+    </div>
+    <div class="spq-qd-question__question">
+        {{questTask.question}}
+    </div>
 </div>
