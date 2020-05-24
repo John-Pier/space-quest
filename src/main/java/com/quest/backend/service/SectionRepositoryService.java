@@ -6,6 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Slf4j
 @Service
 public class SectionRepositoryService {
@@ -16,8 +18,8 @@ public class SectionRepositoryService {
         this.repository = repository;
     }
 
-    public Section getAll() {
+    public List<Section> getAll() {
         log.info("Get all sections");
-        return repository.getAll();
+        return repository.findAll();
     }
 }

@@ -24,8 +24,8 @@ public class Task {
     @Column(name = "answer", nullable = false)
     private String answer;
 
-    @ManyToOne
-    @JoinColumn(name="section_uuid")
+    @ManyToOne(optional=false, targetEntity = Section.class)
+    @JoinColumn(name="section_uuid", referencedColumnName="UUID")
     private String sectionUUID;
 
     @GeneratedValue(strategy = GenerationType.AUTO)

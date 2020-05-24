@@ -6,6 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Slf4j
 @Service
 public class TaskRepositoryService {
@@ -16,8 +18,8 @@ public class TaskRepositoryService {
         this.repository = repository;
     }
 
-    public Task getAllBysectionUUID(String sectionUUID) {
+    public List<Task> getAllBySectionUUID(String sectionUUID) {
         log.info("Get all tasks by section UUID");
-        return repository.getAllBysectionUUID(sectionUUID);
+        return repository.getAllBySectionUUID(sectionUUID);
     }
 }
