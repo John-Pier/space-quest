@@ -29,7 +29,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             throw new UsernameNotFoundException("User or password invalid");
         }
 
-        // указываем роли для этого пользователя
         Set<GrantedAuthority> roles = new HashSet();
         if (user.getAdmin()) {
             roles.add(new SimpleGrantedAuthority(UserRoleEnum.ROLE_ADMIN.name()));
@@ -41,9 +40,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             log.info("2");
         }
 
-        // на основании полученных данных формируем объект UserDetails
-        // который позволит проверить введенный пользователем логин и пароль
-        // и уже потом аутентифицировать пользователя
 
         return new org.springframework.security.core.userdetails.User(user.getLogin(),
                 user.getPassword(),
