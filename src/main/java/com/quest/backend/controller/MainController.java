@@ -36,7 +36,7 @@ public class MainController {
     }
     @GetMapping(value = "/image", produces = MediaType.IMAGE_JPEG_VALUE)
     public @ResponseBody byte[] getImageAsByteArray(@RequestBody String url) throws IOException {
-        InputStream in =getClass().getResourceAsStream("/images/" + url);
+        InputStream in = getClass().getResourceAsStream("/images/" + url);
         return IOUtils.toByteArray(in);
     }
 }
