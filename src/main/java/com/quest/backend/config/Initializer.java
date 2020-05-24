@@ -16,7 +16,6 @@ public class Initializer implements WebApplicationInitializer {
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
         AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
-        // регистрация конфигураций в Spring контексте
         ctx.register(WebAppConfig.class);
         ctx.register(SecurityConfig.class);
         servletContext.addListener(new ContextLoaderListener(ctx));
