@@ -1,28 +1,44 @@
 <div class="spq-qd-answer__inner">
     <div class="spq-qd-answer__bar">
         <div class="spq-qd-answer__bar-attempts">
-            <svg>
-                <use xlink:href="#icon-rocket"/>
-            </svg>
-            <svg>
-                <use xlink:href="#icon-non-color-rocket"/>
-            </svg>
-            <svg>
-                <use xlink:href="#icon-non-color-rocket"/>
+            <svg *ngFor="let attempt of _attemptsModel; trackBy: _trackByAttemptSpentFn">
+                <ng-template [ngTemplateOutlet]="attempt.attemptSpent ? spentTemplate : noSpentTemplate">
+                </ng-template>
+                <ng-template #noSpentTemplate>
+                    <use xlink:href="#icon-non-color-rocket"/>
+                </ng-template>
+                <ng-template #spentTemplate>
+                    <use xlink:href="#icon-rocket"/>
+                </ng-template>
             </svg>
         </div>
-        <div class="spq-qd-answer__bar-hints">
+        <div class="spq-qd-answer__bar-hints"
+             [matTooltip]="!_hintsUsed ? 'У вас есть только одна подсказка' : 'Вы уже использовали подсказку'"
+             [matTooltipPosition]="'after'"
+             (click)="_onHintsClick()">
             <svg width="28px" height="28px">
-                <use xlink:href="#icon-lamp"/>
+                <use *ngIf="!_hintsUsed; else usedHintsTemplate"
+                     xlink:href="#icon-lamp"/>
+                <ng-template #usedHintsTemplate>
+                    <use xlink:href="#icon-lamp"/>
+                </ng-template>
             </svg>
         </div>
     </div>
     <div class="spq-qd-answer__answer">
-        <div>
-            Answer
-            <input matInput>
+        <div class="_input">
+            <mat-form-field appearance="outline">
+                <mat-label>Ваш ответ</mat-label>
+                <input #input
+                       matInput
+                       placeholder="Placeholder">
+                <mat-hint *ngIf="_failureAnswer">Попробуйте еще раз</mat-hint>
+            </mat-form-field>
         </div>
-        <button mat-raised-button color="primary">
+        <button class="_button"
+                mat-raised-button color="primary"
+                (click)="_onSubmitClick(input.value)">
+            Отправить
         </button>
     </div>
 </div>
