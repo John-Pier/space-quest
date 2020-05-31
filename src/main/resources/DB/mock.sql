@@ -11,6 +11,9 @@ insert into task(uuid, answer, section_uuid, text)
 
 insert into tooltip(uuid, level, text) 
 values ('22fea63f7d0e463699f91aefd83ddaeb',1, 'ха'), ('5376eb74fc6544eab76526a9502eed86',2, 'ха-ха'), ('e1ba78946204421c943109c4d577dfbc', 3, 'ха-ха-ха');
+insert into tooltip(uuid, level, text)
+values ('bae0632d43ec4af09e6c2e319f8a341b',1, 'уф'), ('cfd63a9d6b374e75a2fff883a57b65d1',2, 'уф-уф'),
+		('c39bc641494f4ee5a93bcefca4d7d449',1, 'ух');
 
 insert into task(uuid, answer, section_uuid, url, text) 
 values ('c79a30507e634558b063432627c56082','test1', '83b09c65ba73435491dd3326a9eea717', 'test2.jpg', 'Вопрос: test + 1 = ?'),
