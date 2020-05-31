@@ -38,4 +38,10 @@ public class Task {
 
     @Column(name = "url")
     private String url;
+
+    @Column(name = "title", nullable = false)
+    private String title;
+
+    @Column(name = "subtitle", nullable = false)
+    private String subtitle;
 }

@@ -24,6 +24,8 @@ CREATE TABLE "task" (
 	"url" VARCHAR(255),
 	"text" VARCHAR(255),
 	"serial_number" serial NOT NULL,
+	"title" VARCHAR(255) NOT NULL,
+	"subtitle" VARCHAR(255) NOT NULL,
 	CONSTRAINT "task_pk" PRIMARY KEY ("uuid")
 ) WITH (
   OIDS=FALSE

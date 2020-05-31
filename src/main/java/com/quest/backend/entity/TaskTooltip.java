@@ -5,9 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "task_tooltip")
@@ -16,7 +14,11 @@ import javax.persistence.Table;
 @AllArgsConstructor
 public class TaskTooltip {
 
-    @EmbeddedId
-    private TaskTooltipId taskTooltipId;
+    @Id
+    @Column(name = "tooltip_uuid", nullable = false)
+    private String tooltipUUID;
+
+    @Column(name = "task_uuid", nullable = false)
+    private String taskUUID;
 
 }

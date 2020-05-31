@@ -32,6 +32,8 @@ public class TaskController {
 
     @GetMapping("/task/tooltip/count")
     public Integer  getCountOfTooltipsByTaskUUID(@RequestBody String taskUUID) throws Exception{
+        System.out.println(taskUUID);
+        log.info("text");
         return taskService.getCountOfTooltipsByTaskUUID(taskUUID);
     }
 }

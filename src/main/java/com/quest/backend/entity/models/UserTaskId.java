@@ -16,10 +16,10 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class UserTaskId implements Serializable {
 
-    @Column(name = "user_uuid", nullable = false)
+    /*@Column(name = "user_uuid", nullable = false)
     private String userUUID;
 
     @Column(name = "task_uuid", nullable = false)
-    private String taskUUID;
+    private String taskUUID;*/
 
 }
