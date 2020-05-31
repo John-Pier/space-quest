@@ -1,0 +1,20 @@
+<h1 mat-dialog-title>Отлично</h1>
+<div class="spq-finish-action-popup__inner">
+    <div class="spq-finish-action-popup__caption">
+        Вы успешно ответили на вопрос!
+    </div>
+        <mat-dialog-actions class="spq-finish-action-popup__buttons"
+                            align="end">
+            <button mat-button
+                    [mat-dialog-close]="_actionsPopupResult.BACK">
+                Назад к списку
+            </button>
+            <button mat-button
+                    color="primary"
+                    [mat-dialog-close]="_actionsPopupResult.NEXT"
+                    cdkFocusInitial
+                    [disabled]="_nextDisable">
+                Продолжить
+            </button>
+        </mat-dialog-actions>
+</div>

@@ -30,14 +30,6 @@ export class SPQMainContainerComponent implements OnInit {
             {
                 tabName: "Quest",
                 route: SPQRoutesMap[SPQRoutesString.SPQ_QUEST],
-            },
-            {
-                tabName: "Profile",
-                route: SPQRoutesMap[SPQRoutesString.SPQ_USER_PROFILE],
-            },
-            {
-                tabName: "Test 404",
-                route: "/main/lol",
             }
         ];
 
@@ -49,5 +41,9 @@ export class SPQMainContainerComponent implements OnInit {
 
     public _logoutClick(): void {
         this.navigationService.navigateTo(SPQRoutesMap[SPQRoutesString.SPQ_AUTH]);
+    }
+
+    public _onNavigateToUserProfileClick() {
+        this.navigationService.navigateTo(SPQRoutesMap[SPQRoutesString.SPQ_USER_PROFILE]);
     }
 }

@@ -1,25 +1,20 @@
-export type ResponseModel =  {
-    accessToken: string;
-    type: string,
-    id: string | number,
-    login: string,
-    firstName?: string,
-    authorities: string[]
+export type EncodedTokenResponse = {
+    token: string
 };
 
 export const authStore = {
-    login: <ResponseModel> {
-        accessToken: "asdfasfsadgsadgasdgasdgsagasgeru898rybhve8roywvguy9y-yb-g-vwg-cwgw5h66rvgvr5e4v-gwechwrcger",
-        type: "",
-        id: "1",
-        login: "test@user.ru",
-        authorities: []
+    login: <EncodedTokenResponse> {
+        token: "eyJhbGciOiJIUzUxMiJ9." +
+            "eyJmaXJzdE5hbWUiOiJTdXBlciBUZXN0Iiwic3ViIjoidGVzdEB1c2VyLnJ1Iiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sImV4cCI6MTU5MDI4NzE4OCwiaWF0IjoxNTkwMjY5MTg4fQ." +
+            "Cth9ECLtRuMpeLis05gBjVp5VPWPESZ630Kage7CqFZ0_DMEWShQDis-AABJkDL0Ze_i_y08GAATtabaF59HAQ"
     },
-    registration: <ResponseModel> {
-        accessToken: "asdfasfsasadfasdfsaft34tfesdgsagasgeru898rybhve8roywvguy9y-yb-g-vwg-cwgw5h66rvgvr5e4v-gwechwrcger",
-        type: "",
-        id: "2",
-        login: "newtest@user.ru",
-        authorities: []
+    registration: <EncodedTokenResponse> {
+        token: "eyJhbGciOiJIUzUxMiJ9." +
+            "eyJmaXJzdE5hbWUiOiJTdXBlciBUZXN0Iiwic3ViIjoidGVzdEB1c2VyLnJ1Iiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sImV4cCI6MTU5MDI4NzE4OCwiaWF0IjoxNTkwMjY5MTg4fQ." +
+            "Cth9ECLtRuMpeLis05gBjVp5VPWPESZ630Kage7CqFZ0_DMEWShQDis-AABJkDL0Ze_i_y08GAATtabaF59HAQ"
     }
+};
+
+export const DecodedResponseData = {
+    login: "test@user.ru"
 };

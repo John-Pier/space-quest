@@ -6,7 +6,7 @@
                              [title]="node.title"
                              [subtitle]="node.subtitle"
                              [serialNumber]="node.serialNumber"
-                             [isSelected]="node.isSelected"
+                             [isSelected]="values.currentTaskId == node.id"
                              (onClick)="_navigateToClickedQuestDetails($event)">
         </spq-quest-step-cube>
     </div>

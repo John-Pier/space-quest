@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs";
-import {SPAEncodedResponse} from "../../core/security/types/jwt-response.type";
+import {SPAEncodedResponse} from "../../core/security/types/response.type";
 import {SPQAuthDataModel, SPQRegistrationDataModel} from "../../modules/auth/types/auth.type";
 import {SPQDataService} from "./abstract-data.service";
 

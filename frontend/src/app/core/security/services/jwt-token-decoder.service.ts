@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {JwtHelperService} from "@auth0/angular-jwt";
 import {SPATokenDecoderService} from "../../../services/token-decoder.service";
-import {SPADecodedResponseModel, SPAEncodedResponse} from "../types/jwt-response.type";
+import {SPADecodedResponseModel, SPAEncodedResponse} from "../types/response.type";
 
 @Injectable()
 export class SPAJwtTokenDecoderService implements SPATokenDecoderService {

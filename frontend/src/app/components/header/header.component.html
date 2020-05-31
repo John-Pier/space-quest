@@ -1,14 +1,16 @@
 <div class="spq-header__inner">
-    <div class="spq-header__main-label">
-        <ng-template [ngTemplateOutlet]="logoLabelTemplate ? logoLabelTemplate : logoLabelTemplate">
-        </ng-template>
-    </div>
-    <div class="spq-header__tabs">
-        <div class="spq-header__tab"
-        *ngFor="let model of models">
-            <ng-template [ngTemplateOutlet]="tabTemplate"
-                         [ngTemplateOutletContext]="{model: model}">
+    <div class="spq-header__main-content">
+        <div class="spq-header__main-label">
+            <ng-template [ngTemplateOutlet]="logoLabelTemplate ? logoLabelTemplate : logoLabelTemplate">
             </ng-template>
+        </div>
+        <div class="spq-header__tabs">
+            <div class="spq-header__tab"
+                 *ngFor="let model of models">
+                <ng-template [ngTemplateOutlet]="tabTemplate"
+                             [ngTemplateOutletContext]="{model: model}">
+                </ng-template>
+            </div>
         </div>
     </div>
     <div class="spq-header__right-bar">

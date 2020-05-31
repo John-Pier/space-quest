@@ -1,4 +1,21 @@
 <div class="spq-qd-question__inner">
-    Question Component
-    Not implemented
+    <div class="spq-qd-question__content"
+         [ngSwitch]="questTask.type">
+        <iframe class="spq-qd-question__content-video"
+                *ngSwitchCase="_questUrlType.VIDEO"
+                [src]="_trustedUrl"
+                frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture">
+        </iframe>
+        <img class="spq-qd-question__content-picture"
+             *ngSwitchCase="_questUrlType.PICTURE"
+             [src]="_trustedUrl"
+             importance="high"
+             alt="Question Picture">
+    </div>
+    <div class="spq-qd-question__question">
+        <div class="spq-qd-question__question-caption">
+            {{questTask.question}}
+        </div>
+    </div>
 </div>
