@@ -20,9 +20,7 @@ export class SPQQuestDetailsComponent implements OnInit {
         this.subscribeToGetQuestTask();
     }
 
-    public ngOnInit() {
-
-    }
+    public ngOnInit() {}
 
     public _onBackClick(): void {
         this.navigationService.back();

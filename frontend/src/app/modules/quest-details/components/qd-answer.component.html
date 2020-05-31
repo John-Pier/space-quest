@@ -26,19 +26,24 @@
         </div>
     </div>
     <div class="spq-qd-answer__answer">
-        <div class="_input">
-            <mat-form-field appearance="outline">
-                <mat-label>Ваш ответ</mat-label>
-                <input #input
-                       matInput
-                       placeholder="Placeholder">
-                <mat-hint *ngIf="_failureAnswer">Попробуйте еще раз</mat-hint>
-            </mat-form-field>
-        </div>
-        <button class="_button"
-                mat-raised-button color="primary"
-                (click)="_onSubmitClick(input.value)">
-            Отправить
-        </button>
+        <form [formGroup]="_answerFormGroupModel"
+              (ngSubmit)="_onSubmitClick(input.value)">
+            <div class="_input">
+                <mat-form-field appearance="outline">
+                    <mat-label>Ваш ответ</mat-label>
+                    <input #input
+                           formControlName="answerInput"
+                           matInput
+                           placeholder="Placeholder">
+                    <mat-hint *ngIf="_failureAnswer">Попробуйте еще раз</mat-hint>
+                </mat-form-field>
+            </div>
+            <button class="_button"
+                    type="submit"
+                    mat-raised-button color="primary"
+                    [disabled]="_localLoading || _answerFormGroupModel.invalid || !_answerFormGroupModel.dirty">
+                Отправить
+            </button>
+        </form>
     </div>
 </div>

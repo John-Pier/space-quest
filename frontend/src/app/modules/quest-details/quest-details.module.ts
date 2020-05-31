@@ -1,8 +1,11 @@
 import {CommonModule} from "@angular/common";
 import {NgModule, Type} from "@angular/core";
-import {MatButtonModule, MatInputModule, MatTabsModule, MatTooltipModule} from "@angular/material";
+import {ReactiveFormsModule} from "@angular/forms";
+import {MatButtonModule, MatDialogModule, MatInputModule, MatTabsModule, MatTooltipModule} from "@angular/material";
 import {RouterModule, Routes} from "@angular/router";
 import {SPQQuestDetailsDataService} from "../../services/data/quest-details-data.service";
+import {SPQFinishActionPopupComponent} from "./components/embed/finish-action-popup.component";
+import {SPQHintPopupComponent} from "./components/embed/hint-popup.component";
 import {SPQQuestDetailsAnswerComponent} from "./components/qd-answer.component";
 import {SPQQuestDetailsQuestionComponent} from "./components/qd-question.component";
 import {SPQQuestDetailsComponent} from "./quest-details.component";
@@ -20,22 +23,30 @@ const QuestDetailsRoutes: Routes = [
 ];
 
 const matModules: Array<Type<any>> = [
+    MatDialogModule,
+    MatButtonModule,
+    MatTabsModule,
+    MatInputModule,
+    MatTooltipModule
 ];
 
 @NgModule({
     imports: [
         CommonModule,
         RouterModule.forChild(QuestDetailsRoutes),
-        ...matModules,
-        MatButtonModule,
-        MatTabsModule,
-        MatInputModule,
-        MatTooltipModule
+        ReactiveFormsModule,
+        ...matModules
     ],
     declarations: [
         SPQQuestDetailsComponent,
         SPQQuestDetailsQuestionComponent,
-        SPQQuestDetailsAnswerComponent
+        SPQQuestDetailsAnswerComponent,
+        SPQFinishActionPopupComponent,
+        SPQHintPopupComponent
+    ],
+    entryComponents: [
+        SPQFinishActionPopupComponent,
+        SPQHintPopupComponent
     ],
     exports: [
         SPQQuestDetailsComponent
