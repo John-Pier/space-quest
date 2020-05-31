@@ -18,4 +18,5 @@ public class TaskTooltip {
 
     @EmbeddedId
     private TaskTooltipId taskTooltipId;
+
 }
