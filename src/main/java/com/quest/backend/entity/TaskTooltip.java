@@ -1,10 +1,11 @@
 package com.quest.backend.entity;
 
+import com.quest.backend.entity.models.TaskTooltipId;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -15,9 +16,6 @@ import javax.persistence.Table;
 @AllArgsConstructor
 public class TaskTooltip {
 
-    @Column(name = "task_uuid", nullable = false)
-    private String taskUUID;
-
-    @Column(name = "tooltip_uuid", nullable = false)
-    private String tooltipUUID;
+    @EmbeddedId
+    private TaskTooltipId taskTooltipId;
 }
