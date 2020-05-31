@@ -14,8 +14,10 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TaskTooltip {
+
     @Column(name = "task_uuid", nullable = false)
     private String taskUUID;
+
     @Column(name = "tooltip_uuid", nullable = false)
     private String tooltipUUID;
 }
