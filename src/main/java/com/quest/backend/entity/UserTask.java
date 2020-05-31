@@ -25,4 +25,10 @@ public class UserTask {
 
     @Column(name = "is_passed", nullable = false)
     private Boolean isPassed = false;
+
+    public UserTask(String userUUID, String taskUUID, Boolean lock) {
+        this.userUUID = userUUID;
+        this.taskUUID = taskUUID;
+        this.lock = lock;
+    }
 }

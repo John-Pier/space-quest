@@ -22,4 +22,9 @@ public class SectionRepositoryService {
         log.info("Get all sections");
         return repository.findAll();
     }
+
+    public List<String> getAllId() {
+        log.info("Get all id of sections");
+        return  repository.getAllId();
+    }
 }

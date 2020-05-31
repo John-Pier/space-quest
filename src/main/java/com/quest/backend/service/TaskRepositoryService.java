@@ -31,13 +31,10 @@ public class TaskRepositoryService {
 
     public Tooltip getTooltipByLvl(String taskUUID, Integer lvl) {
         log.info("Find tooltips by taskUUID");
-        System.out.println(taskUUID);
         List<TaskTooltip> taskTooltips = taskTooltipRepositoryService.getAllByTaskUUID(taskUUID);
         Tooltip tooltip = null;
-        System.out.println(taskTooltips.size());
         for (TaskTooltip temp : taskTooltips) {
             log.info("Find tooltip by UUID");
-            System.out.println(temp.getTooltipUUID());
             tooltip = tooltipRepositoryService.getByUUID(temp.getTooltipUUID());
             if (tooltip.getLevel() == lvl) {
                 break;
@@ -49,6 +46,14 @@ public class TaskRepositoryService {
     public Integer getCountOfTooltipsByTaskUUID(String taskUUID) {
         log.info("Find tooltips by taskUUID");
         return taskTooltipRepositoryService.getAllByTaskUUID(taskUUID).size();
+    }
 
+    public List<String> getAllId() {
+        return repository.getAllId();
+    }
+
+    public List<String> getAllIdBySectionId(String sectionUUID) {
+        log.info("Get all task id by sectionUUID");
+        return repository.getAllIdBySectionId(sectionUUID);
     }
 }
