@@ -44,4 +44,3 @@ export const SPQStubQuestFlow: SPQQuestFlow = {
     nodes: SPQStubQuestTaskBriefs,
     currentTaskId: 6
 };
-

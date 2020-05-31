@@ -2,11 +2,14 @@ import {Component, HostBinding, OnInit} from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
 import {map, tap} from "rxjs/operators";
 import {SPQQuestTask} from "../../core/models/quest-task.type";
-import {SPQNavigationService} from "../../services/navigation.service";
+import {SPQQuestDetailsNavigationService} from "./services/qd-navigation-helper.service";
 
 @Component({
     selector: "spq-quest-details",
-    templateUrl: "quest-details.component.html"
+    templateUrl: "quest-details.component.html",
+    providers: [
+        SPQQuestDetailsNavigationService
+    ]
 })
 export class SPQQuestDetailsComponent implements OnInit {
 
@@ -16,7 +19,7 @@ export class SPQQuestDetailsComponent implements OnInit {
     private hostClass: boolean = true;
 
     constructor(private route: ActivatedRoute,
-                private navigationService: SPQNavigationService) {
+                private navigationService: SPQQuestDetailsNavigationService) {
         this.subscribeToGetQuestTask();
     }
 

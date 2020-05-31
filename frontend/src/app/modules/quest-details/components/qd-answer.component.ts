@@ -1,11 +1,10 @@
 import {Component, HostBinding, Input, OnDestroy, OnInit} from "@angular/core";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {MatDialog} from "@angular/material";
-import {Subscription} from "rxjs";
 import {take, tap} from "rxjs/operators";
-import {SPQRoutesMap, SPQRoutesString} from "../../../app-routers";
 import {SPQQuestTask} from "../../../core/models/quest-task.type";
-import {SPQNavigationService} from "../../../services/navigation.service";
+import {SPQQuestDetailsNavigationService} from "../services/qd-navigation-helper.service";
+import {SPQActionsPopupResult} from "../types/actions-popup-result";
 import {SPQFinishActionPopupComponent} from "./embed/finish-action-popup.component";
 import {SPQHintPopupComponent} from "./embed/hint-popup.component";
 
@@ -41,40 +40,31 @@ export class SPQQuestDetailsAnswerComponent implements OnInit, OnDestroy {
     @Input()
     public questTask: SPQQuestTask;
 
-    private subscription: Subscription[] = [];
-
     @HostBinding("class.spq-qd-answer")
     private hostClass: boolean = true;
 
     constructor(private dialogService: MatDialog,
-                private navigationService: SPQNavigationService) {}
+                private navigationService: SPQQuestDetailsNavigationService) {}
 
     public ngOnInit() {
-        this._answerFormGroupModel = new FormGroup({
-            answerInput: new FormControl("", [Validators.required, Validators.min(1)])
-        });
+        this.initAnswerForm();
     }
 
     public _onSubmitClick(answer: string): void {
-        if (this._answerFormGroupModel.valid) {
-            this._failureAnswer = this.questTask.answer.toString() !== answer.toString();
-            if (this._failureAnswer) {
-                this._attemptsModel.pop();
-                this._attemptsModel.unshift({
-                    attemptSpent: true
-                });
-                this._answerFormGroupModel.controls["answerInput"].setErrors({ ["answerError"]: "Ответ не верный" });
-            }
-            if (!this._failureAnswer) {
-                this.openFinishDialog();
-            }
+        // TODO -> refactoring - answer not in model now
+        this._failureAnswer = this.questTask.answer.toString() !== answer.toString();
+        if (this._failureAnswer) {
+            this.updateAttemptsModel();
+            this.setAnswerFormError();
+        } else {
+            this.openFinishDialogAndSubscribeToClose();
         }
     }
 
     public _onHintsClick() {
         if (!this._hintsUsed) {
-            this.openHintsDialog();
             this._hintsUsed = true;
+            this.openHintsDialog();
         }
     }
 
@@ -83,22 +73,53 @@ export class SPQQuestDetailsAnswerComponent implements OnInit, OnDestroy {
     }
 
     public ngOnDestroy() {
-        this.subscription.forEach(el => el.unsubscribe());
+        // this.subscription.forEach(el => el.unsubscribe());
     }
 
-    private openFinishDialog(): void {
-        this.dialogService.open(SPQFinishActionPopupComponent)
+    private initAnswerForm(): void {
+        this._answerFormGroupModel = new FormGroup({
+            answerInput: new FormControl("", [Validators.required, Validators.min(1)])
+        });
+    }
+
+    private updateAttemptsModel(): void {
+        this._attemptsModel.pop();
+        this._attemptsModel.unshift({
+            attemptSpent: true
+        });
+    }
+
+    private setAnswerFormError(): void {
+        this._answerFormGroupModel.controls["answerInput"].setErrors({ ["answerError"]: "Ответ не верный" });
+    }
+
+    private openFinishDialogAndSubscribeToClose(): void {
+        this.dialogService.open<SPQFinishActionPopupComponent, boolean, SPQActionsPopupResult>(SPQFinishActionPopupComponent, {
+            data: this.navigationService.nextQuestDetailsIsExist()
+        })
             .afterClosed()
             .pipe(
                 take(1),
-                tap(() => {
-                    this.navigationService.navigateTo(SPQRoutesMap[SPQRoutesString.SPQ_QUEST]);
-                })
+                tap(result => this.navigateFromPopupResult(result))
             )
             .subscribe();
     }
 
     private openHintsDialog(): void {
+        // TODO -> refactoring -> Запрос на срерв - подписка и открытие окна
         this.dialogService.open(SPQHintPopupComponent, { data: this.questTask.answer });
+    }
+
+    private navigateFromPopupResult(result: SPQActionsPopupResult): void {
+        switch (result) {
+            case SPQActionsPopupResult.BACK:
+                this.navigationService.navigateToQuestFlow();
+                break;
+            case SPQActionsPopupResult.NEXT:
+                this.navigationService.navigateToNextQuestDetails();
+                break;
+            default:
+                throw new Error("Unknown value of SPQActionsPopupResult");
+        }
     }
 }
