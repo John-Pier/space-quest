@@ -24,8 +24,8 @@ public class TooltipRepositoryService {
         return repository.findAll();
     }
 
-    public Tooltip getByUUID(String tooltipUUID) {
+    Tooltip getByUUID(String tooltipUUID) {
         log.info("Get tooltip by uuid");
-        return repository.getOne(UUID.fromString(tooltipUUID));
+        return repository.getByUuid(tooltipUUID);
     }
 }

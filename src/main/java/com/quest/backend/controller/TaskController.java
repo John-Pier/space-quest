@@ -3,6 +3,7 @@ package com.quest.backend.controller;
 import com.quest.backend.config.Constants;
 import com.quest.backend.entity.Task;
 import com.quest.backend.entity.Tooltip;
+import com.quest.backend.entity.models.TooltipByLvl;
 import com.quest.backend.service.TaskRepositoryService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -26,8 +27,8 @@ public class TaskController {
     }
 
     @GetMapping("/task/tooltip/lvl")
-    public Tooltip  getTooltipByLvl(@RequestBody String taskUUID, Integer lvl) throws Exception{
-        return taskService.getTooltipByLvl(taskUUID, lvl);
+    public Tooltip  getTooltipByLvl(@RequestBody TooltipByLvl model) throws Exception{
+        return taskService.getTooltipByLvl(model.getTaskUUID(), model.getLvl());
     }
 
     @GetMapping("/task/tooltip/count")

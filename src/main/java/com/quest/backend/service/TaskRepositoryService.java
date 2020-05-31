@@ -4,27 +4,24 @@ import com.quest.backend.entity.Task;
 import com.quest.backend.entity.TaskTooltip;
 import com.quest.backend.entity.Tooltip;
 import com.quest.backend.repository.TaskRepository;
-import com.quest.backend.repository.TaskTooltipRepository;
-import com.quest.backend.repository.TooltipRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 
 @Slf4j
 @Service
 public class TaskRepositoryService {
 
     private final TaskRepository repository;
-    private final TaskTooltipRepository taskTooltipRepository;
-    private final TooltipRepository tooltipRepository;
+    private final TaskTooltipRepositoryService taskTooltipRepositoryService;
+    private final TooltipRepositoryService tooltipRepositoryService;
     @Autowired
-    public TaskRepositoryService(TaskRepository repository, TaskTooltipRepository taskTooltipRepository, TooltipRepository tooltipRepository) {
+    public TaskRepositoryService(TaskRepository repository, TaskTooltipRepositoryService taskTooltipRepositoryService, TooltipRepositoryService tooltipRepositoryService) {
         this.repository = repository;
-        this.taskTooltipRepository = taskTooltipRepository;
-        this.tooltipRepository = tooltipRepository;
+        this.taskTooltipRepositoryService = taskTooltipRepositoryService;
+        this.tooltipRepositoryService = tooltipRepositoryService;
     }
 
     public List<Task> getAllBySectionUUID(String sectionUUID) {
@@ -34,11 +31,14 @@ public class TaskRepositoryService {
 
     public Tooltip getTooltipByLvl(String taskUUID, Integer lvl) {
         log.info("Find tooltips by taskUUID");
-        List<TaskTooltip> taskTooltips = taskTooltipRepository.getAllByTaskUUID(taskUUID);
+        System.out.println(taskUUID);
+        List<TaskTooltip> taskTooltips = taskTooltipRepositoryService.getAllByTaskUUID(taskUUID);
         Tooltip tooltip = null;
+        System.out.println(taskTooltips.size());
         for (TaskTooltip temp : taskTooltips) {
             log.info("Find tooltip by UUID");
-            tooltip = tooltipRepository.getOne(UUID.fromString(temp.getTooltipUUID()));
+            System.out.println(temp.getTooltipUUID());
+            tooltip = tooltipRepositoryService.getByUUID(temp.getTooltipUUID());
             if (tooltip.getLevel() == lvl) {
                 break;
             }
@@ -48,17 +48,7 @@ public class TaskRepositoryService {
 
     public Integer getCountOfTooltipsByTaskUUID(String taskUUID) {
         log.info("Find tooltips by taskUUID");
-        System.out.println(taskUUID);
-        System.out.println(taskUUID);
-        System.out.println(taskUUID);
-        System.out.println(taskUUID);
-        List<TaskTooltip> taskTooltips = taskTooltipRepository.getAllByTaskUUID(taskUUID);
-        Tooltip tooltip = null;
-        for (TaskTooltip temp : taskTooltips) {
-            log.info("Find tooltip by UUID");
-            System.out.println(taskUUID);
-        }
-        return taskTooltipRepository.getAllByTaskUUID(taskUUID).size();
+        return taskTooltipRepositoryService.getAllByTaskUUID(taskUUID).size();
 
     }
 }

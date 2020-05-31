@@ -8,4 +8,5 @@ import java.util.UUID;
 
 @Repository
 public interface TooltipRepository extends JpaRepository<Tooltip, UUID> {
+    Tooltip getByUuid(String uuid);
 }
