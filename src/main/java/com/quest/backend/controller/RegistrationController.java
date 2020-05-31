@@ -4,18 +4,15 @@ import com.quest.backend.config.Constants;
 import com.quest.backend.entity.User;
 import com.quest.backend.service.UserDetailsServiceImpl;
 import com.quest.backend.service.UserRepositoryService;
+import com.quest.backend.service.UserTaskRepositoryService;
 import com.quest.backend.token.JwtResponse;
 import com.quest.backend.token.JwtTokenUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
 
 @Controller
 @Slf4j
@@ -29,6 +26,8 @@ public class RegistrationController {
     private JwtTokenUtil jwtTokenUtil;
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
+    @Autowired
+    private UserTaskRepositoryService userTaskRepositoryService;
 
 
     @PostMapping(path = "/registration")
@@ -37,7 +36,9 @@ public class RegistrationController {
         final UserDetails userDetails = userDetailsService
                 .loadUserByUsername(user.getLogin());
         final String token = jwtTokenUtil.generateToken(userDetails);
-        log.warn(token);
+        log.info("Token returned");
+        userTaskRepositoryService.initUserTask(userService.getUserByLogin(user.getLogin()).getUuid());
+        log.info("Init actions succeeded");
         return ResponseEntity.ok(new JwtResponse(token));
     }
 

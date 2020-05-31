@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Slf4j
 @Service
@@ -21,5 +22,10 @@ public class TooltipRepositoryService {
     public List<Tooltip> getAll() {
         log.info("Get all tooltips");
         return repository.findAll();
+    }
+
+    Tooltip getByUUID(String tooltipUUID) {
+        log.info("Get tooltip by uuid");
+        return repository.getByUuid(tooltipUUID);
     }
 }
