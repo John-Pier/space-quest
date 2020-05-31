@@ -12,7 +12,7 @@ export class SPQHintPopupComponent {
     @HostBinding("class.spq-hint-popup")
     private hostClass: boolean = true;
 
-    constructor(@Inject(MAT_DIALOG_DATA) data: string) {
-        this._hint = data;
+    constructor(@Inject(MAT_DIALOG_DATA) hint: string) {
+        this._hint = hint;
     }
 }
