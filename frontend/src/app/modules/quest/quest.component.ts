@@ -10,7 +10,7 @@ import {SQPQuestFlowService} from "./services/quest-flow.service";
 })
 export class SPQQuesComponent implements OnInit, OnDestroy {
 
-    public _questFlow: SPQQuestFlow = null;
+    public _questFlows: SPQQuestFlow[] = [];
 
     private subscriptions: Subscription[] = [];
 
@@ -30,10 +30,10 @@ export class SPQQuesComponent implements OnInit, OnDestroy {
 
     private subscribeToGetQuestFlow(): void {
         this.subscriptions.push(
-            this.service.getQuestFlow()
+            this.service.getAllQuestFlow()
             .pipe(
                 tap(flow => {
-                    this._questFlow = flow;
+                    this._questFlows = flow;
                 })
             )
             .subscribe()

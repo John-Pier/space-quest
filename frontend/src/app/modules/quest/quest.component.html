@@ -1,5 +1,6 @@
-<div class="spq-quest__inner">
-    <spq-quest-flow [values]="_questFlow"
+<div class="spq-quest__inner"
+     *ngFor="let questFlow of _questFlows">
+    <spq-quest-flow [values]="questFlow"
                     [config]="null">
     </spq-quest-flow>
 </div>

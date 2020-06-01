@@ -5,6 +5,7 @@ import {MatButtonModule} from "@angular/material";
 import {MatCardModule} from "@angular/material/card";
 import {MatExpansionModule} from "@angular/material/expansion";
 import {RouterModule, Routes} from "@angular/router";
+import {SQPQuestDataFlowService} from "../../services/data/quest-data-flow.service";
 import {SPQCardComponent} from "./components/card.component";
 import {SPQTimelineComponent} from "./timeline.component";
 
@@ -31,7 +32,9 @@ const TimelineRouters: Routes = [
     exports: [
         SPQTimelineComponent
     ],
-    providers: []
+    providers: [
+        SQPQuestDataFlowService
+    ]
 })
 export class SPQTimelineModule {
 }

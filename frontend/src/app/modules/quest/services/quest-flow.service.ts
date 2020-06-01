@@ -13,8 +13,8 @@ export class SQPQuestFlowService {
                 private navigationService: SPQNavigationService) {
     }
 
-    public getQuestFlow(): Observable<SPQQuestFlow> {
-        return this.dataFlowService.getQuestFlow();
+    public getAllQuestFlow(): Observable<SPQQuestFlow[]> {
+        return this.dataFlowService.getAllQuestFlow();
     }
 
     public navigateToQuestDetails(questId: ID): void {
