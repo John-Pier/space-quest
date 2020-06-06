@@ -7,7 +7,7 @@ import {SPQStubQuestFlow} from "./stub/quest-flow.stub";
 @Injectable()
 export class SQPQuestDataFlowService extends SPQDataService {
 
-    public flowBriefsURL = "section";
+    public flowBriefsURL = "section/all";
 
     public getAllQuestFlow(): Observable<SPQQuestFlow[]> {
         // return this.get<SPQQuestFlow>("");

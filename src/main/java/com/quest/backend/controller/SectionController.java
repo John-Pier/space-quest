@@ -28,7 +28,7 @@ public class SectionController {
         return sectionService.getAll();
     }
 
-    @GetMapping("/section/quest flow/all")
+    @GetMapping("/section/quest_flow/all")
     public List<QuestFlow> getAllQuestFlow() throws Exception{
         return sectionService.getAllQuestFlow();
     }

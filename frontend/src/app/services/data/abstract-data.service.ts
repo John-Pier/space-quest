@@ -11,8 +11,14 @@ export const defaultHttpOptions = {
 
 export class SPQDataService {
 
-    constructor(@Inject(SPQ_APP_API_CONFIG) private config: SPQAppAPIConfig,
+    private resourcesUrl = "image/";
+
+    constructor(@Inject(SPQ_APP_API_CONFIG) protected config: SPQAppAPIConfig,
                 private http: HttpClient) {
+    }
+
+    public getResourcesUrl(): string {
+        return this.makeURL(this.resourcesUrl);
     }
 
     public get<T>(address: string, options: any = defaultHttpOptions): Observable<T> {
