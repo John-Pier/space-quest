@@ -7,5 +7,5 @@ import java.util.List;
 @Data
 public class QuestFlow {
     private String id;
-    private List<String> nodes;
+    private List<QuestCube> nodes;
 }

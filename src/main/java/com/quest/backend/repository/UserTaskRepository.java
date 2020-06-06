@@ -18,4 +18,5 @@ public interface UserTaskRepository extends JpaRepository<UserTask, UUID> {
     void saveRecord(@Param("userUUID")String userUUID,
                     @Param("taskUUID")String taskUUID,
                     @Param("lock")Boolean lock);
+    UserTask getByTaskUUID(String taskUUID);
 }

@@ -1,6 +1,7 @@
 package com.quest.backend.service;
 
 import com.quest.backend.entity.Section;
+import com.quest.backend.entity.models.QuestFlow;
 import com.quest.backend.repository.SectionRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,5 +27,9 @@ public class SectionRepositoryService {
     public List<String> getAllId() {
         log.info("Get all id of sections");
         return  repository.getAllId();
+    }
+
+    public List<QuestFlow> getAllQuestFlow() {
+        return null;
     }
 }
