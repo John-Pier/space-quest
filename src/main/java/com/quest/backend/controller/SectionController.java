@@ -2,6 +2,7 @@ package com.quest.backend.controller;
 
 import com.quest.backend.config.Constants;
 import com.quest.backend.entity.Section;
+import com.quest.backend.entity.models.QuestFlow;
 import com.quest.backend.service.SectionRepositoryService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -22,8 +23,13 @@ public class SectionController {
         this.sectionService = sectionService;
     }
 
-    @GetMapping("/section")
+    @GetMapping("/section/all")
     public List<Section> getAll() throws Exception{
         return sectionService.getAll();
+    }
+
+    @GetMapping("/section/quest flow/all")
+    public List<QuestFlow> getAllQuestFlow() throws Exception{
+        return sectionService.getAllQuestFlow();
     }
 }
