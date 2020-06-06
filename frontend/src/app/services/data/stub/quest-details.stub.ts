@@ -5,7 +5,7 @@ export const SPQQuestTasks: SPQTypedMap<SPQQuestTask> = {
     1: {
         id: 1,
         type: SPQQuestTaskUrlType.PICTURE,
-        url: "https://sun1-86.userapi.com/3FnETLCD9KSIHasrTIRNaOddc7rii_-5KZpZeQ/Xo21o78aGPc.jpg",
+        url: "test1.jpg",
         question: "Думатель: каков ответ на главный вопрос жизни, вселенной и всего такого ?",
         title: "Test Init Cube Label",
         subtitle: "This is one step",
@@ -23,7 +23,7 @@ export const SPQQuestTasks: SPQTypedMap<SPQQuestTask> = {
     3: {
         id: 3,
         type: SPQQuestTaskUrlType.PICTURE,
-        url: "https://sun1-86.userapi.com/3FnETLCD9KSIHasrTIRNaOddc7rii_-5KZpZeQ/Xo21o78aGPc.jpg",
+        url: "test2.jpg",
         question: "Думатель: каков ответ на главный вопрос жизни, вселенной и всего такого ?",
         title: "Перед стартом",
         subtitle: "Проспект Ленина 21",
@@ -32,7 +32,7 @@ export const SPQQuestTasks: SPQTypedMap<SPQQuestTask> = {
     4: {
         id: 4,
         type: SPQQuestTaskUrlType.PICTURE,
-        url: "https://sun1-86.userapi.com/3FnETLCD9KSIHasrTIRNaOddc7rii_-5KZpZeQ/Xo21o78aGPc.jpg",
+        url: "test1.jpg",
         question: "Думатель: каков ответ на главный вопрос жизни, вселенной и всего такого ?",
         title: "Дом- рекордсмен",
         subtitle: "Проспект Ленина",
@@ -41,7 +41,7 @@ export const SPQQuestTasks: SPQTypedMap<SPQQuestTask> = {
     5: {
         id: 5,
         type: SPQQuestTaskUrlType.PICTURE,
-        url: "https://sun1-86.userapi.com/3FnETLCD9KSIHasrTIRNaOddc7rii_-5KZpZeQ/Xo21o78aGPc.jpg",
+        url: "test2.jpg",
         question: "Думатель: каков ответ на главный вопрос жизни, вселенной и всего такого ?",
         title: "Семейные узы",
         subtitle: "Молодо- гвардейская 238",
@@ -50,7 +50,7 @@ export const SPQQuestTasks: SPQTypedMap<SPQQuestTask> = {
     6: {
         id: 6,
         type: SPQQuestTaskUrlType.PICTURE,
-        url: "https://sun1-86.userapi.com/3FnETLCD9KSIHasrTIRNaOddc7rii_-5KZpZeQ/Xo21o78aGPc.jpg",
+        url: "test2.jpg",
         question: "Думатель: каков ответ на главный вопрос жизни, вселенной и всего такого ?",
         title: "Артемьев Олег Германович",
         subtitle: "Вопрос о космодромах",

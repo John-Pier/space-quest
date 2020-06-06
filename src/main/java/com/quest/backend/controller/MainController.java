@@ -1,4 +1,5 @@
 package com.quest.backend.controller;
+import com.quest.backend.config.Constants;
 import com.quest.backend.entity.User;
 import com.quest.backend.service.UserRepositoryService;
 import org.apache.commons.io.IOUtils;
@@ -11,7 +12,7 @@ import java.io.InputStream;
 import java.util.List;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping(Constants.API_VERSION)
 public class MainController {
 
     private UserRepositoryService userService;
@@ -34,9 +35,9 @@ public class MainController {
     public User findByLogin() throws Exception{
         return userService.getUserByLogin("test");
     }
-    @GetMapping(value = "/image", produces = MediaType.IMAGE_JPEG_VALUE)
-    public @ResponseBody byte[] getImageAsByteArray(@RequestBody String url) throws IOException {
-        InputStream in = getClass().getResourceAsStream("/images/" + url);
+    @GetMapping(value = "/image/", produces = MediaType.IMAGE_JPEG_VALUE)
+    public @ResponseBody byte[] getImageAsByteArray(@RequestParam String path) throws IOException {
+        InputStream in = getClass().getResourceAsStream("/images/" + path);
         return IOUtils.toByteArray(in);
     }
 }

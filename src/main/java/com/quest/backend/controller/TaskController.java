@@ -44,7 +44,7 @@ public class TaskController {
         return taskService.getCountOfTooltipsByTaskUUID(taskUUID);
     }
 
-    @GetMapping("/task/quest_cube/section")
+    @GetMapping("/task/brief/section")
     public List<QuestTaskBrief> getAllQuestCube(@RequestBody String sectionUUID, @RequestHeader("Authorization") String token) throws Exception{
         log.info("Get login from token");
         JwtTokenUtil jwtTokenUtil = new JwtTokenUtil();

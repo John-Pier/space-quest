@@ -3,8 +3,17 @@
 
 .spq-timeline {
     display: flex;
+    flex: 1;
 
     &__inner {
+        display: flex;
+        flex-flow: column nowrap;
+        width: 100%;
         padding: 0 10px;
+    }
+
+    &__card {
+        padding-top: 10px;
+        width: 100%;
     }
 }

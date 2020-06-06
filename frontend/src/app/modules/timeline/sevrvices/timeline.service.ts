@@ -1,17 +1,24 @@
 import {Injectable} from "@angular/core";
 import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
 import {Observable} from "rxjs";
-import {SPQQuestFlowBrief} from "../../../core/models/quest-task.type";
-import {SQPQuestDataFlowService} from "../../../services/data/quest-data-flow.service";
+import {ID} from "../../../core/base.types";
+import {SPQQuestFlowBrief, SPQQuestTaskBrief} from "../../../core/models/quest-task.type";
+import {SQPQuestFlowDataService} from "../../../services/data/quest-data-flow.service";
+import {SPQQuestDetailsDataService} from "../../../services/data/quest-details-data.service";
 
 @Injectable()
 export class SPQTimelineService {
-    constructor(private questDataFlowService: SQPQuestDataFlowService,
+    constructor(private questFlowDataService: SQPQuestFlowDataService,
+                private questDetailsDataService: SPQQuestDetailsDataService,
                 private sanitizer: DomSanitizer) {
     }
 
     public getAllQuestFlowBriefs(): Observable<SPQQuestFlowBrief[]> {
-        return this.questDataFlowService.getAllQuestFlowBriefs();
+        return this.questFlowDataService.getAllQuestFlowBriefs();
+    }
+
+    public getTaskBriefById(taskId: ID): Observable<SPQQuestTaskBrief> {
+        return this.questDetailsDataService.getQuestTaskBriefById(taskId);
     }
 
     public makeSafeImageUrl(imageUrl): SafeResourceUrl {
@@ -19,6 +26,6 @@ export class SPQTimelineService {
     }
 
     private makeImageUrl(imageUrl: string): string {
-        return this.questDataFlowService.getResourcesUrl() + imageUrl;
+        return this.questFlowDataService.getResourcesUrl() + imageUrl;
     }
 }

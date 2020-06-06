@@ -18,7 +18,8 @@ export class SPQDataService {
     }
 
     public getResourcesUrl(): string {
-        return this.makeURL(this.resourcesUrl);
+        // TODO -> refactoring - make service
+        return this.makeURL(this.resourcesUrl) + "?path=";
     }
 
     public get<T>(address: string, options: any = defaultHttpOptions): Observable<T> {
