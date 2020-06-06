@@ -3,6 +3,7 @@ package com.quest.backend.controller;
 import com.quest.backend.config.Constants;
 import com.quest.backend.entity.Task;
 import com.quest.backend.entity.Tooltip;
+import com.quest.backend.entity.models.QuestCube;
 import com.quest.backend.entity.models.TooltipByLvl;
 import com.quest.backend.service.TaskRepositoryService;
 import lombok.extern.slf4j.Slf4j;
@@ -36,5 +37,10 @@ public class TaskController {
         System.out.println(taskUUID);
         log.info("text");
         return taskService.getCountOfTooltipsByTaskUUID(taskUUID);
+    }
+
+    @GetMapping("/task/quest cube/section")
+    public List<QuestCube> getAllQuestCube(@RequestBody String sectionUUID) throws Exception{
+        return taskService.getQuestCubesBySectionUUID(sectionUUID);
     }
 }
