@@ -1,7 +1,9 @@
 package com.quest.backend.service;
 
 import com.quest.backend.entity.Section;
+import com.quest.backend.entity.Task;
 import com.quest.backend.entity.models.QuestFlow;
+import com.quest.backend.entity.models.QuestFlowBrief;
 import com.quest.backend.entity.models.QuestTaskBrief;
 import com.quest.backend.repository.SectionRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -23,6 +25,28 @@ public class SectionRepositoryService {
         this.taskRepositoryService = taskRepositoryService;
     }
 
+    public List<QuestFlowBrief> getAllQuestFlowsBriefByUserUUID(String userUUID) {
+        log.info("Get all quest flows");
+        List<Section> sections = repository.findAll();
+        List<QuestFlowBrief> questFlowBriefs = new ArrayList<>();
+        for (Section section : sections) {
+            QuestFlowBrief questFlowBrief = new QuestFlowBrief();
+            questFlowBrief.setId(section.getUuid());
+            questFlowBrief.setName(section.getName());
+            questFlowBrief.setText(section.getText());
+            questFlowBrief.setUrl(section.getUrl());
+            List<String> tasksId = taskRepositoryService.getAllIdBySectionId(section.getUuid());
+            for (String id : tasksId) {
+                if (taskRepositoryService.taskIsSelected(id, userUUID)) {
+                    questFlowBrief.setCurrentTaskId(id);
+                    break;
+                }
+            }
+            questFlowBriefs.add(questFlowBrief);
+        }
+        return questFlowBriefs;
+    }
+
     public List<Section> getAll() {
         log.info("Get all sections");
         return repository.findAll();
@@ -33,7 +57,7 @@ public class SectionRepositoryService {
         return  repository.getAllId();
     }
 
-    public List<QuestFlow> getAllQuestFlow() {
+    public List<QuestFlow> getAllQuestFlowByUserUUID(String userUUID) {
         log.info("Get quest flows");
         List<Section> sections = getAll();
         List<QuestFlow> questFlows = new ArrayList<QuestFlow>();
@@ -41,7 +65,7 @@ public class SectionRepositoryService {
             log.info("Map model quest flow");
             QuestFlow questFlow = new QuestFlow();
             questFlow.setId(section.getUuid());
-            questFlow.setNodes(taskRepositoryService.getTasksBriefBySectionUUID(section.getUuid()));
+            questFlow.setNodes(taskRepositoryService.getTasksBriefBySectionUUIDandUserUUID(section.getUuid(), userUUID));
             for (QuestTaskBrief task : questFlow.getNodes()) {
                 if (task.isSelected()) {
                     questFlow.setCurrentTaskId(task.getId());

@@ -62,7 +62,7 @@ public class TaskRepositoryService {
         return repository.getAllIdBySectionId(sectionUUID);
     }
 
-    public List<QuestTaskBrief> getTasksBriefBySectionUUID(String sectionUUID) {
+    public List<QuestTaskBrief> getTasksBriefBySectionUUIDandUserUUID(String sectionUUID, String userUUID) {
         log.info("Get tasks brief by sectionUUID");
         List<QuestTaskBrief> questCubes = new ArrayList<QuestTaskBrief>();
         List<Task> tasks = getAllBySectionUUID(sectionUUID);
@@ -74,11 +74,14 @@ public class TaskRepositoryService {
             questCube.setTitle(task.getTitle());
             questCube.setSubtitle(task.getSubtitle());
             questCube.setSerialNumber(task.getSerialNumber());
-            questCube.setSelected(userTaskRepositoryService.taskIsSelected(task.getUuid()));
-            questCube.setPassed(userTaskRepositoryService.taskIsPassed(task.getUuid()));
+            questCube.setSelected(userTaskRepositoryService.taskIsSelected(task.getUuid(), userUUID));
+            questCube.setPassed(userTaskRepositoryService.taskIsPassed(task.getUuid(), userUUID));
             questCubes.add(questCube);
         }
 
         return questCubes;
+    }
+    public Boolean taskIsSelected(String taskUUID, String userUUID) {
+        return userTaskRepositoryService.taskIsSelected(taskUUID, userUUID);
     }
 }

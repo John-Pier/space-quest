@@ -6,7 +6,10 @@ import com.quest.backend.entity.Tooltip;
 import com.quest.backend.entity.models.QuestTaskBrief;
 import com.quest.backend.entity.models.TooltipByLvl;
 import com.quest.backend.service.TaskRepositoryService;
+import com.quest.backend.service.UserRepositoryService;
+import com.quest.backend.token.JwtTokenUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,9 +20,11 @@ import java.util.List;
 @RequestMapping(Constants.API_VERSION)
 public class TaskController {
     private TaskRepositoryService taskService;
+    private UserRepositoryService userRepositoryService;
 
-    public TaskController(TaskRepositoryService taskService) {
+    public TaskController(TaskRepositoryService taskService, @Lazy UserRepositoryService userRepositoryService) {
         this.taskService = taskService;
+        this.userRepositoryService = userRepositoryService;
     }
 
     @GetMapping("/task/section")
@@ -39,8 +44,11 @@ public class TaskController {
         return taskService.getCountOfTooltipsByTaskUUID(taskUUID);
     }
 
-    @GetMapping("/task/quest cube/section")
-    public List<QuestTaskBrief> getAllQuestCube(@RequestBody String sectionUUID) throws Exception{
-        return taskService.getTasksBriefBySectionUUID(sectionUUID);
+    @GetMapping("/task/quest_cube/section")
+    public List<QuestTaskBrief> getAllQuestCube(@RequestBody String sectionUUID, @RequestHeader("Authorization") String token) throws Exception{
+        log.info("Get login from token");
+        JwtTokenUtil jwtTokenUtil = new JwtTokenUtil();
+        String login = jwtTokenUtil.getUsernameFromToken(token.substring(7));
+        return taskService.getTasksBriefBySectionUUIDandUserUUID(sectionUUID, userRepositoryService.getUserByLogin(login).getUuid());
     }
 }
