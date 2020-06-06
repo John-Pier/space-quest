@@ -1,6 +1,7 @@
 package com.quest.backend.service;
 
 import com.quest.backend.entity.Section;
+import com.quest.backend.entity.Task;
 import com.quest.backend.entity.models.QuestFlow;
 import com.quest.backend.repository.SectionRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -14,9 +15,11 @@ import java.util.List;
 public class SectionRepositoryService {
 
     private final SectionRepository repository;
+    private final TaskRepositoryService taskRepositoryService;
     @Autowired
-    public SectionRepositoryService(SectionRepository repository) {
+    public SectionRepositoryService(SectionRepository repository, TaskRepositoryService taskRepositoryService) {
         this.repository = repository;
+        this.taskRepositoryService = taskRepositoryService;
     }
 
     public List<Section> getAll() {
@@ -30,6 +33,10 @@ public class SectionRepositoryService {
     }
 
     public List<QuestFlow> getAllQuestFlow() {
+        List<Section> sections = getAll();
+        for (Section section : sections) {
+            List<Task> tasks = taskRepositoryService.getAllBySectionUUID(section.getUuid());
+        }
         return null;
     }
 }
