@@ -41,6 +41,6 @@ public class TaskController {
 
     @GetMapping("/task/quest cube/section")
     public List<QuestTaskBrief> getAllQuestCube(@RequestBody String sectionUUID) throws Exception{
-        return taskService.getQuestCubesBySectionUUID(sectionUUID);
+        return taskService.getTasksBriefBySectionUUID(sectionUUID);
     }
 }

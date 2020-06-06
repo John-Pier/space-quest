@@ -1,8 +1,8 @@
 package com.quest.backend.service;
 
 import com.quest.backend.entity.Section;
-import com.quest.backend.entity.Task;
 import com.quest.backend.entity.models.QuestFlow;
+import com.quest.backend.entity.models.QuestTaskBrief;
 import com.quest.backend.repository.SectionRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +41,13 @@ public class SectionRepositoryService {
             log.info("Map model quest flow");
             QuestFlow questFlow = new QuestFlow();
             questFlow.setId(section.getUuid());
-            questFlow.setNodes(taskRepositoryService.getQuestCubesBySectionUUID(section.getUuid()));
+            questFlow.setNodes(taskRepositoryService.getTasksBriefBySectionUUID(section.getUuid()));
+            for (QuestTaskBrief task : questFlow.getNodes()) {
+                if (task.isSelected()) {
+                    questFlow.setCurrentTaskId(task.getId());
+                    break;
+                }
+            }
             questFlows.add(questFlow);
         }
         return questFlows;

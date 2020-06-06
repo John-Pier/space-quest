@@ -62,13 +62,13 @@ public class TaskRepositoryService {
         return repository.getAllIdBySectionId(sectionUUID);
     }
 
-    public List<QuestTaskBrief> getQuestCubesBySectionUUID (String sectionUUID) {
-        log.info("Get quest cubes by sectionUUID");
+    public List<QuestTaskBrief> getTasksBriefBySectionUUID(String sectionUUID) {
+        log.info("Get tasks brief by sectionUUID");
         List<QuestTaskBrief> questCubes = new ArrayList<QuestTaskBrief>();
         List<Task> tasks = getAllBySectionUUID(sectionUUID);
 
         for (Task task : tasks) {
-            log.info("Map model quest cube");
+            log.info("Map model task brief");
             QuestTaskBrief questCube = new QuestTaskBrief();
             questCube.setId(task.getUuid());
             questCube.setTitle(task.getTitle());
