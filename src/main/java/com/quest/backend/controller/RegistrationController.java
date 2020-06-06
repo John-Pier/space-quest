@@ -41,5 +41,4 @@ public class RegistrationController {
         log.info("Init actions succeeded");
         return ResponseEntity.ok(new JwtResponse(token));
     }
-
 }
