@@ -50,8 +50,14 @@ public class UserTaskRepositoryService {
         log.info("Get userTask by taskUUID");
         return repository.getByTaskUUID(taskUUID);
     }
+
     public Boolean taskIsSelected(String taskUUID) {
         log.info("Task is selected?");
         return !repository.isLockByTaskUUID(taskUUID);
+    }
+
+    public Boolean taskIsPassed(String taskUUID) {
+        log.info("Task is passed?");
+        return repository.isPassedByTaskUUID(taskUUID);
     }
 }

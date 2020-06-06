@@ -3,7 +3,7 @@ package com.quest.backend.service;
 import com.quest.backend.entity.Task;
 import com.quest.backend.entity.TaskTooltip;
 import com.quest.backend.entity.Tooltip;
-import com.quest.backend.entity.models.QuestCube;
+import com.quest.backend.entity.models.QuestTaskBrief;
 import com.quest.backend.repository.TaskRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,19 +62,20 @@ public class TaskRepositoryService {
         return repository.getAllIdBySectionId(sectionUUID);
     }
 
-    public List<QuestCube> getQuestCubesBySectionUUID (String sectionUUID) {
+    public List<QuestTaskBrief> getQuestCubesBySectionUUID (String sectionUUID) {
         log.info("Get quest cubes by sectionUUID");
-        List<QuestCube> questCubes = new ArrayList<QuestCube>();
+        List<QuestTaskBrief> questCubes = new ArrayList<QuestTaskBrief>();
         List<Task> tasks = getAllBySectionUUID(sectionUUID);
 
         for (Task task : tasks) {
             log.info("Map model quest cube");
-            QuestCube questCube = new QuestCube();
+            QuestTaskBrief questCube = new QuestTaskBrief();
             questCube.setId(task.getUuid());
             questCube.setTitle(task.getTitle());
             questCube.setSubtitle(task.getSubtitle());
             questCube.setSerialNumber(task.getSerialNumber());
             questCube.setSelected(userTaskRepositoryService.taskIsSelected(task.getUuid()));
+            questCube.setPassed(userTaskRepositoryService.taskIsPassed(task.getUuid()));
             questCubes.add(questCube);
         }
 

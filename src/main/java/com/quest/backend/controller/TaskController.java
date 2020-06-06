@@ -3,7 +3,7 @@ package com.quest.backend.controller;
 import com.quest.backend.config.Constants;
 import com.quest.backend.entity.Task;
 import com.quest.backend.entity.Tooltip;
-import com.quest.backend.entity.models.QuestCube;
+import com.quest.backend.entity.models.QuestTaskBrief;
 import com.quest.backend.entity.models.TooltipByLvl;
 import com.quest.backend.service.TaskRepositoryService;
 import lombok.extern.slf4j.Slf4j;
@@ -40,7 +40,7 @@ public class TaskController {
     }
 
     @GetMapping("/task/quest cube/section")
-    public List<QuestCube> getAllQuestCube(@RequestBody String sectionUUID) throws Exception{
+    public List<QuestTaskBrief> getAllQuestCube(@RequestBody String sectionUUID) throws Exception{
         return taskService.getQuestCubesBySectionUUID(sectionUUID);
     }
 }

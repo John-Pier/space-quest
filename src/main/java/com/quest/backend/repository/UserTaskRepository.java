@@ -23,4 +23,7 @@ public interface UserTaskRepository extends JpaRepository<UserTask, UUID> {
 
     @Query(value = "SELECT lock FROM user_task WHERE task_uuid = :taskUUID", nativeQuery = true)
     Boolean isLockByTaskUUID(@Param("taskUUID") String taskUUID);
+
+    @Query(value = "SELECT is_passed FROM user_task WHERE task_uuid = :taskUUID", nativeQuery = true)
+    Boolean isPassedByTaskUUID(@Param("taskUUID") String taskUUID);
 }
