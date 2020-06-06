@@ -4,6 +4,8 @@ import com.quest.backend.entity.Task;
 import com.quest.backend.entity.UserTask;
 import com.quest.backend.repository.UserTaskRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,7 +19,8 @@ public class UserTaskRepositoryService {
     private final TaskRepositoryService taskRepositoryService;
     private final SectionRepositoryService sectionRepositoryService;
 
-    public UserTaskRepositoryService(UserTaskRepository repository, TaskRepositoryService taskRepositoryService, SectionRepositoryService sectionRepositoryService) {
+    @Autowired
+    public UserTaskRepositoryService(UserTaskRepository repository, @Lazy TaskRepositoryService taskRepositoryService, SectionRepositoryService sectionRepositoryService) {
         this.repository = repository;
         this.taskRepositoryService = taskRepositoryService;
         this.sectionRepositoryService = sectionRepositoryService;
@@ -49,6 +52,6 @@ public class UserTaskRepositoryService {
     }
     public Boolean taskIsSelected(String taskUUID) {
         log.info("Task is selected?");
-        return getUserTaskByTaskUUID(taskUUID).getLock();
+        return !repository.isLockByTaskUUID(taskUUID);
     }
 }

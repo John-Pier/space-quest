@@ -7,6 +7,7 @@ import com.quest.backend.entity.models.QuestCube;
 import com.quest.backend.repository.TaskRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public class TaskRepositoryService {
     private final TooltipRepositoryService tooltipRepositoryService;
     private final UserTaskRepositoryService userTaskRepositoryService;
     @Autowired
-    public TaskRepositoryService(TaskRepository repository, TaskTooltipRepositoryService taskTooltipRepositoryService, TooltipRepositoryService tooltipRepositoryService, UserTaskRepositoryService userTaskRepositoryService) {
+    public TaskRepositoryService(TaskRepository repository, TaskTooltipRepositoryService taskTooltipRepositoryService, TooltipRepositoryService tooltipRepositoryService, @Lazy UserTaskRepositoryService userTaskRepositoryService) {
         this.repository = repository;
         this.taskTooltipRepositoryService = taskTooltipRepositoryService;
         this.tooltipRepositoryService = tooltipRepositoryService;
