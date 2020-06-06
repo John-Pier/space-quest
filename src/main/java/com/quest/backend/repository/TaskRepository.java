@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -18,4 +19,7 @@ public interface TaskRepository extends JpaRepository<Task, UUID> {
 
     @Query(value = "SELECT UUID FROM task WHERE section_uuid = :sectionUUID ORDER BY serial_number", nativeQuery = true)
     List<String> getAllIdBySectionId(@Param("sectionUUID")String sectionUUID);
+
+    @Query(value = "SELECT * FROM task WHERE uuid = :taskUUID", nativeQuery = true)
+    Optional<Task> findByUUID(@Param("taskUUID")String taskUUID);
 }
