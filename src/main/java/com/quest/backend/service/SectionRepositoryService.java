@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -33,10 +34,16 @@ public class SectionRepositoryService {
     }
 
     public List<QuestFlow> getAllQuestFlow() {
+        log.info("Get quest flows");
         List<Section> sections = getAll();
+        List<QuestFlow> questFlows = new ArrayList<QuestFlow>();
         for (Section section : sections) {
-            List<Task> tasks = taskRepositoryService.getAllBySectionUUID(section.getUuid());
+            log.info("Map model quest flow");
+            QuestFlow questFlow = new QuestFlow();
+            questFlow.setId(section.getUuid());
+            questFlow.setNodes(taskRepositoryService.getQuestCubesBySectionUUID(section.getUuid()));
+            questFlows.add(questFlow);
         }
-        return null;
+        return questFlows;
     }
 }
