@@ -20,6 +20,7 @@ export type SPQQuestTaskBrief = Readonly<{
 
 export type SPQQuestFlow = Readonly<{
     id: ID,
+    name: string,
     nodes: SPQQuestTaskBrief[],
     currentTaskId: ID
 }>;
