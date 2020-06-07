@@ -1,4 +1,4 @@
-import {Component, HostBinding, Input, OnDestroy, OnInit} from "@angular/core";
+import {Component, HostBinding, Input, OnChanges, OnDestroy, SimpleChanges} from "@angular/core";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {MatDialog} from "@angular/material";
 import {finalize, take, tap} from "rxjs/operators";
@@ -17,7 +17,7 @@ import {SPQHintPopupComponent} from "./embed/hint-popup.component";
         MatDialog
     ]
 })
-export class SPQQuestDetailsAnswerComponent implements OnInit, OnDestroy {
+export class SPQQuestDetailsAnswerComponent implements OnChanges, OnDestroy {
 
     public _hintsUsed: boolean = false;
 
@@ -39,6 +39,8 @@ export class SPQQuestDetailsAnswerComponent implements OnInit, OnDestroy {
 
     public _answerFormGroupModel: FormGroup;
 
+    public _tooltipArray: boolean[] = [];
+
     @Input()
     public questTask: SPQQuestTask;
 
@@ -49,20 +51,29 @@ export class SPQQuestDetailsAnswerComponent implements OnInit, OnDestroy {
 
     constructor(private dialogService: MatDialog,
                 private questDetailsService: SPQQuestDetailsService,
-                private navigationService: SPQQuestDetailsNavigationService) {}
+                private navigationService: SPQQuestDetailsNavigationService) {
+    }
 
-    public ngOnInit() {
+    public ngOnChanges(changes: SimpleChanges) {
+        if (changes["questTask"]) {
+            this.initAnswerForm();
+            this.subscribeToGetTooltipsCount();
+        }
+    }
+
+    public s() {
         this.initAnswerForm();
+        this.subscribeToGetTooltipsCount();
     }
 
     public _onSubmitClick(answer: string): void {
         this.subscribeToCheckAnswer(answer);
     }
 
-    public _onHintsClick() {
+    public _onHintsClick(count: number) {
         if (!this._hintsUsed) {
-            this._hintsUsed = true;
-            this.openHintsDialog();
+            this._tooltipArray[count] = true;
+            this.openHintsDialog(count);
         }
     }
 
@@ -80,6 +91,17 @@ export class SPQQuestDetailsAnswerComponent implements OnInit, OnDestroy {
         });
     }
 
+    private subscribeToGetTooltipsCount(): void {
+        this.questDetailsService.getQuestTooltipCountByLvl(this.questTask.uuid)
+            .pipe(
+                take(1),
+                tap(count => {
+                    this._tooltipArray = new Array(count).fill(false);
+                })
+            )
+            .subscribe();
+    }
+
     private updateAttemptsModel(): void {
         this._attemptsModel.pop();
         this._attemptsModel.unshift({
@@ -91,6 +113,7 @@ export class SPQQuestDetailsAnswerComponent implements OnInit, OnDestroy {
         this._localLoading = true;
         this.questDetailsService.setQuestAnswer(this.questTask.uuid, answer)
             .pipe(
+                take(1),
                 tap(response => {
                     this._failureAnswer = !response.isPassed;
                     if (this._failureAnswer) {
@@ -133,9 +156,15 @@ export class SPQQuestDetailsAnswerComponent implements OnInit, OnDestroy {
             .subscribe();
     }
 
-    private openHintsDialog(): void {
-        // TODO -> refactoring -> Запрос на срерв - подписка и открытие окна
-        this.dialogService.open(SPQHintPopupComponent, { data: "Not Implemented" });
+    private openHintsDialog(lvl: number): void {
+        this.questDetailsService.getQuestTooltipByLvl(this.questTask.uuid, lvl)
+            .pipe(
+                take(1),
+                tap(hints => {
+                    this.dialogService.open(SPQHintPopupComponent, { data: hints.text });
+                })
+            )
+            .subscribe();
     }
 
     private navigateFromPopupResult(result: SPQActionsPopupResult): void {

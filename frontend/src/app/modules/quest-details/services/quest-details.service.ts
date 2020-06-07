@@ -5,6 +5,7 @@ import {ID} from "../../../core/base.types";
 import {SPQQuestTask} from "../../../core/models/quest-task.type";
 import {SPQQuestDetailsDataService} from "../../../services/data/quest-details-data.service";
 import {SPQQuestAnswerResponse} from "../types/quest-answer.type";
+import {SPQQuestTooltip} from "../types/quest-tooltip.type";
 
 @Injectable()
 export class SPQQuestDetailsService {
@@ -15,6 +16,17 @@ export class SPQQuestDetailsService {
 
     public constructor(private dataService: SPQQuestDetailsDataService,
                        private sanitizer: DomSanitizer) {
+    }
+
+    public getQuestTooltipByLvl(taskId: ID, lvl: number): Observable<SPQQuestTooltip> {
+        return this.dataService.getQuestTooltipByLvl({
+            taskUUID: taskId,
+            lvl: lvl
+        });
+    }
+
+    public getQuestTooltipCountByLvl(taskId: ID): Observable<number> {
+        return this.dataService.getQuestTooltipCountByLvl(taskId);
     }
 
     public setQuestAnswer(taskId: ID, answer: string): Observable<SPQQuestAnswerResponse> {

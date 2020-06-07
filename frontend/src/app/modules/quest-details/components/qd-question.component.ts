@@ -1,4 +1,4 @@
-import {Component, HostBinding, Input, OnInit} from "@angular/core";
+import {Component, HostBinding, Input, OnChanges, SimpleChanges} from "@angular/core";
 import {SafeUrl} from "@angular/platform-browser";
 import {SPQQuestTask} from "../../../core/models/quest-task.type";
 import {SPQQuestDetailsService} from "../services/quest-details.service";
@@ -13,7 +13,7 @@ export enum SPQQuestTaskUrlType {
     selector: "spq-qd-question",
     templateUrl: "qd-question.component.html",
 })
-export class SPQQuestDetailsQuestionComponent implements OnInit {
+export class SPQQuestDetailsQuestionComponent implements OnChanges {
 
     public _safeUrl: SafeUrl;
 
@@ -29,9 +29,11 @@ export class SPQQuestDetailsQuestionComponent implements OnInit {
 
     constructor(private questDetailsService: SPQQuestDetailsService) {}
 
-    public ngOnInit() {
-        this.setTaskType();
-        this.makeSafeUrl();
+    public ngOnChanges(changes: SimpleChanges): void {
+        if (changes["questTask"]) {
+            this.setTaskType();
+            this.makeSafeUrl();
+        }
     }
 
     private setTaskType(): void {
