@@ -1,6 +1,5 @@
 package com.quest.backend.service;
 
-import com.quest.backend.entity.Task;
 import com.quest.backend.entity.UserTask;
 import com.quest.backend.repository.UserTaskRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -8,8 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import javax.persistence.EntityManager;
 import java.util.List;
 
 @Service
@@ -46,9 +44,9 @@ public class UserTaskRepositoryService {
         }
     }
 
-    public UserTask getUserTaskByTaskUUID (String taskUUID) {
+    public UserTask getUserTaskByTaskUUID_And_UserUUID (String taskUUID, String userUUID) {
         log.info("Get userTask by taskUUID");
-        return repository.getByTaskUUID(taskUUID);
+        return repository.getByTaskUUID_And_UserUUID(taskUUID, userUUID);
     }
 
     public Boolean taskIsSelected(String taskUUID, String userUUID) {
@@ -59,5 +57,15 @@ public class UserTaskRepositoryService {
     public Boolean taskIsPassed(String taskUUID, String userUUID) {
         log.info("Task is passed?");
         return repository.isPassedByTaskUUID(taskUUID, userUUID);
+    }
+
+    public void updateCurrentTask(String userUUID, String taskUUID) {
+        log.info("Update lock status of current task");
+        repository.updateCurrentTask(userUUID, taskUUID);
+    }
+
+    public void saveAnswer(String userUUID, String taskUUID, Boolean isPassed) {
+        log.info("Update user task");
+        repository.saveAnswer(userUUID, taskUUID, isPassed);
     }
 }
