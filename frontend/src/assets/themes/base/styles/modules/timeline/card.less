@@ -32,43 +32,42 @@
     &__task {
         display: flex;
         justify-content: flex-start;
-        box-shadow: 0 4px 5px @main-shadow;
-        border-radius: 15px;
-        background: linear-gradient(to bottom, @primary-light-20, @primary);
         user-select: none;
-        transition: background .5s, color 0.8s ease-out;
+        width: 100%;
+
+        ._relative {
+            position: relative !important;
+        }
+
+        .mat-list-item {
+            display: flex;
+            justify-content: flex-start;
+            user-select: none;
+            width: 100%;
+        }
 
         &-text {
             display: flex;
-            flex-flow: column nowrap;
-            text-align: center;
-            z-index: 10;
-            height: 100%;
+            justify-content: flex-start;
+            width: 100%;
+            overflow: hidden;
 
             &-title {
-                font-weight: 800;
-                font-size: 18px;
-                line-height: 22px;
+                flex: 1 50%;
                 text-overflow: ellipsis;
             }
 
             &-subtitle {
-                font-style: italic;
+                flex: 1 50%;
                 font-weight: normal;
-                font-size: 13px;
-                line-height: 16px;
                 text-overflow: ellipsis;
             }
         }
 
         &-number {
-            padding: 6px;
+            padding-right: 6px;
+            font-weight: 500;
             font-style: normal;
-            font-weight: 800;
-            font-size: 72px;
-            line-height: 60px;
-            opacity: 0.4;
-            color: @primary-light-80;
         }
     }
 

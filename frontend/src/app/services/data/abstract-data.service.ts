@@ -22,14 +22,14 @@ export class SPQDataService {
         return this.makeURL(this.resourcesUrl) + "?path=";
     }
 
-    public get<T>(address: string, options: any = defaultHttpOptions): Observable<T> {
+    public get<T>(address: string, options: any = {}): Observable<T> {
         // @ts-ignore
-        return this.http.get<T>(this.makeURL(address), options);
+        return this.http.get<T>(this.makeURL(address), { ...defaultHttpOptions, ...options});
     }
 
-    public post<T>(address: string, value: any, options: any = defaultHttpOptions): Observable<T> {
+    public post<T>(address: string, value: any, options: any = {}): Observable<T> {
         // @ts-ignore
-        return this.http.post<T>(this.makeURL(address), value, options);
+        return this.http.post<T>(this.makeURL(address), value, { ...defaultHttpOptions, ...options});
     }
 
     protected getAbsoluteAddress(): string {

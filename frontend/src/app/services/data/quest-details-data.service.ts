@@ -1,3 +1,4 @@
+import {HttpParams} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import {Observable, of} from "rxjs";
 import {ID} from "../../core/base.types";
@@ -19,6 +20,8 @@ export class SPQQuestDetailsDataService extends SPQDataService {
     }
 
     public getQuestTaskBriefById(taskId: ID): Observable<SPQQuestTaskBrief> {
-        return this.get<SPQQuestTaskBrief>(this.questTaskBriefURL);
+        return this.get<SPQQuestTaskBrief>(this.questTaskBriefURL, {
+            params: new HttpParams().set("taskId", taskId.toString())
+        });
     }
 }

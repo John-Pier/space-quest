@@ -3,19 +3,15 @@ package com.quest.backend.controller;
 import com.quest.backend.config.Constants;
 import com.quest.backend.entity.Task;
 import com.quest.backend.entity.Tooltip;
-import com.quest.backend.entity.User;
 import com.quest.backend.entity.models.AnswerBody;
 import com.quest.backend.entity.models.AnswerResponse;
 import com.quest.backend.entity.models.QuestTaskBrief;
 import com.quest.backend.entity.models.TooltipByLvl;
 import com.quest.backend.service.TaskRepositoryService;
 import com.quest.backend.service.UserRepositoryService;
-import com.quest.backend.token.JwtResponse;
 import com.quest.backend.token.JwtTokenUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -73,7 +69,7 @@ public class TaskController {
     }
 
     @GetMapping("/task/brief")
-    public QuestTaskBrief getQuestCubeByTaskUUID(@RequestBody String taskUUID, @RequestHeader("Authorization") String token) throws Exception{
+    public QuestTaskBrief getQuestCubeByTaskUUID(@RequestParam("taskId") String taskUUID, @RequestHeader("Authorization") String token) throws Exception{
         log.info("Get login from token");
         JwtTokenUtil jwtTokenUtil = new JwtTokenUtil();
         String login = jwtTokenUtil.getUsernameFromToken(token.substring(7));

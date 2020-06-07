@@ -22,19 +22,21 @@
                 </mat-panel-title>
             </mat-expansion-panel-header>
             <div class="spq-card__e-panel-content">
-                <div class="spq-card__task">
-                    <div class="spq-card__task-number">
-                        {{_currentTaskBrief.serialNumber}}
-                    </div>
-                    <div class="spq-card__task-text">
-                        <div class="spq-card__task-text-title">
-                            {{_currentTaskBrief.title}}
+                <mat-list class="spq-card__task">
+                    <mat-list-item>
+                        <div class="spq-card__task-number">
+                            {{_currentTaskBrief.serialNumber}}
                         </div>
-                        <div class="spq-card__task-text-subtitle">
-                            {{_currentTaskBrief.subtitle}}
+                        <div class="spq-card__task-text">
+                            <div class="spq-card__task-text-title">
+                                {{_currentTaskBrief.title}}</div>
+                            <div class="spq-card__task-text-subtitle">
+                                {{_currentTaskBrief.subtitle}}
+                            </div>
                         </div>
-                    </div>
-                </div>
+                    </mat-list-item>
+                    <mat-divider class="_relative"></mat-divider>
+                </mat-list>
                 <div class="spq-card__e-panel-actions">
                     <button mat-raised-button
                             color="primary"
