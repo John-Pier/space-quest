@@ -1,7 +1,6 @@
 <div class="spq-timeline__inner">
-    <mat-accordion multi="true">
-        <spq-card></spq-card>
-        <spq-card></spq-card>
-        <spq-card></spq-card>
-    </mat-accordion>
+    <spq-card class="spq-timeline__card"
+              *ngFor="let flowBrief of _questFlowBriefs"
+              [flowBrief]="flowBrief">
+    </spq-card>
 </div>

@@ -2,7 +2,7 @@ import {CommonModule} from "@angular/common";
 import {NgModule, Type} from "@angular/core";
 import {MatRippleModule} from "@angular/material";
 import {RouterModule, Routes} from "@angular/router";
-import {SQPQuestDataFlowService} from "../../services/data/quest-data-flow.service";
+import {SQPQuestFlowDataService} from "../../services/data/quest-data-flow.service";
 import {SPQQuestFlowComponent} from "./components/quest-flow.component";
 import {SPQQuestStepCubeComponent} from "./components/quest-step-cube.component";
 import {SPQQuesComponent} from "./quest.component";
@@ -34,7 +34,7 @@ const matModules: Array<Type<any>> = [
         ...matModules
     ],
     providers: [
-        SQPQuestDataFlowService,
+        SQPQuestFlowDataService,
         SQPQuestFlowService
     ]
 

@@ -31,7 +31,7 @@ public class SectionController {
         return sectionService.getAll();
     }
 
-    @GetMapping("/section/quest_flow_brief/all")
+    @GetMapping("/section/brief/all")
     public List<QuestFlowBrief> getAllQuestFlowsBrief(@RequestHeader("Authorization") String token) throws Exception {
         log.info("Get login from token");
         JwtTokenUtil jwtTokenUtil = new JwtTokenUtil();
@@ -39,7 +39,7 @@ public class SectionController {
         return sectionService.getAllQuestFlowsBriefByUserUUID(userRepositoryService.getUserByLogin(login).getUuid());
     }
 
-    @GetMapping("/section/quest_flow/all")
+    @GetMapping("/section/flow/all")
     public List<QuestFlow> getAllQuestFlow(@RequestHeader("Authorization") String token) throws Exception {
         log.info("Get login from token");
         JwtTokenUtil jwtTokenUtil = new JwtTokenUtil();

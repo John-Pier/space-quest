@@ -52,7 +52,8 @@ export class SPQQuestDetailsAnswerComponent implements OnInit, OnDestroy {
 
     public _onSubmitClick(answer: string): void {
         // TODO -> refactoring - answer not in model now
-        this._failureAnswer = this.questTask.answer.toString() !== answer.toString();
+        this._failureAnswer = "42" !== answer.toString();
+
         if (this._failureAnswer) {
             this.updateAttemptsModel();
             this.setAnswerFormError();
@@ -107,7 +108,7 @@ export class SPQQuestDetailsAnswerComponent implements OnInit, OnDestroy {
 
     private openHintsDialog(): void {
         // TODO -> refactoring -> Запрос на срерв - подписка и открытие окна
-        this.dialogService.open(SPQHintPopupComponent, { data: this.questTask.answer });
+        this.dialogService.open(SPQHintPopupComponent, { data: "Not Implemented" });
     }
 
     private navigateFromPopupResult(result: SPQActionsPopupResult): void {

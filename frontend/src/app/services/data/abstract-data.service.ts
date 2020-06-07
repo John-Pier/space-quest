@@ -11,18 +11,25 @@ export const defaultHttpOptions = {
 
 export class SPQDataService {
 
-    constructor(@Inject(SPQ_APP_API_CONFIG) private config: SPQAppAPIConfig,
+    private resourcesUrl = "image/";
+
+    constructor(@Inject(SPQ_APP_API_CONFIG) protected config: SPQAppAPIConfig,
                 private http: HttpClient) {
     }
 
-    public get<T>(address: string, options: any = defaultHttpOptions): Observable<T> {
-        // @ts-ignore
-        return this.http.get<T>(this.makeURL(address), options);
+    public getResourcesUrl(): string {
+        // TODO -> refactoring - make service
+        return this.makeURL(this.resourcesUrl) + "?path=";
     }
 
-    public post<T>(address: string, value: any, options: any = defaultHttpOptions): Observable<T> {
+    public get<T>(address: string, options: any = {}): Observable<T> {
         // @ts-ignore
-        return this.http.post<T>(this.makeURL(address), value, options);
+        return this.http.get<T>(this.makeURL(address), { ...defaultHttpOptions, ...options});
+    }
+
+    public post<T>(address: string, value: any, options: any = {}): Observable<T> {
+        // @ts-ignore
+        return this.http.post<T>(this.makeURL(address), value, { ...defaultHttpOptions, ...options});
     }
 
     protected getAbsoluteAddress(): string {

@@ -12,7 +12,6 @@ export type SPQQuestTask = Readonly<{
     type: SPQQuestTaskUrlType
     url: string,
     question: string,
-    answer: any, // TODO -> specify
     serialNumber: number
 }>;
 
@@ -27,5 +26,13 @@ export type SPQQuestTaskBrief = Readonly<{
 export type SPQQuestFlow = Readonly<{
     id: ID,
     nodes: SPQQuestTaskBrief[],
+    currentTaskId: ID
+}>;
+
+export type SPQQuestFlowBrief = Readonly<{
+    id: ID,
+    name: string,
+    text: string,
+    url: string,
     currentTaskId: ID
 }>;

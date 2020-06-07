@@ -1,15 +1,16 @@
 <div class="spq-qd-question__inner">
     <div class="spq-qd-question__content"
+         *ngIf="_safeUrl"
          [ngSwitch]="questTask.type">
         <iframe class="spq-qd-question__content-video"
                 *ngSwitchCase="_questUrlType.VIDEO"
-                [src]="_trustedUrl"
+                [src]="_safeUrl"
                 frameborder="0"
                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture">
         </iframe>
         <img class="spq-qd-question__content-picture"
              *ngSwitchCase="_questUrlType.PICTURE"
-             [src]="_trustedUrl"
+             [src]="_safeUrl"
              importance="high"
              alt="Question Picture">
     </div>

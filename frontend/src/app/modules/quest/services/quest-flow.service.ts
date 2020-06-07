@@ -3,18 +3,18 @@ import {Observable} from "rxjs";
 import {SPQRoutesMap, SPQRoutesString} from "../../../app-routers";
 import {ID} from "../../../core/base.types";
 import {SPQQuestFlow} from "../../../core/models/quest-task.type";
-import {SQPQuestDataFlowService} from "../../../services/data/quest-data-flow.service";
+import {SQPQuestFlowDataService} from "../../../services/data/quest-data-flow.service";
 import {SPQNavigationService} from "../../../services/navigation.service";
 
 @Injectable()
 export class SQPQuestFlowService {
 
-    constructor(private dataFlowService: SQPQuestDataFlowService,
+    constructor(private dataFlowService: SQPQuestFlowDataService,
                 private navigationService: SPQNavigationService) {
     }
 
-    public getQuestFlow(): Observable<SPQQuestFlow> {
-        return this.dataFlowService.getQuestFlow();
+    public getAllQuestFlow(): Observable<SPQQuestFlow[]> {
+        return this.dataFlowService.getAllQuestFlow();
     }
 
     public navigateToQuestDetails(questId: ID): void {

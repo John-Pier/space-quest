@@ -1,27 +1,50 @@
 <div class="spq-card__inner">
     <mat-card class="example-card">
         <mat-card-header>
-            <mat-card-title> <p>Какая-то часть города</p></mat-card-title>
+            <mat-card-title>
+                {{flowBrief.name}}
+            </mat-card-title>
         </mat-card-header>
         <img class="spq-card__image"
+             *ngIf="flowBrief.url"
+             [src]="_safeUrl"
              mat-card-image
-             src="https://material.angular.io/assets/img/examples/shiba2.jpg">
+             alt="Preview">
         <mat-card-content>
-            <p>
-                Тут какое-то описание
-            </p>
+            <p>{{flowBrief.text}}</p>
         </mat-card-content>
-        <mat-card-actions>
-            <button mat-button color="primary">Развернуть в окне</button>
-        </mat-card-actions>
-        <mat-expansion-panel>
+        <mat-expansion-panel class="spq-card__e-panel _no-shadow"
+                             *ngIf="_currentTaskBrief"
+                             (expandedChange)="_isCollapsed = !$event">
             <mat-expansion-panel-header>
                 <mat-panel-title>
-                    Раверните чтбы промотреть прогрес квеста по этой части
+                    {{_isCollapsed ? 'Раверните чтбы промотреть текущее задание по этой части' : 'Текущее задание'}}
                 </mat-panel-title>
-<!--                <mat-panel-description></mat-panel-description>-->
             </mat-expansion-panel-header>
-            <p>Ну. чета нету прогреса, сори</p>
+            <div class="spq-card__e-panel-content">
+                <mat-list class="spq-card__task">
+                    <mat-list-item>
+                        <div class="spq-card__task-number">
+                            {{_currentTaskBrief.serialNumber}}
+                        </div>
+                        <div class="spq-card__task-text">
+                            <div class="spq-card__task-text-title">
+                                {{_currentTaskBrief.title}}</div>
+                            <div class="spq-card__task-text-subtitle">
+                                {{_currentTaskBrief.subtitle}}
+                            </div>
+                        </div>
+                    </mat-list-item>
+                    <mat-divider class="_relative"></mat-divider>
+                </mat-list>
+                <div class="spq-card__e-panel-actions">
+                    <button mat-raised-button
+                            color="primary"
+                            (click)="_onNavigateToQuestDetailsClick()">
+                        Перейти к заданию
+                    </button>
+                </div>
+            </div>
         </mat-expansion-panel>
     </mat-card>
 </div>
