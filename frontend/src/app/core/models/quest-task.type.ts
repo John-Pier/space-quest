@@ -14,7 +14,9 @@ export type SPQQuestTaskBrief = Readonly<{
     id: ID,
     title: string,
     subtitle: string,
-    serialNumber: number
+    serialNumber: number,
+    passed: boolean,
+    selected: boolean
     // TODO -> Может добавить превью вопроса как на моках ?
 }>;
 

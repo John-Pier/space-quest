@@ -9,7 +9,8 @@
                              [title]="node.title"
                              [subtitle]="node.subtitle"
                              [serialNumber]="node.serialNumber"
-                             [isSelected]="values.currentTaskId == node.id"
+                             [disabled]="!node.passed && values.currentTaskId !== node.id"
+                             [isSelected]="values.currentTaskId === node.id"
                              (onClick)="_navigateToClickedQuestDetails($event)">
         </spq-quest-step-cube>
     </div>

@@ -16,6 +16,11 @@
         user-select: none;
         transition: background .5s, color 0.8s ease-out;
 
+        &.disabled {
+            opacity: 0.4;
+            filter: blur(2px);
+        }
+
         &.selected {
             background: @primary-light-80 none;
 
@@ -61,13 +66,12 @@
             line-height: 16px;
             text-overflow: ellipsis;
         }
-
     }
 
     &__serial-number {
         position: absolute;
         height: 104px;
-        left:20px;
+        left: 20px;
         top: -10px;
         font-style: normal;
         font-weight: 800;
@@ -76,5 +80,14 @@
         text-align: center;
         opacity: 0.4;
         color: @primary-light-80;
+    }
+
+    &__lock {
+        position: absolute;
+        display: flex;
+        width: 158px;
+        height: 128px;
+        justify-content: center;
+        align-items: center;
     }
 }
