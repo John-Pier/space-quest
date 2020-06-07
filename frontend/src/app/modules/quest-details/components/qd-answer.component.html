@@ -13,12 +13,13 @@
             </svg>
         </div>
         <div class="spq-qd-answer__bar-hints"
-             [matTooltip]="!_hintsUsed ? 'У вас есть только одна подсказка' : 'Вы уже использовали подсказку'"
+             *ngFor="let used of _tooltipArray; index as i"
+             [matTooltip]="!used ? 'Вы можете воспользоваться этой подсказкой' : 'Вы уже использовали эту подсказку'"
              [matTooltipPosition]="'after'"
-             (click)="_onHintsClick()">
+             (click)="_onHintsClick(i)">
             <svg width="28px" height="28px">
-                <use *ngIf="!_hintsUsed; else usedHintsTemplate"
-                     xlink:href="#icon-lamp"/>
+                <use *ngIf="!used; else usedHintsTemplate"
+                     xlink:href="#icon-yellow-lamp" fill="#FFDA00"/>
                 <ng-template #usedHintsTemplate>
                     <use xlink:href="#icon-lamp"/>
                 </ng-template>
@@ -26,7 +27,8 @@
         </div>
     </div>
     <div class="spq-qd-answer__answer">
-        <form [formGroup]="_answerFormGroupModel"
+        <form class="spq-qd-answer__form"
+              [formGroup]="_answerFormGroupModel"
               (ngSubmit)="_onSubmitClick(input.value)">
             <div class="_input">
                 <mat-form-field appearance="outline">

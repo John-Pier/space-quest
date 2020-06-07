@@ -34,13 +34,13 @@ public class TaskController {
         return taskService.getAllBySectionUUID(sectionUUID);
     }
 
-    @GetMapping("/task/tooltip/lvl")
+    @PostMapping("/task/tooltip/lvl")
     public Tooltip  getTooltipByLvl(@RequestBody TooltipByLvl model) throws Exception{
         return taskService.getTooltipByLvl(model.getTaskUUID(), model.getLvl());
     }
 
     @GetMapping("/task/tooltip/count")
-    public Integer  getCountOfTooltipsByTaskUUID(@RequestBody String taskUUID) throws Exception{
+    public Integer  getCountOfTooltipsByTaskUUID(@RequestParam("taskId") String taskUUID) throws Exception{
         System.out.println(taskUUID);
         log.info("text");
         return taskService.getCountOfTooltipsByTaskUUID(taskUUID);
@@ -63,7 +63,7 @@ public class TaskController {
     }
 
     @GetMapping("/task")
-    public Task getTaskByUUID(@RequestBody String taskUUID) throws Exception{
+    public Task getTaskByUUID(@RequestParam("taskId") String taskUUID) throws Exception{
         log.info("Get task by id");
         return taskService.getTaskByUUID(taskUUID);
     }

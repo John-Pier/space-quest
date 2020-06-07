@@ -1,7 +1,7 @@
 <div class="spq-qd-question__inner">
     <div class="spq-qd-question__content"
-         *ngIf="_safeUrl"
-         [ngSwitch]="questTask.type">
+         *ngIf="_safeUrl && _taskType"
+         [ngSwitch]="_taskType">
         <iframe class="spq-qd-question__content-video"
                 *ngSwitchCase="_questUrlType.VIDEO"
                 [src]="_safeUrl"
@@ -16,7 +16,7 @@
     </div>
     <div class="spq-qd-question__question">
         <div class="spq-qd-question__question-caption">
-            {{questTask.question}}
+            {{questTask.text}}
         </div>
     </div>
 </div>

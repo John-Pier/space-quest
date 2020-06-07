@@ -1,17 +1,12 @@
 import {ID} from "../base.types";
 
-export enum SPQQuestTaskUrlType {
-    VIDEO = "video",
-    PICTURE = "picture"
-}
-
 export type SPQQuestTask = Readonly<{
-    id: ID,
+    uuid: ID,
+    sectionUUID: ID,
     title: string,
     subtitle: string,
-    type: SPQQuestTaskUrlType
     url: string,
-    question: string,
+    text: string,
     serialNumber: number
 }>;
 
@@ -25,6 +20,7 @@ export type SPQQuestTaskBrief = Readonly<{
 
 export type SPQQuestFlow = Readonly<{
     id: ID,
+    name: string,
     nodes: SPQQuestTaskBrief[],
     currentTaskId: ID
 }>;

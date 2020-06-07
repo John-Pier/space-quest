@@ -1,6 +1,6 @@
 import {Component, HostBinding, Input, OnInit} from "@angular/core";
 import {SafeResourceUrl} from "@angular/platform-browser";
-import {tap} from "rxjs/operators";
+import {take, tap} from "rxjs/operators";
 import {SPQRoutesMap, SPQRoutesString} from "../../../app-routers";
 import {SPQQuestFlowBrief, SPQQuestTaskBrief} from "../../../core/models/quest-task.type";
 import {SPQNavigationService} from "../../../services/navigation.service";
@@ -44,6 +44,7 @@ export class SPQCardComponent implements OnInit {
     private subscribeToGetTaskBrief(): void {
         this.service.getTaskBriefById(this.flowBrief.currentTaskId)
             .pipe(
+                take(1),
                 tap(brief => {
                     this._currentTaskBrief = brief;
                 })

@@ -1,9 +1,11 @@
-import {Component, HostBinding, Input, OnDestroy, OnInit} from "@angular/core";
+import {Component, HostBinding, Input, OnChanges, OnDestroy, SimpleChanges} from "@angular/core";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {MatDialog} from "@angular/material";
-import {take, tap} from "rxjs/operators";
+import {finalize, take, tap} from "rxjs/operators";
+import {ID} from "../../../core/base.types";
 import {SPQQuestTask} from "../../../core/models/quest-task.type";
 import {SPQQuestDetailsNavigationService} from "../services/qd-navigation-helper.service";
+import {SPQQuestDetailsService} from "../services/quest-details.service";
 import {SPQActionsPopupResult} from "../types/actions-popup-result";
 import {SPQFinishActionPopupComponent} from "./embed/finish-action-popup.component";
 import {SPQHintPopupComponent} from "./embed/hint-popup.component";
@@ -15,7 +17,7 @@ import {SPQHintPopupComponent} from "./embed/hint-popup.component";
         MatDialog
     ]
 })
-export class SPQQuestDetailsAnswerComponent implements OnInit, OnDestroy {
+export class SPQQuestDetailsAnswerComponent implements OnChanges, OnDestroy {
 
     public _hintsUsed: boolean = false;
 
@@ -37,35 +39,41 @@ export class SPQQuestDetailsAnswerComponent implements OnInit, OnDestroy {
 
     public _answerFormGroupModel: FormGroup;
 
+    public _tooltipArray: boolean[] = [];
+
     @Input()
     public questTask: SPQQuestTask;
+
+    private nextTaskId: ID = "";
 
     @HostBinding("class.spq-qd-answer")
     private hostClass: boolean = true;
 
     constructor(private dialogService: MatDialog,
-                private navigationService: SPQQuestDetailsNavigationService) {}
-
-    public ngOnInit() {
-        this.initAnswerForm();
+                private questDetailsService: SPQQuestDetailsService,
+                private navigationService: SPQQuestDetailsNavigationService) {
     }
 
-    public _onSubmitClick(answer: string): void {
-        // TODO -> refactoring - answer not in model now
-        this._failureAnswer = "42" !== answer.toString();
-
-        if (this._failureAnswer) {
-            this.updateAttemptsModel();
-            this.setAnswerFormError();
-        } else {
-            this.openFinishDialogAndSubscribeToClose();
+    public ngOnChanges(changes: SimpleChanges) {
+        if (changes["questTask"]) {
+            this.initAnswerForm();
+            this.subscribeToGetTooltipsCount();
         }
     }
 
-    public _onHintsClick() {
+    public s() {
+        this.initAnswerForm();
+        this.subscribeToGetTooltipsCount();
+    }
+
+    public _onSubmitClick(answer: string): void {
+        this.subscribeToCheckAnswer(answer);
+    }
+
+    public _onHintsClick(count: number) {
         if (!this._hintsUsed) {
-            this._hintsUsed = true;
-            this.openHintsDialog();
+            this._tooltipArray[count] = true;
+            this.openHintsDialog(count);
         }
     }
 
@@ -83,6 +91,17 @@ export class SPQQuestDetailsAnswerComponent implements OnInit, OnDestroy {
         });
     }
 
+    private subscribeToGetTooltipsCount(): void {
+        this.questDetailsService.getQuestTooltipCountByLvl(this.questTask.uuid)
+            .pipe(
+                take(1),
+                tap(count => {
+                    this._tooltipArray = new Array(count).fill(false);
+                })
+            )
+            .subscribe();
+    }
+
     private updateAttemptsModel(): void {
         this._attemptsModel.pop();
         this._attemptsModel.unshift({
@@ -90,13 +109,44 @@ export class SPQQuestDetailsAnswerComponent implements OnInit, OnDestroy {
         });
     }
 
+    private subscribeToCheckAnswer(answer: string): void {
+        this._localLoading = true;
+        this.questDetailsService.setQuestAnswer(this.questTask.uuid, answer)
+            .pipe(
+                take(1),
+                tap(response => {
+                    this._failureAnswer = !response.isPassed;
+                    if (this._failureAnswer) {
+                        this.updateAttemptsModel();
+                        this.setAnswerFormError();
+                    } else {
+                        this.nextTaskId = response.currentTaskId;
+                        this.clearField();
+                        this.openFinishDialogAndSubscribeToClose(!response.isAllPassed && !!response.currentTaskId);
+                    }
+                }),
+                finalize(() => {
+                    this._localLoading = false;
+                })
+            )
+            .subscribe();
+    }
+
     private setAnswerFormError(): void {
         this._answerFormGroupModel.controls["answerInput"].setErrors({ ["answerError"]: "Ответ не верный" });
     }
 
-    private openFinishDialogAndSubscribeToClose(): void {
+    private clearField(): void {
+        this._answerFormGroupModel.patchValue({
+            answerInput: ""
+        }, {
+            emitEvent: false
+        });
+    }
+
+    private openFinishDialogAndSubscribeToClose(hasNext: boolean): void {
         this.dialogService.open<SPQFinishActionPopupComponent, boolean, SPQActionsPopupResult>(SPQFinishActionPopupComponent, {
-            data: this.navigationService.nextQuestDetailsIsExist()
+            data: hasNext
         })
             .afterClosed()
             .pipe(
@@ -106,9 +156,15 @@ export class SPQQuestDetailsAnswerComponent implements OnInit, OnDestroy {
             .subscribe();
     }
 
-    private openHintsDialog(): void {
-        // TODO -> refactoring -> Запрос на срерв - подписка и открытие окна
-        this.dialogService.open(SPQHintPopupComponent, { data: "Not Implemented" });
+    private openHintsDialog(lvl: number): void {
+        this.questDetailsService.getQuestTooltipByLvl(this.questTask.uuid, lvl)
+            .pipe(
+                take(1),
+                tap(hints => {
+                    this.dialogService.open(SPQHintPopupComponent, { data: hints.text });
+                })
+            )
+            .subscribe();
     }
 
     private navigateFromPopupResult(result: SPQActionsPopupResult): void {
@@ -117,7 +173,9 @@ export class SPQQuestDetailsAnswerComponent implements OnInit, OnDestroy {
                 this.navigationService.navigateToQuestFlow();
                 break;
             case SPQActionsPopupResult.NEXT:
-                this.navigationService.navigateToNextQuestDetails();
+                this.nextTaskId
+                    ? this.navigationService.navigateToNextQuestDetails(this.nextTaskId)
+                    : this.navigationService.navigateToQuestFlow();
                 break;
             default:
                 throw new Error("Unknown value of SPQActionsPopupResult");

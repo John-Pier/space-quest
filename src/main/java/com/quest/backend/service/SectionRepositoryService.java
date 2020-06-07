@@ -1,7 +1,6 @@
 package com.quest.backend.service;
 
 import com.quest.backend.entity.Section;
-import com.quest.backend.entity.Task;
 import com.quest.backend.entity.models.QuestFlow;
 import com.quest.backend.entity.models.QuestFlowBrief;
 import com.quest.backend.entity.models.QuestTaskBrief;
@@ -65,6 +64,7 @@ public class SectionRepositoryService {
             log.info("Map model quest flow");
             QuestFlow questFlow = new QuestFlow();
             questFlow.setId(section.getUuid());
+            questFlow.setName(section.getName());
             questFlow.setNodes(taskRepositoryService.getTasksBriefBySectionUUIDandUserUUID(section.getUuid(), userUUID));
             for (QuestTaskBrief task : questFlow.getNodes()) {
                 if (task.isSelected()) {
