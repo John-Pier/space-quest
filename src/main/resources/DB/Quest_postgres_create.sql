@@ -23,7 +23,7 @@ CREATE TABLE "task" (
 	"section_uuid" VARCHAR(255) NOT NULL,
 	"url" VARCHAR(255),
 	"text" VARCHAR(255),
-	"serial_number" serial NOT NULL,
+	"serial_number" integer,
 	"title" VARCHAR(255) NOT NULL,
 	"subtitle" VARCHAR(255) NOT NULL,
 	CONSTRAINT "task_pk" PRIMARY KEY ("uuid")
@@ -89,5 +89,18 @@ ALTER TABLE "task_tooltip" ADD CONSTRAINT "task_tooltip_fk1" FOREIGN KEY ("toolt
 
 ALTER TABLE "user_task" ADD CONSTRAINT "user_task_fk0" FOREIGN KEY ("user_uuid") REFERENCES "users"("uuid") ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE "user_task" ADD CONSTRAINT "user_task_fk1" FOREIGN KEY ("task_uuid") REFERENCES "task"("uuid") ON DELETE CASCADE ON UPDATE CASCADE;
+
+CREATE OR REPLACE FUNCTION task_insert() RETURNS trigger AS
+$$
+BEGIN
+	IF(NEW.section_uuid in (SELECT section_uuid FROM task))
+	THEN NEW.serial_number = (SELECT max(serial_number) FROM task WHERE NEW.section_uuid = section_uuid) + 1;
+	ELSE NEW.serial_number = 1;
+	END IF;
+	return NEW;
+END
+$$ LANGUAGE plpgsql;
+CREATE TRIGGER task_insert BEFORE INSERT ON task
+	FOR EACH ROW EXECUTE PROCEDURE task_insert();
 
 
