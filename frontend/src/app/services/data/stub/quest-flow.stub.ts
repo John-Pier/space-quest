@@ -1,6 +1,4 @@
-import {SPQQuestFlow, SPQQuestTaskBrief} from "../../../core/models/quest-task.type";
-
-export const SPQStubQuestTaskBriefs: SPQQuestTaskBrief[] = [
+const SPQStubQuestTaskBriefs = [
     {
         id: "1",
         title: "Test Init Cube Label",
@@ -39,7 +37,7 @@ export const SPQStubQuestTaskBriefs: SPQQuestTaskBrief[] = [
     }
 ];
 
-export const SPQStubQuestFlow: SPQQuestFlow = {
+const SPQStubQuestFlow = {
     id: "test-flow-id",
     nodes: SPQStubQuestTaskBriefs,
     currentTaskId: 6

@@ -92,7 +92,9 @@
         "no-angle-bracket-type-assertion": false,
         "no-string-literal": false,
         "no-trailing-whitespace": false,
-        "jsdoc-format": false
+        "jsdoc-format": false,
+        "object-literal-shorthand": false,
+        "no-shadowed-variable": false
     },
     "rulesDirectory": [
         "codelyzer"

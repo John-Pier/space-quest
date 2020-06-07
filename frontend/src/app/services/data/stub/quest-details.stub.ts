@@ -1,7 +1,4 @@
-import {SPQTypedMap} from "../../../core/base.types";
-import {SPQQuestTask} from "../../../core/models/quest-task.type";
-
-export const SPQQuestTasks: SPQTypedMap<SPQQuestTask> = {
+export const SPQQuestTasks = {
     1: {
         uuid: 1,
         sectionUUID: 5,

@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {ID} from "../../../core/base.types";
 import {SPQQuestTask} from "../../../core/models/quest-task.type";
 import {SPQQuestDetailsDataService} from "../../../services/data/quest-details-data.service";
+import {SPQQuestAnswerResponse} from "../types/quest-answer.type";
 
 @Injectable()
 export class SPQQuestDetailsService {
@@ -13,7 +14,15 @@ export class SPQQuestDetailsService {
     private readonly videoEndPartUrl: string = "?loop=1&modestbranding=1&color=white";
 
     public constructor(private dataService: SPQQuestDetailsDataService,
-                       private sanitizer: DomSanitizer) {}
+                       private sanitizer: DomSanitizer) {
+    }
+
+    public setQuestAnswer(taskId: ID, answer: string): Observable<SPQQuestAnswerResponse> {
+        return this.dataService.setQuestAnswer({
+            taskUUID: taskId,
+            answer: answer
+        });
+    }
 
     public getQuestTaskById(taskId: ID): Observable<SPQQuestTask> {
         return this.dataService.getQuestTaskById(taskId);
