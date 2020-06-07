@@ -63,7 +63,7 @@ public class TaskController {
     }
 
     @GetMapping("/task")
-    public Task getTaskByUUID(@RequestBody String taskUUID) throws Exception{
+    public Task getTaskByUUID(@RequestParam("taskId") String taskUUID) throws Exception{
         log.info("Get task by id");
         return taskService.getTaskByUUID(taskUUID);
     }

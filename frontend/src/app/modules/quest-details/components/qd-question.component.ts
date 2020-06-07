@@ -1,7 +1,13 @@
 import {Component, HostBinding, Input, OnInit} from "@angular/core";
 import {SafeUrl} from "@angular/platform-browser";
-import {SPQQuestTask, SPQQuestTaskUrlType} from "../../../core/models/quest-task.type";
+import {SPQQuestTask} from "../../../core/models/quest-task.type";
 import {SPQQuestDetailsService} from "../services/quest-details.service";
+
+export enum SPQQuestTaskUrlType {
+    VIDEO = "video",
+    PICTURE = "picture"
+}
+
 
 @Component({
     selector: "spq-qd-question",
@@ -13,6 +19,8 @@ export class SPQQuestDetailsQuestionComponent implements OnInit {
 
     public _questUrlType = SPQQuestTaskUrlType;
 
+    public _taskType: SPQQuestTaskUrlType;
+
     @Input()
     public questTask: SPQQuestTask;
 
@@ -22,15 +30,26 @@ export class SPQQuestDetailsQuestionComponent implements OnInit {
     constructor(private questDetailsService: SPQQuestDetailsService) {}
 
     public ngOnInit() {
-        switch (this.questTask.type) {
+        this.setTaskType();
+        this.makeSafeUrl();
+    }
+
+    private setTaskType(): void {
+        this._taskType = this.questTask.url
+            ?  this.questTask.url.includes(".")
+                ? SPQQuestTaskUrlType.PICTURE
+                : SPQQuestTaskUrlType.VIDEO
+            : null;
+    }
+
+    private makeSafeUrl(): void {
+        switch (this._taskType) {
             case SPQQuestTaskUrlType.PICTURE:
                 this._safeUrl = this.questDetailsService.makeSafeImageUrl(this.questTask.url);
                 break;
             case SPQQuestTaskUrlType.VIDEO:
                 this._safeUrl = this.questDetailsService.makeSafeVideoUrl(this.questTask.url);
                 break;
-            default:
-                throw Error("Unknown questTask.type!");
         }
     }
 }
