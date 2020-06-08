@@ -4,6 +4,7 @@ import com.quest.backend.config.Constants;
 import com.quest.backend.entity.Section;
 import com.quest.backend.entity.models.QuestFlow;
 import com.quest.backend.entity.models.QuestFlowBrief;
+import com.quest.backend.entity.models.SectionStatistic;
 import com.quest.backend.service.SectionRepositoryService;
 import com.quest.backend.service.UserRepositoryService;
 import com.quest.backend.token.JwtTokenUtil;
@@ -45,5 +46,13 @@ public class SectionController {
         JwtTokenUtil jwtTokenUtil = new JwtTokenUtil();
         String login = jwtTokenUtil.getUsernameFromToken(token.substring(7));
         return sectionService.getAllQuestFlowByUserUUID(userRepositoryService.getUserByLogin(login).getUuid());
+    }
+
+    @GetMapping("/section/statistic")
+    public List<SectionStatistic> getSectionsStatistic(@RequestHeader("Authorization") String token) throws Exception {
+        log.info("Get login from token");
+        JwtTokenUtil jwtTokenUtil = new JwtTokenUtil();
+        String login = jwtTokenUtil.getUsernameFromToken(token.substring(7));
+        return sectionService.getSectionsStatistic(userRepositoryService.getUserByLogin(login).getUuid());
     }
 }

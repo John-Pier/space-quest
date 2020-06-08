@@ -27,15 +27,15 @@ public class TaskRepositoryService {
     private final TooltipRepositoryService tooltipRepositoryService;
     private final UserTaskRepositoryService userTaskRepositoryService;
 
-    @Autowired
-    private EntityManager entityManager;
+    private final EntityManager entityManager;
 
     @Autowired
-    public TaskRepositoryService(TaskRepository repository, TaskTooltipRepositoryService taskTooltipRepositoryService, TooltipRepositoryService tooltipRepositoryService, @Lazy UserTaskRepositoryService userTaskRepositoryService) {
+    public TaskRepositoryService(TaskRepository repository, TaskTooltipRepositoryService taskTooltipRepositoryService, TooltipRepositoryService tooltipRepositoryService, @Lazy UserTaskRepositoryService userTaskRepositoryService, EntityManager entityManager) {
         this.repository = repository;
         this.taskTooltipRepositoryService = taskTooltipRepositoryService;
         this.tooltipRepositoryService = tooltipRepositoryService;
         this.userTaskRepositoryService = userTaskRepositoryService;
+        this.entityManager = entityManager;
     }
 
     public List<Task> getAllBySectionUUID(String sectionUUID) {
@@ -154,5 +154,14 @@ public class TaskRepositoryService {
             questCube.setSelected(userTaskRepositoryService.taskIsSelected(task.getUuid(), userUUID));
             questCube.setPassed(userTaskRepositoryService.taskIsPassed(task.getUuid(), userUUID));
         return questCube;
+    }
+
+    public List<String> getTasksIdBySectionUUID(String sectionUUID) {
+        log.info("Get tasks id by section id");
+        return repository.getTasksIdBySectionUUID(sectionUUID);
+    }
+
+    public boolean isPassed(String taskUUID, String userUUID) {
+        return userTaskRepositoryService.taskIsPassed(taskUUID, userUUID);
     }
 }

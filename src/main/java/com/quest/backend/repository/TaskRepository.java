@@ -22,4 +22,7 @@ public interface TaskRepository extends JpaRepository<Task, UUID> {
 
     @Query(value = "SELECT * FROM task WHERE uuid = :taskUUID", nativeQuery = true)
     Optional<Task> findByUUID(@Param("taskUUID")String taskUUID);
+
+    @Query(value = "SELECT uuid FROM task WHERE section_uuid = :sectionUUID", nativeQuery = true)
+    List<String> getTasksIdBySectionUUID(@Param("sectionUUID")String sectionUUID);
 }

@@ -4,11 +4,13 @@ import com.quest.backend.entity.Section;
 import com.quest.backend.entity.models.QuestFlow;
 import com.quest.backend.entity.models.QuestFlowBrief;
 import com.quest.backend.entity.models.QuestTaskBrief;
+import com.quest.backend.entity.models.SectionStatistic;
 import com.quest.backend.repository.SectionRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,10 +20,12 @@ public class SectionRepositoryService {
 
     private final SectionRepository repository;
     private final TaskRepositoryService taskRepositoryService;
+    private final EntityManager entityManager;
     @Autowired
-    public SectionRepositoryService(SectionRepository repository, TaskRepositoryService taskRepositoryService) {
+    public SectionRepositoryService(SectionRepository repository, TaskRepositoryService taskRepositoryService, EntityManager entityManager) {
         this.repository = repository;
         this.taskRepositoryService = taskRepositoryService;
+        this.entityManager = entityManager;
     }
 
     public List<QuestFlowBrief> getAllQuestFlowsBriefByUserUUID(String userUUID) {
@@ -75,6 +79,28 @@ public class SectionRepositoryService {
             questFlows.add(questFlow);
         }
         return questFlows;
+    }
+
+    public List<SectionStatistic> getSectionsStatistic(String userUUID) {
+        List<SectionStatistic> sectionsStatistic = new ArrayList<>();
+        log.info("Get statistic of sections");
+        List<String> sectionsId = repository.getAllId();
+        List<String> tasks;
+        for (String id : sectionsId) {
+            SectionStatistic sectionStatistic = new SectionStatistic();
+            sectionStatistic.setId(id);
+            tasks = taskRepositoryService.getAllIdBySectionId(id);
+            sectionStatistic.setCount(tasks.size());
+            int counter = 0;
+            for(String taskId : tasks) {
+                if(taskRepositoryService.isPassed(taskId, userUUID)) {
+                    counter++;
+                }
+            }
+            sectionStatistic.setCountOfPassed(counter);
+            sectionsStatistic.add(sectionStatistic);
+        }
+        return sectionsStatistic;
     }
 
 }
