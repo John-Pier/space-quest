@@ -24,6 +24,7 @@
                     <use xlink:href="#icon-simple-lamp"/>
                 </ng-template>
             </svg>
+            {{this._tooltipArray}}
         </div>
     </div>
     <div class="spq-qd-answer__answer">
@@ -36,7 +37,7 @@
                     <input #input
                            formControlName="answerInput"
                            matInput
-                           placeholder="Placeholder">
+                           placeholder="Ответ">
                     <mat-hint *ngIf="_failureAnswer">Попробуйте еще раз</mat-hint>
                 </mat-form-field>
             </div>
