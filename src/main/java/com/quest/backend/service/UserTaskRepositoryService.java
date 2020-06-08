@@ -51,7 +51,7 @@ public class UserTaskRepositoryService {
 
     public Boolean taskIsSelected(String taskUUID, String userUUID) {
         log.info("Task is selected?");
-        return !repository.isLockByTaskUUID(taskUUID, userUUID);
+        return !repository.isLockByTaskUUID(taskUUID, userUUID) && !repository.isPassedByTaskUUID(taskUUID, userUUID);
     }
 
     public Boolean taskIsPassed(String taskUUID, String userUUID) {
