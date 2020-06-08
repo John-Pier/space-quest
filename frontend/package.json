@@ -13,7 +13,7 @@
     "less": "gulp less && gulp less:inject",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "report": "webpack-bundle-analyzer dist/space-quest/stats-es2015.json"
+    "report": "webpack-bundle-analyzer dist/stats-es2015.json"
   },
   "private": true,
   "dependencies": {

@@ -19,4 +19,4 @@ export const SPQRoutesMap: SPQTypedMap<string> = {
     [SPQRoutesString.SPQ_AUTH]: "/" + SPQRoutesString.SPQ_AUTH,
 };
 
-export const defaultAbsoluteRoute = SPQRoutesMap[SPQRoutesString.SPQ_TIMELINE];
+export const defaultAbsoluteRoute = "/" + SPQRoutesString.SPQ_MAIN.toString() + "/" + SPQRoutesString.SPQ_TIMELINE.toString();
