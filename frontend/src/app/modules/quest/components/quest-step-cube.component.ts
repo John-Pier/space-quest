@@ -21,6 +21,9 @@ export class SPQQuestStepCubeComponent {
     public isSelected: boolean = false;
 
     @Input()
+    public disabled: boolean = false;
+
+    @Input()
     public id: ID;
 
     @Output()
@@ -30,6 +33,8 @@ export class SPQQuestStepCubeComponent {
     private hostClass: boolean = true;
 
     public _onStepCubeClick(): void {
-        this.onClick.emit(this.id);
+        if (!this.disabled) {
+            this.onClick.emit(this.id);
+        }
     }
 }

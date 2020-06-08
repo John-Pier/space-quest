@@ -9,11 +9,11 @@
                     [mat-dialog-close]="_actionsPopupResult.BACK">
                 Назад к списку
             </button>
-            <button mat-button
+            <button *ngIf="!_nextDisable"
+                    mat-button
                     color="primary"
                     [mat-dialog-close]="_actionsPopupResult.NEXT"
-                    cdkFocusInitial
-                    [disabled]="_nextDisable">
+                    cdkFocusInitial>
                 Продолжить
             </button>
         </mat-dialog-actions>

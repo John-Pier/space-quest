@@ -5,10 +5,10 @@
                 <ng-template [ngTemplateOutlet]="attempt.attemptSpent ? spentTemplate : noSpentTemplate">
                 </ng-template>
                 <ng-template #noSpentTemplate>
-                    <use xlink:href="#icon-non-color-rocket"/>
+                    <use xlink:href="#icon-rocket"/>
                 </ng-template>
                 <ng-template #spentTemplate>
-                    <use xlink:href="#icon-rocket"/>
+                    <use xlink:href="#icon-non-color-rocket"/>
                 </ng-template>
             </svg>
         </div>
@@ -19,9 +19,9 @@
              (click)="_onHintsClick(i)">
             <svg width="28px" height="28px">
                 <use *ngIf="!used; else usedHintsTemplate"
-                     xlink:href="#icon-yellow-lamp" fill="#FFDA00"/>
+                     xlink:href="#icon-lamp"/>
                 <ng-template #usedHintsTemplate>
-                    <use xlink:href="#icon-lamp"/>
+                    <use xlink:href="#icon-simple-lamp"/>
                 </ng-template>
             </svg>
         </div>
