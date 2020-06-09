@@ -138,7 +138,7 @@ public class TaskRepositoryService {
         log.info("Get task by id");
         Task task = repository.findByUUID(taskUUID).orElse(null);
         assert task != null;
-        task.setAnswer("");
+        //task.setAnswer("");
         return task;
     }
 

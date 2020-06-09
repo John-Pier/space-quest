@@ -25,6 +25,7 @@ public interface UserTaskRepository extends JpaRepository<UserTask, UUID> {
                                         @Param("userUUID")String userUUID);
 
     @Query(value = "SELECT lock FROM user_task WHERE task_uuid = :taskUUID and user_uuid = :userUUID", nativeQuery = true)
+    @Transactional
     Boolean isLockByTaskUUID(@Param("taskUUID") String taskUUID,
                              @Param("userUUID") String userUUID);
 
