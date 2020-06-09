@@ -220,7 +220,7 @@ let SPQQuestDetailsAnswerComponent = class SPQQuestDetailsAnswerComponent {
         this.subscribeToCheckAnswer(answer);
     }
     _onHintsClick(count) {
-        if (!this._hintsUsed) {
+        if (!this._tooltipArray[count]) {
             this._tooltipArray[count] = true;
             this.openHintsDialog(count);
         }
@@ -287,7 +287,7 @@ let SPQQuestDetailsAnswerComponent = class SPQQuestDetailsAnswerComponent {
             .subscribe();
     }
     openHintsDialog(lvl) {
-        this.questDetailsService.getQuestTooltipByLvl(this.questTask.uuid, lvl)
+        this.questDetailsService.getQuestTooltipByLvl(this.questTask.uuid, lvl + 1)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["take"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(hints => {
             this.dialogService.open(_embed_hint_popup_component__WEBPACK_IMPORTED_MODULE_9__["SPQHintPopupComponent"], { data: hints.text });
         }))

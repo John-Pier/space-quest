@@ -369,7 +369,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "_onHintsClick",
         value: function _onHintsClick(count) {
-          if (!this._hintsUsed) {
+          if (!this._tooltipArray[count]) {
             this._tooltipArray[count] = true;
             this.openHintsDialog(count);
           }
@@ -462,7 +462,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         value: function openHintsDialog(lvl) {
           var _this4 = this;
 
-          this.questDetailsService.getQuestTooltipByLvl(this.questTask.uuid, lvl).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["take"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (hints) {
+          this.questDetailsService.getQuestTooltipByLvl(this.questTask.uuid, lvl + 1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["take"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (hints) {
             _this4.dialogService.open(_embed_hint_popup_component__WEBPACK_IMPORTED_MODULE_9__["SPQHintPopupComponent"], {
               data: hints.text
             });

@@ -132,9 +132,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         value: function subscribeToGetTaskBrief() {
           var _this = this;
 
-          this.service.getTaskBriefById(this.flowBrief.currentTaskId).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["take"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["tap"])(function (brief) {
-            _this._currentTaskBrief = brief;
-          })).subscribe();
+          if (this.flowBrief && this.flowBrief.currentTaskId) {
+            this.service.getTaskBriefById(this.flowBrief.currentTaskId).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["take"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["tap"])(function (brief) {
+              _this._currentTaskBrief = brief;
+            })).subscribe();
+          }
         }
       }]);
 

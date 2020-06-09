@@ -21,7 +21,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div class=\"spq-quest-flow__inner\">\n    <div class=\"spq-quest-flow__name\">\n        {{values.name}}\n    </div>\n    <div class=\"spq-quest-flow__flow\">\n        <spq-quest-step-cube *ngFor=\"let node of values.nodes; trackBy:  _trackCubeById\"\n                             class=\"spq-quest-flow__flow-cube\"\n                             [id]=\"node.id\"\n                             [title]=\"node.title\"\n                             [subtitle]=\"node.subtitle\"\n                             [serialNumber]=\"node.serialNumber\"\n                             [disabled]=\"!node.passed && values.currentTaskId !== node.id\"\n                             [isSelected]=\"values.currentTaskId === node.id\"\n                             (onClick)=\"_navigateToClickedQuestDetails($event)\">\n        </spq-quest-step-cube>\n    </div>\n</div>\n";
+    __webpack_exports__["default"] = "<div class=\"spq-quest-flow__inner\">\n    <div class=\"spq-quest-flow__name\">\n        {{values.name}}\n    </div>\n    <div class=\"spq-quest-flow__flow\">\n        <spq-quest-step-cube class=\"spq-quest-flow__flow-cube\"\n                             *ngFor=\"let node of values.nodes; trackBy:  _trackCubeById\"\n                             [id]=\"node.id\"\n                             [title]=\"node.title\"\n                             [subtitle]=\"node.subtitle\"\n                             [serialNumber]=\"node.serialNumber\"\n                             [disabled]=\"!node.passed && values.currentTaskId !== node.id\"\n                             [selected]=\"values.currentTaskId === node.id\"\n                             [highlighted]=\"node.passed\"\n                             (onClick)=\"_navigateToClickedQuestDetails($event)\">\n        </spq-quest-step-cube>\n    </div>\n</div>\n";
     /***/
   },
 
@@ -41,7 +41,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div class=\"spq-quest-step-cube__inner\"\n     matRipple\n     [class.disabled]=\"disabled\"\n     [class.selected]=\"isSelected\"\n     (click)=\"_onStepCubeClick()\">\n    <div class=\"spq-quest-step-cube__text\">\n        <div class=\"spq-quest-step-cube__text-title\">\n            {{title}}\n        </div>\n        <div class=\"spq-quest-step-cube__text-subtitle\">\n            {{subtitle}}\n        </div>\n    </div>\n    <div class=\"spq-quest-step-cube__serial-number\">\n        {{serialNumber}}\n    </div>\n</div>\n<div *ngIf=\"disabled\"\n     class=\"spq-quest-step-cube__lock\">\n    <svg width=\"80px\" height=\"80px\">\n        <use xlink:href=\"#icon-lock\"/>\n    </svg>\n</div>\n";
+    __webpack_exports__["default"] = "<div class=\"spq-quest-step-cube__inner\"\n     matRipple\n     [class.disabled]=\"disabled\"\n     [class.selected]=\"selected\"\n     [class.highlighted]=\"highlighted\"\n     (click)=\"_onStepCubeClick()\">\n    <div class=\"spq-quest-step-cube__text\">\n        <div class=\"spq-quest-step-cube__text-title\">\n            {{title}}\n        </div>\n        <div class=\"spq-quest-step-cube__text-subtitle\">\n            {{subtitle}}\n        </div>\n    </div>\n    <div class=\"spq-quest-step-cube__serial-number\">\n        {{serialNumber}}\n    </div>\n</div>\n<div *ngIf=\"disabled\"\n     class=\"spq-quest-step-cube__lock\">\n    <svg width=\"80px\" height=\"80px\">\n        <use xlink:href=\"#icon-lock\"/>\n    </svg>\n</div>\n";
     /***/
   },
 
@@ -112,6 +112,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }
 
       _createClass(SPQQuestFlowComponent, [{
+        key: "ngOnInit",
+        value: function ngOnInit() {}
+      }, {
         key: "_trackCubeById",
         value: function _trackCubeById(index, node) {
           return node.id.toString();
@@ -180,8 +183,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       function SPQQuestStepCubeComponent() {
         _classCallCheck(this, SPQQuestStepCubeComponent);
 
-        this.isSelected = false;
+        this.selected = false;
         this.disabled = false;
+        this.highlighted = false;
         this.onClick = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
         this.hostClass = true;
       }
@@ -201,8 +205,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", String)], SPQQuestStepCubeComponent.prototype, "title", void 0);
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", String)], SPQQuestStepCubeComponent.prototype, "subtitle", void 0);
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Number)], SPQQuestStepCubeComponent.prototype, "serialNumber", void 0);
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Boolean)], SPQQuestStepCubeComponent.prototype, "isSelected", void 0);
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Boolean)], SPQQuestStepCubeComponent.prototype, "selected", void 0);
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Boolean)], SPQQuestStepCubeComponent.prototype, "disabled", void 0);
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Boolean)], SPQQuestStepCubeComponent.prototype, "highlighted", void 0);
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Object)], SPQQuestStepCubeComponent.prototype, "id", void 0);
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"])(), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"])], SPQQuestStepCubeComponent.prototype, "onClick", void 0);
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["HostBinding"])("class.spq-quest-step-cube"), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Boolean)], SPQQuestStepCubeComponent.prototype, "hostClass", void 0);

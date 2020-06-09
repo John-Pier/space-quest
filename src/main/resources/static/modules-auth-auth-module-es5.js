@@ -47,7 +47,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div class=\"spq-auth__inner\">\n    <div class=\"spq-auth__inner-form\">\n        <mat-progress-bar *ngIf=\"_loading\"\n                          class=\"progress-line\"\n                          mode=\"indeterminate\">\n        </mat-progress-bar>\n        <mat-tab-group [dynamicHeight]=\"true\"\n                       mat-align-tabs=\"center\">\n            <mat-tab label=\"Вход\">\n                <form class=\"spq-auth__form\"\n                      [formGroup]=\"_loginForm\"\n                      (ngSubmit)=\"onValidLoginClick()\">\n                    <mat-form-field appearance=\"outline\"\n                                    [hideRequiredMarker]=\"false\">\n                        <mat-label>Логин</mat-label>\n                        <input type=\"text\"\n                               placeholder=\"Введите ваш логин\"\n                               formControlName=\"login\"\n                               matInput>\n                    </mat-form-field>\n                    <mat-form-field appearance=\"outline\">\n                        <mat-label>Пароль</mat-label>\n                        <input type=\"password\"\n                               placeholder=\"Введите ваш пароль\"\n                               formControlName=\"password\"\n                               matInput>\n                        <mat-error *ngIf=\"_loginForm.invalid\">{{getErrorMessage()}}</mat-error>\n                    </mat-form-field>\n                    <button class=\"spq-auth__form-submit\"\n                            mat-button\n                            color=\"accent\"\n                            type=\"submit\"\n                            mat-raised-button\n                            [disabled]=\"!_loginForm.valid || _loading\">\n                        Войти\n                    </button>\n                </form>\n            </mat-tab>\n            <mat-tab label=\"Регистрация\">\n                <form class=\"spq-auth__form\"\n                      [formGroup]=\"_registrationForm\"\n                      (ngSubmit)=\"onValidRegisterClick()\">\n                    <mat-form-field appearance=\"outline\">\n                        <mat-label>Ваше Имя</mat-label>\n                        <input type=\"text\"\n                               placeholder=\"Имя\"\n                               formControlName=\"firstName\"\n                               matInput>\n                    </mat-form-field>\n                    <mat-form-field appearance=\"outline\">\n                        <mat-label>Email</mat-label>\n                        <input type=\"text\"\n                               placeholder=\"Введите ваш Email\"\n                               formControlName=\"email\"\n                               matInput>\n                    </mat-form-field>\n                    <mat-form-field appearance=\"outline\">\n                        <mat-label>Логин</mat-label>\n                        <input type=\"text\"\n                               placeholder=\"Логин\"\n                               formControlName=\"login\"\n                               matInput>\n                    </mat-form-field>\n                    <mat-form-field appearance=\"outline\">\n                        <mat-label>Пароль</mat-label>\n                        <input type=\"password\"\n                               placeholder=\"Введите ваш пароль\"\n                               formControlName=\"password\"\n                               matInput>\n                    </mat-form-field>\n                    <button class=\"spq-auth__form-submit\"\n                            mat-button\n                            color=\"accent\"\n                            mat-raised-button\n                            [formAction]=\"'submit'\"\n                            [disabled]=\"!_registrationForm.valid || _loading\">\n                        Зарегистрироваться\n                    </button>\n                </form>\n            </mat-tab>\n        </mat-tab-group>\n\n    </div>\n</div>\n";
+    __webpack_exports__["default"] = "<div class=\"spq-auth__inner\">\n    <div class=\"spq-auth__inner-form\">\n        <mat-progress-bar *ngIf=\"_loading\"\n                          class=\"progress-line\"\n                          mode=\"indeterminate\">\n        </mat-progress-bar>\n        <mat-tab-group [dynamicHeight]=\"true\"\n                       mat-align-tabs=\"center\">\n            <mat-tab label=\"Вход\">\n                <form class=\"spq-auth__form\"\n                      [formGroup]=\"_loginForm\"\n                      (ngSubmit)=\"onValidLoginClick()\">\n                    <mat-form-field appearance=\"outline\"\n                                    [hideRequiredMarker]=\"false\">\n                        <mat-label>Логин</mat-label>\n                        <input type=\"text\"\n                               placeholder=\"Введите ваш логин\"\n                               formControlName=\"login\"\n                               matInput>\n                    </mat-form-field>\n                    <mat-form-field appearance=\"outline\">\n                        <mat-label>Пароль</mat-label>\n                        <input type=\"password\"\n                               placeholder=\"Введите ваш пароль\"\n                               formControlName=\"password\"\n                               matInput>\n                        <mat-error *ngIf=\"_loginForm.invalid\">{{getErrorMessage()}}</mat-error>\n                    </mat-form-field>\n                    <mat-error class=\"spq-auth__form-error\"\n                               *ngIf=\"_loginMessage\">\n                        {{_loginMessage}}\n                    </mat-error>\n                    <button class=\"spq-auth__form-submit\"\n                            mat-button\n                            color=\"accent\"\n                            type=\"submit\"\n                            mat-raised-button\n                            [disabled]=\"!_loginForm.valid || _loading\">\n                        Войти\n                    </button>\n                </form>\n            </mat-tab>\n            <mat-tab label=\"Регистрация\">\n                <form class=\"spq-auth__form\"\n                      [formGroup]=\"_registrationForm\"\n                      (ngSubmit)=\"onValidRegisterClick()\">\n                    <mat-form-field appearance=\"outline\">\n                        <mat-label>Ваше Имя</mat-label>\n                        <input type=\"text\"\n                               placeholder=\"Имя\"\n                               formControlName=\"firstName\"\n                               matInput>\n                    </mat-form-field>\n                    <mat-form-field appearance=\"outline\">\n                        <mat-label>Email</mat-label>\n                        <input type=\"email\"\n                               placeholder=\"Введите ваш Email\"\n                               formControlName=\"email\"\n                               matInput>\n                        <mat-error *ngIf=\"_registrationForm.controls.email.invalid\">Некорректный Email</mat-error>\n                    </mat-form-field>\n                    <mat-form-field appearance=\"outline\">\n                        <mat-label>Логин</mat-label>\n                        <input type=\"text\"\n                               placeholder=\"Логин\"\n                               formControlName=\"login\"\n                               matInput>\n                    </mat-form-field>\n                    <mat-form-field appearance=\"outline\">\n                        <mat-label>Пароль</mat-label>\n                        <input type=\"password\"\n                               placeholder=\"Введите ваш пароль\"\n                               formControlName=\"password\"\n                               matInput>\n                    </mat-form-field>\n                    <mat-error class=\"spq-auth__form-error\"\n                               *ngIf=\"_registrationMessage\">\n                        {{_registrationMessage}}\n                    </mat-error>\n                    <button class=\"spq-auth__form-submit\"\n                            mat-button\n                            color=\"accent\"\n                            mat-raised-button\n                            [formAction]=\"'submit'\"\n                            [disabled]=\"!_registrationForm.valid || _loading\">\n                        Зарегистрироваться\n                    </button>\n                </form>\n            </mat-tab>\n        </mat-tab-group>\n\n    </div>\n</div>\n";
     /***/
   },
 
@@ -91,25 +91,31 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony import */
 
 
-    var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! rxjs */
+    "./node_modules/rxjs/_esm2015/index.js");
+    /* harmony import */
+
+
+    var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! rxjs/operators */
     "./node_modules/rxjs/_esm2015/operators/index.js");
     /* harmony import */
 
 
-    var _app_routers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    var _app_routers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! ../../app-routers */
     "./src/app/app-routers.ts");
     /* harmony import */
 
 
-    var _services_navigation_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    var _services_navigation_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! ../../services/navigation.service */
     "./src/app/services/navigation.service.ts");
     /* harmony import */
 
 
-    var _services_auth_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+    var _services_auth_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
     /*! ./services/auth.service */
     "./src/app/modules/auth/services/auth.service.ts"); // TODO: big refactoring!
 
@@ -121,6 +127,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         this.authService = authService;
         this.navigationService = navigationService;
         this._loading = false;
+        this._loginMessage = "";
+        this._registrationMessage = "";
         this.hostClass = true;
       }
 
@@ -137,20 +145,24 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           var _this = this;
 
           this._loading = true;
+          this._registrationMessage = "";
           this.authService.attemptRegistration({
             login: this._registrationForm.value["login"],
             password: this._registrationForm.value["password"],
             email: this._registrationForm.value["email"],
             firstName: this._registrationForm.value["firstName"]
-          }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (response) {
+          }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (response) {
             _this.authService.decodeResponseTokenAndSetToStore(response);
 
-            _this.navigationService.navigateTo(_app_routers__WEBPACK_IMPORTED_MODULE_4__["defaultAbsoluteRoute"]);
+            _this.navigationService.navigateTo(_app_routers__WEBPACK_IMPORTED_MODULE_5__["defaultAbsoluteRoute"]);
           }, function () {
             _this._registrationForm.setErrors({
               password: "Error"
             });
-          }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["finalize"])(function () {
+          }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(function (err) {
+            _this._registrationMessage = err.error.error;
+            return rxjs__WEBPACK_IMPORTED_MODULE_3__["EMPTY"];
+          }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["finalize"])(function () {
             _this._loading = false;
           })).subscribe();
         }
@@ -160,10 +172,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           var _this2 = this;
 
           this._loading = true;
+          this._loginMessage = "";
           this.authService.attemptAuthentication({
             login: this._loginForm.value["login"],
             password: this._loginForm.value["password"]
-          }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["finalize"])(function () {
+          }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(function (err) {
+            _this2._loginMessage = err.error.error;
+            return rxjs__WEBPACK_IMPORTED_MODULE_3__["EMPTY"];
+          }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["finalize"])(function () {
             _this2._loading = false;
           })).subscribe(function (response) {
             _this2.authService.decodeResponseTokenAndSetToStore(response);
@@ -215,9 +231,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     SPQAuthComponent.ctorParameters = function () {
       return [{
-        type: _services_auth_service__WEBPACK_IMPORTED_MODULE_6__["SPQAuthService"]
+        type: _services_auth_service__WEBPACK_IMPORTED_MODULE_7__["SPQAuthService"]
       }, {
-        type: _services_navigation_service__WEBPACK_IMPORTED_MODULE_5__["SPQNavigationService"]
+        type: _services_navigation_service__WEBPACK_IMPORTED_MODULE_6__["SPQNavigationService"]
       }];
     };
 
@@ -227,9 +243,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
       /*! raw-loader!./auth.component.html */
       "./node_modules/raw-loader/dist/cjs.js!./src/app/modules/auth/auth.component.html"))["default"],
-      changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectionStrategy"].OnPush,
-      providers: [_services_auth_service__WEBPACK_IMPORTED_MODULE_6__["SPQAuthService"]]
-    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_auth_service__WEBPACK_IMPORTED_MODULE_6__["SPQAuthService"], _services_navigation_service__WEBPACK_IMPORTED_MODULE_5__["SPQNavigationService"]])], SPQAuthComponent);
+      providers: [_services_auth_service__WEBPACK_IMPORTED_MODULE_7__["SPQAuthService"]]
+    }), tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_auth_service__WEBPACK_IMPORTED_MODULE_7__["SPQAuthService"], _services_navigation_service__WEBPACK_IMPORTED_MODULE_6__["SPQNavigationService"]])], SPQAuthComponent);
     /***/
   },
 

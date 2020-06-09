@@ -66,11 +66,13 @@ let SPQCardComponent = class SPQCardComponent {
         return this.service.makeSafeImageUrl(this.flowBrief.url);
     }
     subscribeToGetTaskBrief() {
-        this.service.getTaskBriefById(this.flowBrief.currentTaskId)
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["take"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["tap"])(brief => {
-            this._currentTaskBrief = brief;
-        }))
-            .subscribe();
+        if (this.flowBrief && this.flowBrief.currentTaskId) {
+            this.service.getTaskBriefById(this.flowBrief.currentTaskId)
+                .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["take"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["tap"])(brief => {
+                this._currentTaskBrief = brief;
+            }))
+                .subscribe();
+        }
     }
 };
 SPQCardComponent.ctorParameters = () => [

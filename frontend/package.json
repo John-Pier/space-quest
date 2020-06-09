@@ -10,7 +10,7 @@
         "build": "ng build --prod",
         "build:server": "webpack-dev-server --open --port 3000 --entry /webpack-dev-server --output-path dist/space-quest --compress --content-base dist/space-quest --history-api-fallback",
         "test": "ng test",
-        "copy": "copyfiles -V -E -f ./dist/* ../../src/main/resources/static/",
+        "copy": "copyfiles -V -E -f ./dist/* ../src/main/resources/static/",
         "deploy": "ng build && npm run copy",
         "less": "gulp less && gulp less:inject",
         "lint": "ng lint",
