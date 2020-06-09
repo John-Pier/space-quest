@@ -71,7 +71,7 @@ export class SPQQuestDetailsAnswerComponent implements OnChanges, OnDestroy {
     }
 
     public _onHintsClick(count: number) {
-        if (!this._hintsUsed) {
+        if (!this._tooltipArray[count]) {
             this._tooltipArray[count] = true;
             this.openHintsDialog(count);
         }
