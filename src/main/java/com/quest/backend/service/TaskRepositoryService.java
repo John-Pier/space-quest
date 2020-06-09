@@ -75,7 +75,7 @@ public class TaskRepositoryService {
         log.info("Get tasks brief by sectionUUID");
         List<QuestTaskBrief> questCubes = new ArrayList<QuestTaskBrief>();
         List<Task> tasks = getAllBySectionUUID(sectionUUID);
-
+        tasks.sort(Comparator.comparingInt(Task::getSerialNumber));
         for (Task task : tasks) {
             log.info("Map model task brief");
             QuestTaskBrief questCube = new QuestTaskBrief();
