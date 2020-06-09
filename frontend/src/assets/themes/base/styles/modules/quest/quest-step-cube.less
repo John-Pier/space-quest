@@ -16,6 +16,10 @@
         user-select: none;
         transition: background .5s, color 0.8s ease-out;
 
+        &.highlighted {
+            box-shadow: 0 4px 4px  @primary-light-60;
+        }
+
         &.disabled {
             opacity: 0.4;
             filter: blur(2px);

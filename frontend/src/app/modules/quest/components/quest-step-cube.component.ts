@@ -18,10 +18,13 @@ export class SPQQuestStepCubeComponent {
     public serialNumber: number;
 
     @Input()
-    public isSelected: boolean = false;
+    public selected: boolean = false;
 
     @Input()
     public disabled: boolean = false;
+
+    @Input()
+    public highlighted: boolean = false;
 
     @Input()
     public id: ID;
