@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,7 +22,9 @@ public class TooltipRepositoryService {
 
     public List<Tooltip> getAll() {
         log.info("Get all tooltips");
-        return repository.findAll();
+        List<Tooltip> tooltips = repository.findAll();
+        tooltips.sort(Comparator.comparingInt(Tooltip::getLevel));
+        return tooltips;
     }
 
     Tooltip getByUUID(String tooltipUUID) {

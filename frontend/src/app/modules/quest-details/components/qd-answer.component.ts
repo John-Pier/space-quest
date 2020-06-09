@@ -157,7 +157,7 @@ export class SPQQuestDetailsAnswerComponent implements OnChanges, OnDestroy {
     }
 
     private openHintsDialog(lvl: number): void {
-        this.questDetailsService.getQuestTooltipByLvl(this.questTask.uuid, lvl)
+        this.questDetailsService.getQuestTooltipByLvl(this.questTask.uuid, lvl + 1)
             .pipe(
                 take(1),
                 tap(hints => {
