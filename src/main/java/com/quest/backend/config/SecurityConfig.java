@@ -47,16 +47,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.cors()
                 .and()
-                .csrf()
-                .disable()
+                .csrf().disable()
                 .authorizeRequests()
                 .antMatchers(Constants.API_VERSION + "/authenticate").permitAll()
                 .antMatchers(Constants.API_VERSION + "/registration").permitAll()
                 .antMatchers(Constants.API_VERSION + "/image/**").permitAll()
                 .antMatchers("/resources/**").denyAll()
-                .anyRequest().authenticated()
-                .antMatchers("/test/").hasRole("USER")
-                .antMatchers("/test/admin").hasRole("ADMIN")
+                .antMatchers("/resources/static/**").permitAll()
+                .antMatchers("/index", "/").permitAll()
+                .antMatchers("/main/**").permitAll()
+                .antMatchers("/auth").permitAll()
+                .anyRequest().permitAll()//Разрешает все
+                //.anyRequest().authenticated()
                 .and()
                 // make sure we use stateless session; session won't be used to
                 // store user's state.
