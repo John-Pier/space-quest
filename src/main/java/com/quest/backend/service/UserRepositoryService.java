@@ -1,6 +1,7 @@
 package com.quest.backend.service;
 
 import com.quest.backend.entity.User;
+import com.quest.backend.entity.models.UserProfile;
 import com.quest.backend.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,9 @@ public class UserRepositoryService{
     }
 
     public User getUserByLogin(String login) {
-        return repository.getUserByLogin(login);
+        User user = repository.getUserByLogin(login);
+        System.out.println(user.getLogin());
+        return user;
     }
 
     public List<User> getAll() {
@@ -55,5 +58,24 @@ public class UserRepositoryService{
 
     public String getFirstNameByLogin(String login) {
         return this.getUserByLogin(login).getFirstName();
+    }
+
+    public UserProfile getUserProfileByLogin(String login) {
+        User user = repository.getUserByLogin(login);
+        log.info("Map userProfile model");
+        UserProfile userProfile = new UserProfile();
+        if(user.getAge() == null) {
+            userProfile.setAge(0);
+        }
+        else {
+            userProfile.setAge(user.getAge());
+        }
+        userProfile.setCity(user.getCity());
+        userProfile.setEmail(user.getEmail());
+        userProfile.setCountry(user.getCountry());
+        userProfile.setFirstName(user.getFirstName());
+        userProfile.setSecondName(user.getSecondName());
+        userProfile.setGender(user.getGender());
+        return userProfile;
     }
 }
