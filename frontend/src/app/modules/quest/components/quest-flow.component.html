@@ -3,14 +3,15 @@
         {{values.name}}
     </div>
     <div class="spq-quest-flow__flow">
-        <spq-quest-step-cube *ngFor="let node of values.nodes; trackBy:  _trackCubeById"
-                             class="spq-quest-flow__flow-cube"
+        <spq-quest-step-cube class="spq-quest-flow__flow-cube"
+                             *ngFor="let node of values.nodes; trackBy:  _trackCubeById"
                              [id]="node.id"
                              [title]="node.title"
                              [subtitle]="node.subtitle"
                              [serialNumber]="node.serialNumber"
                              [disabled]="!node.passed && values.currentTaskId !== node.id"
-                             [isSelected]="values.currentTaskId === node.id"
+                             [selected]="values.currentTaskId === node.id"
+                             [highlighted]="node.passed"
                              (onClick)="_navigateToClickedQuestDetails($event)">
         </spq-quest-step-cube>
     </div>

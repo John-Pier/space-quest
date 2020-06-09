@@ -42,13 +42,15 @@ export class SPQCardComponent implements OnInit {
     }
 
     private subscribeToGetTaskBrief(): void {
-        this.service.getTaskBriefById(this.flowBrief.currentTaskId)
-            .pipe(
-                take(1),
-                tap(brief => {
-                    this._currentTaskBrief = brief;
-                })
-            )
-            .subscribe();
+        if (this.flowBrief && this.flowBrief.currentTaskId) {
+            this.service.getTaskBriefById(this.flowBrief.currentTaskId)
+                .pipe(
+                    take(1),
+                    tap(brief => {
+                        this._currentTaskBrief = brief;
+                    })
+                )
+                .subscribe();
+        }
     }
 }

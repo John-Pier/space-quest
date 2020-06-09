@@ -26,6 +26,10 @@
                                matInput>
                         <mat-error *ngIf="_loginForm.invalid">{{getErrorMessage()}}</mat-error>
                     </mat-form-field>
+                    <mat-error class="spq-auth__form-error"
+                               *ngIf="_loginMessage">
+                        {{_loginMessage}}
+                    </mat-error>
                     <button class="spq-auth__form-submit"
                             mat-button
                             color="accent"
@@ -49,10 +53,11 @@
                     </mat-form-field>
                     <mat-form-field appearance="outline">
                         <mat-label>Email</mat-label>
-                        <input type="text"
+                        <input type="email"
                                placeholder="Введите ваш Email"
                                formControlName="email"
                                matInput>
+                        <mat-error *ngIf="_registrationForm.controls.email.invalid">Некорректный Email</mat-error>
                     </mat-form-field>
                     <mat-form-field appearance="outline">
                         <mat-label>Логин</mat-label>
@@ -68,6 +73,10 @@
                                formControlName="password"
                                matInput>
                     </mat-form-field>
+                    <mat-error class="spq-auth__form-error"
+                               *ngIf="_registrationMessage">
+                        {{_registrationMessage}}
+                    </mat-error>
                     <button class="spq-auth__form-submit"
                             mat-button
                             color="accent"

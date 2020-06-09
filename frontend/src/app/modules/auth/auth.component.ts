@@ -1,6 +1,7 @@
-import {ChangeDetectionStrategy, Component, HostBinding, OnInit} from "@angular/core";
+import {Component, HostBinding, OnInit} from "@angular/core";
 import {FormControl, FormGroup, ValidatorFn, Validators} from "@angular/forms";
-import {finalize, tap} from "rxjs/operators";
+import {EMPTY} from "rxjs";
+import {catchError, finalize, tap} from "rxjs/operators";
 import {defaultAbsoluteRoute} from "../../app-routers";
 import {SPQNavigationService} from "../../services/navigation.service";
 import {SPQAuthService} from "./services/auth.service";
@@ -9,7 +10,6 @@ import {SPQAuthService} from "./services/auth.service";
 @Component({
     selector: "spq-auth",
     templateUrl: "auth.component.html",
-    changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         SPQAuthService
     ]
@@ -20,7 +20,11 @@ export class SPQAuthComponent implements OnInit {
 
     public _loginForm: FormGroup;
 
+    public _loginMessage: string = "";
+
     public _registrationForm: FormGroup;
+
+    public _registrationMessage: string = "";
 
     @HostBinding("class.spq-auth")
     private hostClass: boolean = true;
@@ -37,6 +41,7 @@ export class SPQAuthComponent implements OnInit {
 
     public onValidRegisterClick(): void {
         this._loading = true;
+        this._registrationMessage = "";
         this.authService.attemptRegistration({
             login: this._registrationForm.value["login"],
             password: this._registrationForm.value["password"],
@@ -55,6 +60,10 @@ export class SPQAuthComponent implements OnInit {
                         });
                     }
                 ),
+                catchError(err => {
+                    this._registrationMessage = err.error.error;
+                    return EMPTY;
+                }),
                 finalize(() => {
                     this._loading = false;
                 })
@@ -64,11 +73,16 @@ export class SPQAuthComponent implements OnInit {
 
     public onValidLoginClick(): void {
         this._loading = true;
+        this._loginMessage = "";
         this.authService.attemptAuthentication({
             login: this._loginForm.value["login"],
             password: this._loginForm.value["password"],
         })
             .pipe(
+                catchError(err => {
+                    this._loginMessage = err.error.error;
+                    return EMPTY;
+                }),
                 finalize(() => {
                     this._loading = false;
                 })
