@@ -21,13 +21,18 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
 # compiled output
 /dist
 frontend/dist
 frontend/tmp
 frontend/dist/out-tsc
+
 # Only exists if Bazel was run
 frontend/bazel-out
+
+# static BE
+src/main/resources/static
 
 # dependencies
 frontend/node_modules
@@ -67,5 +72,3 @@ frontend/typings
 # System Files
 .DS_Store
 Thumbs.db
-
-/frontend/dist/
