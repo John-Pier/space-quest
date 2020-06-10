@@ -55,9 +55,12 @@ export class SPQNavigationService {
        return this.executeBasedOnHistoryServiceUse(
             () => {
                 if (this.historyService.isHistoryEmpty()) {
+                    console.log("navigateToDefault");
                     return defaultRoute ? this.navigateTo(defaultRoute) : this.navigateToDefault();
                 } else {
-                    return this.navigateWithoutHistory(this.historyService.popRouteFromHistory());
+                    const lt = this.historyService.popRouteFromHistory();
+                    console.log(lt);
+                    return this.navigateWithoutHistory(lt);
                 }
             },
             () => {
