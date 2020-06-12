@@ -1,12 +1,12 @@
 "use strict";
 
-const gulp     = require("gulp"),
-    path       = require("path"),
-    svgmin     = require("gulp-svgmin"),
-    rename     = require("gulp-rename"),
-    inject     = require("gulp-inject"),
+const gulp = require("gulp"),
+    path = require("path"),
+    svgmin = require("gulp-svgmin"),
+    rename = require("gulp-rename"),
+    inject = require("gulp-inject"),
     rev = require("gulp-rev"),
-    svgstore   = require("gulp-svgstore");
+    svgstore = require("gulp-svgstore");
 
 gulp.task("svg", () => {
     let svgs = gulp
@@ -20,14 +20,6 @@ gulp.task("svg", () => {
                         removeTitle: true
                     },
                     {
-                        removeAttrs: {
-                            attrs: "(fill|stroke)"
-                        }
-                    },
-                    {
-                        removeStyleElement: true
-                    },
-                    {
                         cleanupIDs: {
                             prefix: prefix + "-",
                             minify: true
@@ -38,8 +30,6 @@ gulp.task("svg", () => {
         }))
         .pipe(rename({prefix: "icon-"}))
         .pipe(svgstore({inlineSvg: true}));
-
-    console.log(svgs.contents);
 
     function fileContents(filePath, file) {
         return file.contents.toString();

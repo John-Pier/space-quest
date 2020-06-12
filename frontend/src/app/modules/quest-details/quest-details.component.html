@@ -1,0 +1,19 @@
+<div class="spq-quest-details__inner">
+    <div class="spq-quest-details__header">
+        <div class="spq-quest-details__header-caption">
+            {{_questTask?.title}}
+        </div>
+        <div class="spq-quest-details__header-actions">
+            <button mat-stroked-button
+                    (click)="_onBackClick()">
+                Назад
+            </button>
+        </div>
+    </div>
+    <div class="spq-quest-details__wrapper">
+        <spq-qd-question [questTask]="_questTask">
+        </spq-qd-question>
+        <spq-qd-answer [questTask]="_questTask">
+        </spq-qd-answer>
+    </div>
+</div>

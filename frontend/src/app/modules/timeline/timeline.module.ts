@@ -1,12 +1,18 @@
 import {CommonModule} from "@angular/common";
 import {NgModule} from "@angular/core";
+import {FormsModule} from "@angular/forms";
+import {MatButtonModule, MatListModule} from "@angular/material";
+import {MatCardModule} from "@angular/material/card";
+import {MatExpansionModule} from "@angular/material/expansion";
 import {RouterModule, Routes} from "@angular/router";
+import {SQPQuestFlowDataService} from "../../services/data/quest-data-flow.service";
+import {SPQQuestDetailsDataService} from "../../services/data/quest-details-data.service";
+import {SPQCardComponent} from "./components/card.component";
 import {SPQTimelineComponent} from "./timeline.component";
 
 const TimelineRouters: Routes = [
     {
         path: "",
-        pathMatch: "full",
         component: SPQTimelineComponent
     }
 ];
@@ -14,15 +20,24 @@ const TimelineRouters: Routes = [
 @NgModule({
     imports: [
         CommonModule,
-        RouterModule.forChild(TimelineRouters)
+        RouterModule.forChild(TimelineRouters),
+        FormsModule,
+        MatButtonModule,
+        MatCardModule,
+        MatExpansionModule,
+        MatListModule
     ],
     declarations: [
-        SPQTimelineComponent
+        SPQTimelineComponent,
+        SPQCardComponent
     ],
     exports: [
         SPQTimelineComponent
     ],
-    providers: []
+    providers: [
+        SQPQuestFlowDataService,
+        SPQQuestDetailsDataService
+    ]
 })
 export class SPQTimelineModule {
 }

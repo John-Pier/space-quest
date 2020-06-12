@@ -1,28 +1,22 @@
-import {Routes} from "@angular/router";
+import {SPQTypedMap} from "./core/base.types";
 
-export const appRoutes: Routes = [
-    {
-        path: "auth",
-        loadChildren: () => import("./modules/auth/auth.module").then(m => m.SPQAuthModule)
-    },
-    {
-        path: "main",
-        loadChildren: () => import("./modules/main-container/main-container.module").then(m => m.SPQMainContainerModule)
-    },
-    {
-        path: "",
-        pathMatch: "full",
-        redirectTo: "/main"
-    }
-   // { path: 'hero/:id',      component: HeroDetailComponent },
-   //  {
-   //      path: 'heroes',
-   //      component: HeroListComponent,
-   //      data: { title: 'Heroes List' }
-   //  },
-   //  { path: '',
-   //      redirectTo: '/heroes',
-   //      pathMatch: 'full'
-   //  },
-   //  { path: '**', component: PageNotFoundComponent }
-];
+export enum SPQRoutesString {
+    SPQ_MAIN = "main",
+    SPQ_AUTH = "auth",
+    SPQ_TIMELINE = "timeline",
+    SPQ_QUEST = "quest",
+    SPQ_QUEST_STEP = "quest/:id",
+    SPQ_USER_PROFILE = "profile",
+    SPQ_NOT_FOUND = "not-found"
+}
+
+export const SPQRoutesMap: SPQTypedMap<string> = {
+    [SPQRoutesString.SPQ_MAIN]: "/" + SPQRoutesString.SPQ_MAIN,
+    [SPQRoutesString.SPQ_TIMELINE]: "/" + SPQRoutesString.SPQ_MAIN + "/" + SPQRoutesString.SPQ_TIMELINE,
+    [SPQRoutesString.SPQ_USER_PROFILE]: "/" + SPQRoutesString.SPQ_MAIN + "/" + SPQRoutesString.SPQ_USER_PROFILE,
+    [SPQRoutesString.SPQ_QUEST]: "/" + SPQRoutesString.SPQ_MAIN + "/" + SPQRoutesString.SPQ_QUEST,
+    [SPQRoutesString.SPQ_QUEST_STEP]: "/" + SPQRoutesString.SPQ_MAIN + "/" + SPQRoutesString.SPQ_QUEST_STEP,
+    [SPQRoutesString.SPQ_AUTH]: "/" + SPQRoutesString.SPQ_AUTH,
+};
+
+export const defaultAbsoluteRoute = "/" + SPQRoutesString.SPQ_MAIN.toString() + "/" + SPQRoutesString.SPQ_TIMELINE.toString();

@@ -1,0 +1,24 @@
+<div class="spq-quest-step-cube__inner"
+     matRipple
+     [class.disabled]="disabled"
+     [class.selected]="selected"
+     [class.highlighted]="highlighted"
+     (click)="_onStepCubeClick()">
+    <div class="spq-quest-step-cube__text">
+        <div class="spq-quest-step-cube__text-title">
+            {{title}}
+        </div>
+        <div class="spq-quest-step-cube__text-subtitle">
+            {{subtitle}}
+        </div>
+    </div>
+    <div class="spq-quest-step-cube__serial-number">
+        {{serialNumber}}
+    </div>
+</div>
+<div *ngIf="disabled"
+     class="spq-quest-step-cube__lock">
+    <svg width="80px" height="80px">
+        <use xlink:href="#icon-lock"/>
+    </svg>
+</div>

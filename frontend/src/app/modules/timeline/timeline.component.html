@@ -1,3 +1,6 @@
-<div>
-    herhs
+<div class="spq-timeline__inner">
+    <spq-card class="spq-timeline__card"
+              *ngFor="let flowBrief of _questFlowBriefs"
+              [flowBrief]="flowBrief">
+    </spq-card>
 </div>

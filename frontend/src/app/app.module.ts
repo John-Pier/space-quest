@@ -1,8 +1,37 @@
+import {HttpClientModule} from "@angular/common/http";
 import {NgModule} from "@angular/core";
 import {BrowserModule} from "@angular/platform-browser";
-import {RouterModule} from "@angular/router";
-import {appRoutes} from "./app-routers";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {PreloadAllModules, Router, RouterModule, Routes} from "@angular/router";
+import {SPQRoutesString} from "./app-routers";
 import {AppComponent} from "./app.component";
+import {deployAppAPIConfig, SPQ_APP_API_CONFIG} from "./app.config";
+import {SPQAuthGuard} from "./core/security/guards/auth.guard";
+import {SPQSecurityModule} from "./core/security/security.module";
+import {SPQNavigationHistoryService} from "./services/navigation-history.service";
+import {SPQNavigationService} from "./services/navigation.service";
+
+export const spqRoutes: Routes = [
+    {
+        path: SPQRoutesString.SPQ_AUTH,
+        loadChildren: () => import("./modules/auth/auth.module").then(m => m.SPQAuthModule)
+    },
+    {
+        path: SPQRoutesString.SPQ_MAIN,
+        canActivate: [SPQAuthGuard],
+        canActivateChild: [SPQAuthGuard],
+        loadChildren: () => import("./modules/main-container/main-container.module").then(m => m.SPQMainContainerModule)
+    },
+    {
+        path: "",
+        pathMatch: "full",
+        redirectTo: SPQRoutesString.SPQ_MAIN
+    },
+    {
+        path: "**",
+        redirectTo: SPQRoutesString.SPQ_MAIN
+    }
+];
 
 @NgModule({
     declarations: [
@@ -10,9 +39,29 @@ import {AppComponent} from "./app.component";
     ],
     imports: [
         BrowserModule,
-        RouterModule.forRoot(appRoutes)
+        BrowserAnimationsModule,
+        RouterModule.forRoot(spqRoutes, { preloadingStrategy: PreloadAllModules, onSameUrlNavigation: "reload" }),
+        HttpClientModule,
+        SPQSecurityModule.forRoot()
     ],
-    providers: [],
+    providers: [
+        {
+            provide: SPQ_APP_API_CONFIG,
+            // useValue: localAppAPIConfig
+            useValue: deployAppAPIConfig
+        },
+        SPQNavigationHistoryService,
+        {
+            provide:  SPQNavigationService,
+            useClass: SPQNavigationService,
+            deps: [
+                Router,
+                SPQNavigationHistoryService,
+                // Location - use the platform"s history
+            ]
+        }
+
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {}

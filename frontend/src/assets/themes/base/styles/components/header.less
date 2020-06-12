@@ -2,7 +2,58 @@
 
 .spq-header {
     width: 100%;
+    height: var(--spq-heder-height, 45);
     display: flex;
+    flex-flow: row nowrap;
+    user-select: none;
+    background-color: @nav-color;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 
-    background-color: @light;
+    &__inner {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 10px 5px;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        box-shadow: 0 2px 1px -1px @addition-shadow-2, 0 3px 6px 0 @main-shadow, 0 1px 4px 0 @addition-shadow-12;
+    }
+
+    &__main-content {
+        display: flex;
+        justify-content: flex-start;
+        padding: 0 10px 0 10px;
+    }
+
+    &__main-label {
+        display: flex;
+        justify-content: center;
+        padding: 5px;
+        margin: auto 0;
+
+        &-text {
+            font-size: 18px;
+        }
+    }
+
+    &__tabs {
+        padding: 5px;
+        margin: 0 5px;
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+    }
+
+    &__tab {
+        margin: 0 5px;
+    }
+
+    &__right-bar {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: center;
+        padding-left: 10px;
+    }
 }

@@ -1,8 +1,39 @@
 <div class="spq-main-container__inner">
     <div class="spq-main-container__header">
-        <spq-header></spq-header>
+        <spq-header [logoLabel]="'Space Quest'"
+                    [tabTemplate]="tabTemplate"
+                    [rightBarTemplate]="userInfoTemplate"
+                    [models]="_models">
+        </spq-header>
     </div>
     <div class="spq-main-container__wrapper">
-        <router-outlet></router-outlet>
+        <div class="spq-main-container__wrapper-scroll">
+            <router-outlet></router-outlet>
+            <div class="spq-main-container__footer">
+                <div class="spq-main-container__footer-content">
+                    <a href="https://github.com/John-Pier/space-quest">[github.com] Space Quest</a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
+<ng-template #tabTemplate let-model="model">
+    <button mat-button
+            disableRipple="true"
+            (click)="_navigateTo(model.route)">
+        {{model.tabName}}
+    </button>
+</ng-template>
+
+<ng-template #userInfoTemplate>
+    <span class="spq-main-container__header-email"
+          (click)="_onNavigateToUserProfileClick()">
+        {{_username}}
+    </span>
+    <button mat-button
+            disableRipple="true"
+            (click)="_logoutClick()">
+        Выйти
+    </button>
+</ng-template>
