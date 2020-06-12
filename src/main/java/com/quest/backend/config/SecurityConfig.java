@@ -49,25 +49,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers(Constants.API_VERSION + "/authenticate").permitAll()
-                .antMatchers(Constants.API_VERSION + "/registration").permitAll()
-                .antMatchers(Constants.API_VERSION + "/image/**").permitAll()
-                .antMatchers("/resources/static/**").permitAll()
-                .antMatchers("/index", "/").permitAll()
-                .antMatchers("/main/**").permitAll()
-                .antMatchers("/auth").permitAll()
-                .anyRequest().permitAll()
+                .antMatchers(Constants.API_VERSION + "/authenticate",
+                        Constants.API_VERSION + "/registration",
+                        Constants.API_VERSION + "/image/**").permitAll()
+                .antMatchers("/", "/**.**","/auth", "/main/").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-
-//        http.cors().and()
-//                .logout()
-//                .logoutUrl(Constants.API_VERSION + "/logout")
-//                .invalidateHttpSession(true);
-
-        http.cors().and().addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+                .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                .and()
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .logout()
+                .logoutUrl(Constants.API_VERSION + "/logout")
+                .invalidateHttpSession(true)
+                .and()
+                .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
     @Bean
