@@ -28,11 +28,11 @@ export class SPQNavigationService {
     }
 
     public get getCurrentUrl(): string {
-       return this.historyService.lastURL || this.router.url;
+        return this.historyService.lastURL || this.router.url;
     }
 
     public getPreviousUrl(): string {
-       return this.historyService.previousURL || defaultAbsoluteRoute;
+        return this.historyService.previousURL || defaultAbsoluteRoute;
     }
 
     public navigateTo(rote: string): Promise<boolean> {
@@ -52,14 +52,12 @@ export class SPQNavigationService {
     }
 
     public back(defaultRoute?: string): Promise<boolean> | void {
-       return this.executeBasedOnHistoryServiceUse(
+        return this.executeBasedOnHistoryServiceUse(
             () => {
                 if (this.historyService.isHistoryEmpty()) {
-                    console.log("navigateToDefault");
                     return defaultRoute ? this.navigateTo(defaultRoute) : this.navigateToDefault();
                 } else {
                     const lt = this.historyService.popRouteFromHistory();
-                    console.log(lt);
                     return this.navigateWithoutHistory(lt);
                 }
             },
@@ -84,9 +82,9 @@ export class SPQNavigationService {
 
     private executeBasedOnHistoryServiceUse<T = void, V = void>(ifUse: () => T, ifDontUse: () => V): T | V {
         if (this.isHistoryServiceUse) {
-           return ifUse();
+            return ifUse();
         } else {
-          return ifDontUse();
+            return ifDontUse();
         }
     }
 }

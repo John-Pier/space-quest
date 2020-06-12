@@ -1,7 +1,7 @@
 import {Component, HostBinding, OnInit} from "@angular/core";
 import {FormControl, FormGroup, ValidatorFn, Validators} from "@angular/forms";
 import {EMPTY} from "rxjs";
-import {catchError, finalize, tap} from "rxjs/operators";
+import {catchError, finalize, take, tap} from "rxjs/operators";
 import {defaultAbsoluteRoute} from "../../app-routers";
 import {SPQNavigationService} from "../../services/navigation.service";
 import {SPQAuthService} from "./services/auth.service";
@@ -49,6 +49,7 @@ export class SPQAuthComponent implements OnInit {
             firstName: this._registrationForm.value["firstName"],
         })
             .pipe(
+                take(1),
                 tap(
                     (response) => {
                         this.authService.decodeResponseTokenAndSetToStore(response);
@@ -79,6 +80,7 @@ export class SPQAuthComponent implements OnInit {
             password: this._loginForm.value["password"],
         })
             .pipe(
+                take(1),
                 catchError(err => {
                     this._loginMessage = err.error.error;
                     return EMPTY;
@@ -118,6 +120,9 @@ export class SPQAuthComponent implements OnInit {
 
     private subscribeToLogoutIfLogged(): void {
         this.authService.logoutIfLogged()
+            .pipe(
+                take(1),
+            )
             .subscribe();
     }
 
