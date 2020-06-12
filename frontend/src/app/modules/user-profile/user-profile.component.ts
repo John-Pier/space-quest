@@ -29,7 +29,6 @@ export class SPQUserProfileComponent {
             .pipe(
                 tap(user => {
                     this._user = user;
-                    console.log(user);
                 }),
                 finalize(() => {
                     this.loading = false;
