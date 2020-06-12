@@ -6,13 +6,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class ViewsController {
 
-    @RequestMapping({"/", ""})
-    public String index() {
-        return "index";
-    }
+//    @RequestMapping({"/", ""})
+//    public String index() {
+//        return "index";
+//    }
 
-    @RequestMapping({"/main/**" })
+    @RequestMapping({"/main/**", "/**", "/", ""})
     public String toIndex() {
+
         return "forward:/index.html";
     }
 }
