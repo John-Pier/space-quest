@@ -22,6 +22,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ## Build
 `npm run build` - build project
 
+`npm run deploy` - build project and copy dist to BE *resources/static*
+
 `npm run build:server` - static web server watching at ./dist/* folder 
 
 `npm run report` - look at bundle
