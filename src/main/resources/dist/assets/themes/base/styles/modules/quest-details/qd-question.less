@@ -1,0 +1,55 @@
+@import "./../../common/colors.less";
+@import "./../../common/mixins.less";
+
+.spq-qd-question {
+    display: flex;
+    width: 100%;
+
+    &__inner {
+        width: 100%;
+        display: flex;
+        flex-flow: column nowrap;
+        margin: 0 7px;
+    }
+
+    &__content {
+        width: 100%;
+        display: flex;
+        flex-flow: column nowrap;
+        margin: 0 auto;
+        background-color: @main-background-color;
+
+        &-video {
+            width: 100%;
+            min-height: 405px;
+        }
+
+        &-picture {
+            display: flex;
+            max-width: 100%;
+            width: 100%;
+            height: fit-content;
+            image-rendering: crisp-edges;
+            margin: 0 auto;
+        }
+    }
+
+    &__question {
+        .border-bottom-radius(17px);
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 45px;
+        padding: 10px 20px;
+        background-color: @main-background-color;
+
+        &-caption {
+            color: @white;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 15px;
+            text-align: center;
+        }
+    }
+}
