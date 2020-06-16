@@ -2,9 +2,12 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import {localAppAPIConfig} from "../app/app.config";
+
 export const environment = {
-  production: false,
-    hmr: false
+    production: false,
+    hmr: false,
+    config: localAppAPIConfig
 };
 
 /*

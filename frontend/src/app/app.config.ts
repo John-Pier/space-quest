@@ -10,7 +10,7 @@ export type SPQAppAPIConfig = Readonly<{
     API_VERSION: string | number;
 }>;
 
-export const localAppAPIConfig: SPQAppAPIConfig = {
+export const mockAppAPIConfig: SPQAppAPIConfig = {
     PORT: 3000,
     HOST_NAME: location.hostname,
     PROTOCOL: "http",
@@ -18,10 +18,18 @@ export const localAppAPIConfig: SPQAppAPIConfig = {
     API_VERSION: 1.0
 };
 
-export const deployAppAPIConfig: SPQAppAPIConfig = {
+export const localAppAPIConfig: SPQAppAPIConfig = {
     PORT: 8080,
     HOST_NAME: location.hostname,
     PROTOCOL: "http",
+    API_ADDRESS: "/api/v/n/",
+    API_VERSION: 1.0
+};
+
+export const deployAppAPIConfig: SPQAppAPIConfig = {
+    PORT: location.port,
+    HOST_NAME: location.hostname,
+    PROTOCOL: "https",
     API_ADDRESS: "/api/v/n/",
     API_VERSION: 1.0
 };

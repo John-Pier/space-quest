@@ -33,7 +33,11 @@ export class SPQDataService {
     }
 
     protected getAbsoluteAddress(): string {
-        return `${this.config.PROTOCOL}://${this.config.HOST_NAME}:${this.config.PORT}${this.config.API_ADDRESS}${this.config.API_VERSION}/`;
+        return `${this.config.PROTOCOL}://
+        ${this.config.HOST_NAME}:
+        ${this.config.PORT}
+        ${this.config.API_ADDRESS}
+        ${this.config.API_VERSION}/`;
     }
 
     private makeURL(address: string): string {
