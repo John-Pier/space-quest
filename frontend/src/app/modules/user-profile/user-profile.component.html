@@ -1,9 +1,16 @@
 <div class="spq-user-profile__inner">
     <spq-page-header [pageTitle]="'Профиль'"></spq-page-header>
     <div class="spq-user-profile__content">
-        <span>User Profile</span>
-        <br>
-        Not Implemented
+        <div class="spq-user-profile__content-image">
+            +
+        </div>
+        <div class="spq-user-profile__profile">
+            <div class="spq-user-profile__profile-content">
+                <p>{{_user?.firstName}}</p>
+                <p>{{_user?.email}}</p>
+                <p>{{_user?.login}}</p>
+            </div>
+        </div>
     </div>
 </div>
 
