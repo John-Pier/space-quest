@@ -24,11 +24,11 @@ export class SPQMainContainerComponent implements OnInit {
     public ngOnInit(): void {
         this._models = [
             {
-                tabName: "Main",
+                tabName: "Главная",
                 route: SPQRoutesMap[SPQRoutesString.SPQ_TIMELINE],
             },
             {
-                tabName: "Quest",
+                tabName: "Квесты",
                 route: SPQRoutesMap[SPQRoutesString.SPQ_QUEST],
             }
         ];

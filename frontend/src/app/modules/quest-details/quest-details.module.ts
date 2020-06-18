@@ -3,6 +3,7 @@ import {NgModule, Type} from "@angular/core";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatButtonModule, MatDialogModule, MatInputModule, MatTabsModule, MatTooltipModule} from "@angular/material";
 import {RouterModule, Routes} from "@angular/router";
+import {SPQPageHeaderModule} from "../../components/page-header/page-header.module";
 import {SPQQuestDetailsDataService} from "../../services/data/quest-details-data.service";
 import {SPQFinishActionPopupComponent} from "./components/embed/finish-action-popup.component";
 import {SPQHintPopupComponent} from "./components/embed/hint-popup.component";
@@ -30,12 +31,17 @@ const matModules: Array<Type<any>> = [
     MatTooltipModule
 ];
 
+const spqModules: Array<Type<any>> = [
+    SPQPageHeaderModule
+];
+
 @NgModule({
     imports: [
         CommonModule,
         RouterModule.forChild(QuestDetailsRoutes),
         ReactiveFormsModule,
-        ...matModules
+        ...matModules,
+        ...spqModules
     ],
     declarations: [
         SPQQuestDetailsComponent,
