@@ -1,14 +1,41 @@
 <div class="spq-user-profile__inner">
     <spq-page-header [pageTitle]="'Профиль'"></spq-page-header>
     <div class="spq-user-profile__content">
-        <div class="spq-user-profile__content-image">
+        <div class="spq-user-profile__content-image"
+             (click)="_onChangeProfileImageClick()">
             +
         </div>
         <div class="spq-user-profile__profile">
             <div class="spq-user-profile__profile-content">
-                <p>{{_user?.firstName}}</p>
-                <p>{{_user?.email}}</p>
-                <p>{{_user?.login}}</p>
+                <span class="_name">
+                    {{_user?.firstName}}
+                </span>
+                <span class="_email">{{_user?.email}}</span>
+                <span [class.hidden]="!_user?.login">{{_user?.login}}</span>
+                <div class="spq-user-profile__profile-form">
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            Дополнительная информация о Вас
+                            <svg class="spq-user-profile__profile-edit-icon"
+                                 (click)="_onChangeProfileInfoClick()">
+                                <use xlink:href="#icon-pencil"/>
+                            </svg>
+                        </mat-expansion-panel-header>
+                        <p>Тут пусто</p>
+                        <mat-action-row>
+                            <button mat-button>Сохранить</button>
+                        </mat-action-row>
+                    </mat-expansion-panel>
+                </div>
+                <span>Есть вопросы или пожелания ?</span>
+                <div class="spq-user-profile__action-email">
+                    <button
+                        mat-raised-button
+                        color="primary"
+                        (click)="_onNavigateToEmailClick()">
+                        Напишите нам
+                    </button>
+                </div>
             </div>
         </div>
     </div>

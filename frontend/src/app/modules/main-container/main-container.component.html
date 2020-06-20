@@ -11,7 +11,7 @@
             <router-outlet></router-outlet>
             <div class="spq-main-container__footer">
                 <div class="spq-main-container__footer-content">
-                    <a href="https://github.com/John-Pier/space-quest">[github.com] Space Quest</a>
+                    <a href="{{_contactsDataConfig.repoLink}}">{{_contactsDataConfig.repoText}}</a>
                 </div>
             </div>
         </div>
@@ -34,6 +34,8 @@
     <button mat-button
             disableRipple="true"
             (click)="_logoutClick()">
-        Выйти
+        <svg width="20px" height="20px">
+            <use xlink:href="#icon-exit"/>
+        </svg>
     </button>
 </ng-template>

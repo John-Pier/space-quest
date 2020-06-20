@@ -1,4 +1,5 @@
 @import "./../../common/colors.less";
+@import "change-pi.less";
 
 .spq-user-profile {
     display: flex;
@@ -26,7 +27,7 @@
             width: 120px;
             height: 120px;
             border-radius: 50%;
-            background-color: @primary-light-60;
+            background-color: @primary-light-20;
             border: 5px solid @main-background-color-10;
             box-shadow: 0 -4px 4px @addition-shadow-26;
             margin: 50px 0 -35px;
@@ -34,6 +35,12 @@
             font-weight: bold;
             font-size: 20px;
             color: @white;
+            transition: transform .4s, background-color .4s ease-in-out;
+
+            &:hover {
+                transform: scale(1.1);
+                background-color: @primary-light-60;
+            }
         }
     }
 
@@ -52,6 +59,45 @@
             background-color: @main-background-color-10;
             box-shadow: 0 -4px 10px @addition-shadow-2;
             border-radius: 15px 15px 0 0;
+            line-height: 22px;
+            text-align: center;
+
+            ._name {
+                color: @white;
+                font-size: 26px;
+                padding: 10px;
+            }
+
+            ._email {
+                font-size: 18px;
+            }
+        }
+
+        &-edit-icon {
+            width: 20px;
+            height: 20px;
+            margin-left: 20px;
+            z-index: 10;
+            transition: transform .4s ease-in-out;
+
+            &:hover {
+                transform: scale(1.1);
+            }
+        }
+
+        &-form {
+            padding: 20px 0;
+            width: 100%;
+
+            .mat-content {
+                overflow: visible;
+            }
+        }
+    }
+
+    &__action {
+        &-email {
+            margin: 10px;
         }
     }
 }
