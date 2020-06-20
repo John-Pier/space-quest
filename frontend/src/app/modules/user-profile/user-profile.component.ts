@@ -1,6 +1,9 @@
-import {Component, HostBinding} from "@angular/core";
+import {Component, HostBinding, Inject} from "@angular/core";
+import {MatBottomSheet} from "@angular/material";
 import {finalize, tap} from "rxjs/operators";
+import {SPQ_CONTACTS_DATA_CONFIG, SPQContactsDataConfig} from "../../app.config";
 import {SPQUserModel} from "../../core/models/user.model";
+import {SPQChangePIComponent} from "./components/embed/change-profile-image.component";
 import {SPQUserService} from "./services/user.service";
 
 @Component({
@@ -19,8 +22,22 @@ export class SPQUserProfileComponent {
     @HostBinding("class.spq-user-profile")
     private hostClass: boolean = true;
 
-    constructor(private service: SPQUserService) {
+    constructor(private service: SPQUserService,
+                @Inject(SPQ_CONTACTS_DATA_CONFIG) private contactsDataConfig: SPQContactsDataConfig,
+                private bottomSheetService: MatBottomSheet) {
         this.subscribeToGetUser();
+    }
+
+    public _onChangeProfileImageClick(): void {
+        this.bottomSheetService.open(SPQChangePIComponent);
+    }
+
+    public _onChangeProfileInfoClick(): void {
+        //
+    }
+
+    public _onNavigateToEmailClick(): void {
+        location.href = "mailto:" + this.contactsDataConfig.adminEmail;
     }
 
     private subscribeToGetUser(): void {

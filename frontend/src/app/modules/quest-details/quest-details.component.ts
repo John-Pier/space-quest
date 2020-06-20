@@ -18,16 +18,11 @@ export class SPQQuestDetailsComponent implements OnInit {
     @HostBinding("class.spq-quest-details")
     private hostClass: boolean = true;
 
-    constructor(private route: ActivatedRoute,
-                private navigationService: SPQQuestDetailsNavigationService) {
+    constructor(private route: ActivatedRoute) {
         this.subscribeToGetQuestTask();
     }
 
     public ngOnInit() {}
-
-    public _onBackClick(): void {
-        this.navigationService.back();
-    }
 
     private subscribeToGetQuestTask(): void {
         this.route.data

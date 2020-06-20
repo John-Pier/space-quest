@@ -78,7 +78,6 @@
         "no-input-rename": true,
         "no-inputs-metadata-property": true,
         "no-output-native": true,
-        "no-output-on-prefix": true,
         "no-output-rename": true,
         "no-outputs-metadata-property": true,
         "template-banana-in-box": true,
@@ -94,7 +93,8 @@
         "no-trailing-whitespace": false,
         "jsdoc-format": false,
         "object-literal-shorthand": false,
-        "no-shadowed-variable": false
+        "no-shadowed-variable": false,
+        "no-output-on-prefix": false
     },
     "rulesDirectory": [
         "codelyzer"

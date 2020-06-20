@@ -1,6 +1,7 @@
 import {InjectionToken} from "@angular/core";
 
 export const SPQ_APP_API_CONFIG: InjectionToken<SPQAppAPIConfig> = new InjectionToken<SPQAppAPIConfig>("SPQ_APP_API_CONFIG");
+export const SPQ_CONTACTS_DATA_CONFIG: InjectionToken<SPQContactsDataConfig> = new InjectionToken<SPQContactsDataConfig>("SPQ_CONTACTS_DATA_CONFIG");
 
 export type SPQAppAPIConfig = Readonly<{
     PORT: string | number;
@@ -8,6 +9,12 @@ export type SPQAppAPIConfig = Readonly<{
     PROTOCOL: string;
     API_ADDRESS: string;
     API_VERSION: string | number;
+}>;
+
+export type SPQContactsDataConfig = Readonly<{
+    adminEmail: string;
+    repoLink: string;
+    repoText: string;
 }>;
 
 export const mockAppAPIConfig: SPQAppAPIConfig = {
@@ -32,4 +39,10 @@ export const deployAppAPIConfig: SPQAppAPIConfig = {
     PROTOCOL: location.protocol,
     API_ADDRESS: "/api/v/n/",
     API_VERSION: 1.0
+};
+
+export const contactsDataConfig = {
+    adminEmail: "quest.super.user@gmail.com",
+    repoLink: "https://github.com/John-Pier/space-quest",
+    repoText: "[github.com] Space Quest"
 };

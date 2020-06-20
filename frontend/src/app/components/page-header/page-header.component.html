@@ -1,0 +1,14 @@
+<div class="spq-page-header__inner">
+    <div class="spq-page-header__header">
+        <div class="spq-page-header__header-caption">
+            {{pageTitle}}
+        </div>
+        <div class="spq-page-header__header-actions">
+            <ng-content></ng-content>
+            <button mat-stroked-button
+                    (click)="_onBackClick()">
+                Назад
+            </button>
+        </div>
+    </div>
+</div>

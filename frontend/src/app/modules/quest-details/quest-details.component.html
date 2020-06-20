@@ -1,15 +1,5 @@
 <div class="spq-quest-details__inner">
-    <div class="spq-quest-details__header">
-        <div class="spq-quest-details__header-caption">
-            {{_questTask?.title}}
-        </div>
-        <div class="spq-quest-details__header-actions">
-            <button mat-stroked-button
-                    (click)="_onBackClick()">
-                Назад
-            </button>
-        </div>
-    </div>
+    <spq-page-header [pageTitle]="_questTask?.title"></spq-page-header>
     <div class="spq-quest-details__wrapper">
         <spq-qd-question [questTask]="_questTask">
         </spq-qd-question>
