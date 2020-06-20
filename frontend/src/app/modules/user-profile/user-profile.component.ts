@@ -37,7 +37,7 @@ export class SPQUserProfileComponent {
     }
 
     public _onNavigateToEmailClick(): void {
-        location.href = "mailto:" + this.contactsDataConfig.adminEmail;
+        window.open("mailto:" + this.contactsDataConfig.adminEmail, "_blank");
     }
 
     private subscribeToGetUser(): void {
