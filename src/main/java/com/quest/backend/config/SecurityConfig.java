@@ -27,14 +27,18 @@ import java.util.Arrays;
 @EnableGlobalMethodSecurity(securedEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+
+    private final UserDetailsServiceImpl userDetailsService;
+
+    private final JwtRequestFilter jwtRequestFilter;
 
     @Autowired
-    private UserDetailsServiceImpl userDetailsService;
-
-    @Autowired
-    private JwtRequestFilter jwtRequestFilter;
+    public SecurityConfig(JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint, UserDetailsServiceImpl userDetailsService, JwtRequestFilter jwtRequestFilter) {
+        this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
+        this.userDetailsService = userDetailsService;
+        this.jwtRequestFilter = jwtRequestFilter;
+    }
 
     @Autowired
     public void registerGlobalAuthentication(AuthenticationManagerBuilder auth) throws Exception {
@@ -49,43 +53,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers(Constants.API_VERSION + "/authenticate").permitAll()
-                .antMatchers(Constants.API_VERSION + "/registration").permitAll()
-                .antMatchers(Constants.API_VERSION + "/image/**").permitAll()
-                .antMatchers("/resources/**").denyAll()
-                .antMatchers("/resources/static/**").permitAll()
-                .antMatchers("/index", "/").permitAll()
-                .antMatchers("/main/**").permitAll()
-                .antMatchers("/auth").permitAll()
-                .anyRequest().permitAll()//Разрешает все
-                //.anyRequest().authenticated()
+                .antMatchers(Constants.API_VERSION + "/authenticate",
+                        Constants.API_VERSION + "/registration",
+                        Constants.API_VERSION + "/image/**").permitAll()
+                .antMatchers("/", "/**.**","/**.css","/auth", "/main/**","/main","/assets/themes/base/**").permitAll()
+                .anyRequest().authenticated()
                 .and()
-                // make sure we use stateless session; session won't be used to
-                // store user's state.
-                .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-
-
-       /* http.cors()
-                .and().logout()
-                // разрешаем делать логаут всем
-                .permitAll()
-                // указываем URL логаута
-                .logoutUrl("/api/v/n/1/logout")
-                // указываем URL при удачном логауте
-                //.logoutSuccessUrl("/login?logout")
-                // делаем не валидной текущую сессию
-                .invalidateHttpSession(true);
-        /*http.antMatcher("/test/**")
-                .authorizeRequests()
-                //.antMatchers("/test").hasRole("BAR")
-                .and().authenticated();*/
-
-        http.cors().and().addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+                .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                .and()
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .logout()
+                .logoutUrl(Constants.API_VERSION + "/logout")
+                .invalidateHttpSession(true)
+                .and()
+                .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
     @Bean
-    public PasswordEncoder getBCryptPasswordEncoder(){
+    public PasswordEncoder getBCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
@@ -93,9 +80,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.addAllowedOrigin("*");
-        configuration.setAllowedMethods(Arrays.asList("GET","POST", "PUT"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT"));
         configuration.setAllowCredentials(true);
-        configuration.setAllowedHeaders(Arrays.asList("Access-Control-Allow-Headers","Access-Control-Allow-Origin","Access-Control-Request-Method", "Access-Control-Request-Headers","Origin","Cache-Control", "Content-Type", "Authorization"));
+        configuration.setAllowedHeaders(Arrays.asList("Access-Control-Allow-Headers", "Access-Control-Allow-Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", "Origin", "Cache-Control", "Content-Type", "Authorization"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;

@@ -1,4 +1,7 @@
+import {localAppAPIConfig} from "../app/app.config";
+
 export const environment = {
     production: false,
-    hmr: true
+    hmr: true,
+    config: localAppAPIConfig
 };

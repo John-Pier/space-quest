@@ -1,5 +1,6 @@
 import {Injectable} from "@angular/core";
 import {Observable, of} from "rxjs";
+import {tap} from "rxjs/operators";
 import {SPADecodedResponseModel, SPAEncodedResponse} from "../../../core/security/types/response.type";
 import {SPQAuthDataService} from "../../../services/data/auth-data.service";
 import {SPQStorageService} from "../../../services/storage.service";
@@ -23,8 +24,10 @@ export class SPQAuthService {
 
     public logoutIfLogged(): Observable<void> {
         if (this.storageService.isLoggedIn()) {
-            this.storageService.goOut();
-            return this.dataService.logout();
+            return this.dataService.logout()
+                .pipe(
+                    tap(() => this.storageService.goOut())
+                );
         }
         return of(this.storageService.goOut());
     }
