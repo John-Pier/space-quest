@@ -47,6 +47,14 @@
         <span>Профиль</span>
     </button>
     <button mat-menu-item
+            disabled>
+        <svg class="_menu-icon"
+             width="20px" height="20px" fill="white">
+            <use xlink:href="#icon-info"/>
+        </svg>
+        <span>О приложении</span>
+    </button>
+    <button mat-menu-item
             (click)="_logoutClick()">
         <svg class="_menu-icon"
              width="20px" height="20px" fill="white">
