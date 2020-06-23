@@ -7,6 +7,7 @@ import {environment} from "../environments/environment";
 import {SPQRoutesString} from "./app-routers";
 import {AppComponent} from "./app.component";
 import {contactsDataConfig, SPQ_APP_API_CONFIG, SPQ_CONTACTS_DATA_CONFIG} from "./app.config";
+import {SPQLoaderModule} from "./components/loader/loader.module";
 import {SPQAuthGuard} from "./core/security/guards/auth.guard";
 import {SPQSecurityModule} from "./core/security/security.module";
 import {SPQNavigationHistoryService} from "./services/navigation-history.service";
@@ -43,7 +44,8 @@ export const spqRoutes: Routes = [
         BrowserAnimationsModule,
         RouterModule.forRoot(spqRoutes, { preloadingStrategy: PreloadAllModules, onSameUrlNavigation: "reload" }),
         HttpClientModule,
-        SPQSecurityModule.forRoot()
+        SPQSecurityModule.forRoot(),
+        SPQLoaderModule
     ],
     providers: [
         {

@@ -1,4 +1,5 @@
-<div class="spq-main-container__inner">
+<div class="spq-main-container__inner"
+     [@flashAnimations]>
     <div class="spq-main-container__header">
         <spq-header [logoLabel]="'Space Quest'"
                     [tabTemplate]="tabTemplate"
@@ -27,15 +28,39 @@
 </ng-template>
 
 <ng-template #userInfoTemplate>
-    <span class="spq-main-container__header-email"
-          (click)="_onNavigateToUserProfileClick()">
+    <span class="spq-main-container__header-email">
         {{_username}}
     </span>
-    <button mat-button
-            disableRipple="true"
-            (click)="_logoutClick()">
-        <svg width="20px" height="20px">
-            <use xlink:href="#icon-exit"/>
-        </svg>
+    <button mat-icon-button
+            aria-label="Меню"
+            [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
     </button>
 </ng-template>
+
+<mat-menu #menu="matMenu">
+    <button mat-menu-item
+            (click)="_onNavigateToUserProfileClick()">
+        <svg class="_menu-icon"
+             width="20px" height="20px">
+            <use xlink:href="#icon-person"/>
+        </svg>
+        <span>Профиль</span>
+    </button>
+    <button mat-menu-item
+            disabled>
+        <svg class="_menu-icon"
+             width="20px" height="20px" fill="white">
+            <use xlink:href="#icon-info"/>
+        </svg>
+        <span>О приложении</span>
+    </button>
+    <button mat-menu-item
+            (click)="_logoutClick()">
+        <svg class="_menu-icon"
+             width="20px" height="20px" fill="white">
+            <use xlink:href="#icon-exit"/>
+        </svg>
+        <span>Выйти</span>
+    </button>
+</mat-menu>

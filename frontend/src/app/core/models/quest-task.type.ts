@@ -7,7 +7,9 @@ export type SPQQuestTask = Readonly<{
     subtitle: string,
     url: string,
     text: string,
-    serialNumber: number
+    serialNumber: number,
+    passed: boolean,
+    selected: boolean
 }>;
 
 export type SPQQuestTaskBrief = Readonly<{

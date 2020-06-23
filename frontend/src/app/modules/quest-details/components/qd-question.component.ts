@@ -1,5 +1,6 @@
 import {Component, HostBinding, Input, OnChanges, SimpleChanges} from "@angular/core";
 import {SafeUrl} from "@angular/platform-browser";
+import {flashAnimations} from "../../../core/core.animations";
 import {SPQQuestTask} from "../../../core/models/quest-task.type";
 import {SPQQuestDetailsService} from "../services/quest-details.service";
 
@@ -12,6 +13,9 @@ export enum SPQQuestTaskUrlType {
 @Component({
     selector: "spq-qd-question",
     templateUrl: "qd-question.component.html",
+    animations: [
+        flashAnimations
+    ]
 })
 export class SPQQuestDetailsQuestionComponent implements OnChanges {
 

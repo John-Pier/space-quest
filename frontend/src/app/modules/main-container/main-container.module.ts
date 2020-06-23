@@ -1,5 +1,6 @@
 import {CommonModule} from "@angular/common";
 import {NgModule, Type} from "@angular/core";
+import {MatIconModule, MatMenuModule} from "@angular/material";
 import {MatButtonModule} from "@angular/material/button";
 import {RouterModule, Routes} from "@angular/router";
 import {SPQHeaderModule} from "../../components/header/header.module";
@@ -20,12 +21,18 @@ const spqModules: Type<any>[] = [
     SPQNotFoundModule
 ];
 
+const matModules: Type<any>[] = [
+    MatButtonModule,
+    MatMenuModule,
+    MatIconModule
+];
+
 @NgModule({
     imports: [
         CommonModule,
         RouterModule.forChild(SPQMainContainerRoutes),
         ...spqModules,
-        MatButtonModule
+        ...matModules
     ],
     declarations: [
         SPQMainContainerComponent

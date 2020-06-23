@@ -2,12 +2,16 @@ import {Component, HostBinding, Inject, OnInit} from "@angular/core";
 import {SPQRoutesMap, SPQRoutesString} from "../../app-routers";
 import {SPQ_CONTACTS_DATA_CONFIG, SPQContactsDataConfig} from "../../app.config";
 import {SPQTabsModel} from "../../components/header/model/tabs.type";
+import {flashAnimations} from "../../core/core.animations";
 import {SPQNavigationService} from "../../services/navigation.service";
 import {SPQStorageService} from "../../services/storage.service";
 
 @Component({
     selector: "spq-main-container",
     templateUrl: "main-container.component.html",
+    animations: [
+        flashAnimations
+    ]
 })
 export class SPQMainContainerComponent implements OnInit {
 
