@@ -1,10 +1,14 @@
 import {ChangeDetectionStrategy, Component, HostBinding, OnDestroy} from "@angular/core";
+import {flashAnimations} from "../../core/core.animations";
 import {SPQLoaderService} from "./services/loader.service";
 
 @Component({
     selector: "spq-loader",
     templateUrl: "loader.component.html",
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    animations: [
+        flashAnimations
+    ]
 })
 export class SPQLoaderComponent implements OnDestroy {
 

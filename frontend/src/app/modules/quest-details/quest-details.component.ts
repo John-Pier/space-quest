@@ -1,6 +1,7 @@
 import {Component, HostBinding, OnInit} from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
 import {map, tap} from "rxjs/operators";
+import {routerAnimations} from "../../core/core.animations";
 import {SPQQuestTask} from "../../core/models/quest-task.type";
 import {SPQQuestDetailsNavigationService} from "./services/qd-navigation-helper.service";
 
@@ -9,6 +10,9 @@ import {SPQQuestDetailsNavigationService} from "./services/qd-navigation-helper.
     templateUrl: "quest-details.component.html",
     providers: [
         SPQQuestDetailsNavigationService
+    ],
+    animations: [
+        routerAnimations
     ]
 })
 export class SPQQuestDetailsComponent implements OnInit {

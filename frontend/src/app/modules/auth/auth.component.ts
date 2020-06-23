@@ -3,6 +3,7 @@ import {FormControl, FormGroup, ValidatorFn, Validators} from "@angular/forms";
 import {EMPTY} from "rxjs";
 import {catchError, finalize, take, tap} from "rxjs/operators";
 import {defaultAbsoluteRoute} from "../../app-routers";
+import {flashAnimations} from "../../core/core.animations";
 import {SPQNavigationService} from "../../services/navigation.service";
 import {SPQAuthService} from "./services/auth.service";
 
@@ -12,6 +13,9 @@ import {SPQAuthService} from "./services/auth.service";
     templateUrl: "auth.component.html",
     providers: [
         SPQAuthService
+    ],
+    animations: [
+        flashAnimations
     ]
 })
 export class SPQAuthComponent implements OnInit {

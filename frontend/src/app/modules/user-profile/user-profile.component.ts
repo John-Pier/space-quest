@@ -3,6 +3,7 @@ import {MatBottomSheet} from "@angular/material";
 import {finalize, take, tap} from "rxjs/operators";
 import {SPQ_CONTACTS_DATA_CONFIG, SPQContactsDataConfig} from "../../app.config";
 import {SPQLoaderService} from "../../components/loader/services/loader.service";
+import {routerAnimations} from "../../core/core.animations";
 import {SPQUserModel} from "../../core/models/user.model";
 import {SPQChangePIComponent} from "./components/embed/change-profile-image.component";
 import {SPQUserService} from "./services/user.service";
@@ -12,6 +13,9 @@ import {SPQUserService} from "./services/user.service";
     templateUrl: "user-profile.component.html",
     providers: [
         SPQUserService
+    ],
+    animations: [
+        routerAnimations
     ]
 })
 export class SPQUserProfileComponent {

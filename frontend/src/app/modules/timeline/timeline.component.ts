@@ -1,6 +1,7 @@
 import {Component, HostBinding, OnInit} from "@angular/core";
 import {finalize, tap} from "rxjs/operators";
 import {SPQLoaderService} from "../../components/loader/services/loader.service";
+import {routerAnimations} from "../../core/core.animations";
 import {SPQQuestFlowBrief} from "../../core/models/quest-task.type";
 import {SPQTimelineService} from "./services/timeline.service";
 
@@ -9,6 +10,9 @@ import {SPQTimelineService} from "./services/timeline.service";
     templateUrl: "timeline.component.html",
     providers: [
         SPQTimelineService
+    ],
+    animations: [
+        routerAnimations
     ]
 })
 export class SPQTimelineComponent implements OnInit {

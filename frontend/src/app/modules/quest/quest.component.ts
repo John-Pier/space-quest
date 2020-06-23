@@ -2,12 +2,16 @@ import {Component, HostBinding, OnDestroy, OnInit} from "@angular/core";
 import {Subscription} from "rxjs";
 import {finalize, tap} from "rxjs/operators";
 import {SPQLoaderService} from "../../components/loader/services/loader.service";
+import {routerAnimations} from "../../core/core.animations";
 import {SPQQuestFlow} from "../../core/models/quest-task.type";
 import {SQPQuestFlowService} from "./services/quest-flow.service";
 
 @Component({
     selector: "spq-quest",
     templateUrl: "quest.component.html",
+    animations: [
+        routerAnimations
+    ]
 })
 export class SPQQuesComponent implements OnInit, OnDestroy {
 

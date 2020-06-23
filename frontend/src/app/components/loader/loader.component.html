@@ -1,4 +1,5 @@
 <div class="spq-loader__inner"
-     *ngIf="loaderService.loading$| async">
+     *ngIf="loaderService.loading$| async"
+     [@flashAnimations]>
     <mat-spinner></mat-spinner>
 </div>
