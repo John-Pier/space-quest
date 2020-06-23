@@ -19,12 +19,12 @@ export const flashAnimations = trigger("flashAnimations", [
         style({
             opacity: "0.1",
         }),
-        animate("0.3s ease-in", style({
+        animate("0.3s ease-out", style({
             opacity: "1"
         }))
     ]),
     transition(":leave", [
-        animate("0.3s ease-out", style({
+        animate("0.3s ease-in", style({
             opacity: "0.1",
         }))
     ]),
