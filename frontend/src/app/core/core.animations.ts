@@ -3,13 +3,14 @@ import {animate, style, transition, trigger} from "@angular/animations";
 export const routerAnimations = trigger("routerAnimations", [
     transition(":enter", [
         style({
-            transform: "scale(0.1)",
-            opacity: "0.1",
+            transform: "matrix(1, 0, 0.05, 1, -50, -100)",
+            opacity: "0",
         }),
-        animate("0.4s ease-in", style({
-            transform: "scale(1)",
-            opacity: "1"
-        }))
+        animate("0.4s ease-out", style({
+                transform: "matrix(1, 0, 0, 1, 0, 0)",
+                opacity: "1",
+            })
+        ),
     ]),
 ]);
 
