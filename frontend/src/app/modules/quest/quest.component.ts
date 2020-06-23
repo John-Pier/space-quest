@@ -1,6 +1,7 @@
 import {Component, HostBinding, OnDestroy, OnInit} from "@angular/core";
 import {Subscription} from "rxjs";
-import {tap} from "rxjs/operators";
+import {finalize, tap} from "rxjs/operators";
+import {SPQLoaderService} from "../../components/loader/services/loader.service";
 import {SPQQuestFlow} from "../../core/models/quest-task.type";
 import {SQPQuestFlowService} from "./services/quest-flow.service";
 
@@ -17,7 +18,8 @@ export class SPQQuesComponent implements OnInit, OnDestroy {
     @HostBinding("class.spq-quest")
     private hostClass: boolean = true;
 
-    constructor(private service: SQPQuestFlowService) {
+    constructor(private service: SQPQuestFlowService,
+                private loaderService: SPQLoaderService) {
     }
 
     public ngOnInit(): void {
@@ -29,14 +31,16 @@ export class SPQQuesComponent implements OnInit, OnDestroy {
     }
 
     private subscribeToGetQuestFlow(): void {
+        this.loaderService.setLoading(true);
         this.subscriptions.push(
             this.service.getAllQuestFlow()
-            .pipe(
-                tap(flow => {
-                    this._questFlows = flow;
-                })
-            )
-            .subscribe()
+                .pipe(
+                    tap(flow => {
+                        this._questFlows = flow;
+                    }),
+                    finalize(() => this.loaderService.setLoading(false))
+                )
+                .subscribe()
         );
     }
 }

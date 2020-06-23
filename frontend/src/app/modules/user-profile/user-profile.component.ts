@@ -1,7 +1,8 @@
 import {Component, HostBinding, Inject} from "@angular/core";
 import {MatBottomSheet} from "@angular/material";
-import {finalize, tap} from "rxjs/operators";
+import {finalize, take, tap} from "rxjs/operators";
 import {SPQ_CONTACTS_DATA_CONFIG, SPQContactsDataConfig} from "../../app.config";
+import {SPQLoaderService} from "../../components/loader/services/loader.service";
 import {SPQUserModel} from "../../core/models/user.model";
 import {SPQChangePIComponent} from "./components/embed/change-profile-image.component";
 import {SPQUserService} from "./services/user.service";
@@ -17,13 +18,12 @@ export class SPQUserProfileComponent {
 
     public _user: SPQUserModel;
 
-    private loading: boolean = false;
-
     @HostBinding("class.spq-user-profile")
     private hostClass: boolean = true;
 
     constructor(private service: SPQUserService,
                 @Inject(SPQ_CONTACTS_DATA_CONFIG) private contactsDataConfig: SPQContactsDataConfig,
+                private loaderService: SPQLoaderService,
                 private bottomSheetService: MatBottomSheet) {
         this.subscribeToGetUser();
     }
@@ -41,15 +41,14 @@ export class SPQUserProfileComponent {
     }
 
     private subscribeToGetUser(): void {
-        this.loading = true;
+        this.loaderService.setLoading(true);
         this.service.getUser()
             .pipe(
+                take(1),
                 tap(user => {
                     this._user = user;
                 }),
-                finalize(() => {
-                    this.loading = false;
-                })
+                finalize(() => this.loaderService.setLoading(false))
             )
             .subscribe();
     }

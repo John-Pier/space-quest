@@ -1,7 +1,8 @@
 import {Component, HostBinding, OnInit} from "@angular/core";
-import {tap} from "rxjs/operators";
+import {finalize, tap} from "rxjs/operators";
+import {SPQLoaderService} from "../../components/loader/services/loader.service";
 import {SPQQuestFlowBrief} from "../../core/models/quest-task.type";
-import {SPQTimelineService} from "./sevrvices/timeline.service";
+import {SPQTimelineService} from "./services/timeline.service";
 
 @Component({
     selector: "spq-timeline",
@@ -17,7 +18,8 @@ export class SPQTimelineComponent implements OnInit {
     @HostBinding("class.spq-timeline")
     private hostClass: boolean = true;
 
-    constructor(private service: SPQTimelineService) {
+    constructor(private service: SPQTimelineService,
+                private loaderService: SPQLoaderService) {
     }
 
     public ngOnInit(): void {
@@ -25,11 +27,13 @@ export class SPQTimelineComponent implements OnInit {
     }
 
     private subscribeToGetAllQuestFlowBriefs(): void {
+        this.loaderService.setLoading(true);
         this.service.getAllQuestFlowBriefs()
             .pipe(
                 tap(briefs => {
                     this._questFlowBriefs = briefs;
-                })
+                }),
+                finalize(() => this.loaderService.setLoading(false))
             )
             .subscribe();
     }
