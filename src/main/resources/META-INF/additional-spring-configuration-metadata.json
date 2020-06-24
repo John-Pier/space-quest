@@ -4,5 +4,11 @@
       "name": "jwt.get.token.uri",
       "type": "java.lang.String",
       "description": "Description for jwt.get.token.uri."
-  }
-] }
+    },
+    {
+      "name": "jwt.secret",
+      "type": "java.lang.String",
+      "description": "Description for jwt.secret."
+    }
+  ]
+}
