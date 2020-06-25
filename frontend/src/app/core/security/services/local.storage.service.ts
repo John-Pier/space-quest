@@ -10,33 +10,40 @@ export class SPQLocalStorageService implements SPQStorageService {
     }
 
     public getFirstName(): string {
-        return "";
+        return localStorage.getItem(SPAStorageKeys.FIRST_NAME_KEY);
     }
 
     public getRoles(): string[] {
-        return [];
+        const roles = JSON.parse(localStorage.getItem(SPAStorageKeys.ROLES_KEY));
+        return roles ? roles : [];
     }
 
     public getToken(): string {
-        return "";
+        return localStorage.getItem(SPAStorageKeys.TOKEN_KEY);
     }
 
     public goOut(): void {
+        Array.from(Object.values(SPAStorageKeys))
+            .forEach(key => localStorage.removeItem(key));
     }
 
     public isLoggedIn(): boolean {
-        return false;
+        return !!this.getToken() && !!this.getLogin() && !!this.getFirstName();
     }
 
     public saveFirstName(name: string): void {
+        localStorage.setItem(SPAStorageKeys.FIRST_NAME_KEY, name);
     }
 
     public saveLogin(username: string): void {
+        localStorage.setItem(SPAStorageKeys.LOGIN_KEY, username);
     }
 
     public saveRoles(roles: string[]): void {
+        localStorage.setItem(SPAStorageKeys.ROLES_KEY, JSON.stringify(roles));
     }
 
     public saveToken(token: string): void {
+        localStorage.setItem(SPAStorageKeys.TOKEN_KEY, token);
     }
 }
