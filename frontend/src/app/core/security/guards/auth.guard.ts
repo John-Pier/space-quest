@@ -23,7 +23,7 @@ export class SPQAuthGuard implements CanActivate, CanActivateChild, CanLoad {
     }
 
     public canLoad(route: Route, segments: UrlSegment[]): Promise<boolean> | boolean {
-        return this.isLogged() ? true : this.router.navigateByUrl(SPQRoutesMap[SPQRoutesString.SPQ_AUTH])
+        return this.isLogged() ? true : this.navigationService.navigateWithoutHistory(SPQRoutesMap[SPQRoutesString.SPQ_AUTH]);
     }
 
     private isLogged(): boolean {

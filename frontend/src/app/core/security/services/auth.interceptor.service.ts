@@ -1,5 +1,6 @@
-import {HttpHandler, HttpInterceptor, HttpRequest} from "@angular/common/http";
+import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from "@angular/common/http";
 import {Injectable} from "@angular/core";
+import {Observable} from "rxjs";
 import {TOKEN_HEADER_KEY} from "../../../modules/auth/types/auth.type";
 import {SPQStorageService} from "../../../services/storage.service";
 
@@ -8,7 +9,7 @@ export class SPQAuthInterceptor implements HttpInterceptor {
 
     constructor(private token: SPQStorageService) {}
 
-    public intercept(httpRequest: HttpRequest<any>, next: HttpHandler) {
+    public intercept(httpRequest: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         let authRequest = httpRequest;
         const token = this.token.getToken();
         if (token != null) {
