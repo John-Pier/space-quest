@@ -6,7 +6,7 @@ import {SPQAuthGuard} from "./guards/auth.guard";
 import {SPQAuthErrorInterceptor} from "./services/auth-error.interseptor";
 import {SPQAuthInterceptor} from "./services/auth.interceptor.service";
 import {SPAJwtTokenDecoderService} from "./services/jwt-token-decoder.service";
-import {SPQSessionStorageService} from "./services/session-storage.service";
+import {SPQLocalStorageService} from "./services/local.storage.service";
 
 export type SPQSecurityModuleConfig = {
     storageService?: Provider
@@ -35,7 +35,7 @@ export class SPQSecurityModule {
                     moduleConfig.storageService :
                     {
                         provide: SPQStorageService,
-                        useClass: SPQSessionStorageService
+                        useClass: SPQLocalStorageService
                     },
                 SPQAuthGuard,
                 {
