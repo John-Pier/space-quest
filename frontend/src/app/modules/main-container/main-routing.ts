@@ -1,5 +1,6 @@
 import {Routes} from "@angular/router";
 import {defaultAbsoluteRoute, SPQRoutesString} from "../../app-routers";
+import {SPQAccessDeniedComponent} from "../../components/access-denied/access-denied.component";
 import {SPQNotFoundComponent} from "../../components/not-found/not-found.component";
 import {SPQAuthGuard} from "../../core/security/guards/auth.guard";
 
@@ -32,6 +33,10 @@ export const MAIN_ROUTES: Routes = [
     {
         path: SPQRoutesString.SPQ_NOT_FOUND,
         component: SPQNotFoundComponent
+    },
+    {
+        path: SPQRoutesString.SPQ_ACCESS_DENIED,
+        component: SPQAccessDeniedComponent
     },
     {
         path: "**",

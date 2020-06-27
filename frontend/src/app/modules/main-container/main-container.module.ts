@@ -3,6 +3,7 @@ import {NgModule, Type} from "@angular/core";
 import {MatIconModule, MatMenuModule} from "@angular/material";
 import {MatButtonModule} from "@angular/material/button";
 import {RouterModule, Routes} from "@angular/router";
+import {SPQAccessDeniedModule} from "../../components/access-denied/access-denied.module";
 import {SPQHeaderModule} from "../../components/header/header.module";
 import {SPQNotFoundModule} from "../../components/not-found/not-found.module";
 import {SPQMainContainerComponent} from "./main-container.component";
@@ -18,7 +19,8 @@ const SPQMainContainerRoutes: Routes = [
 
 const spqModules: Type<any>[] = [
     SPQHeaderModule,
-    SPQNotFoundModule
+    SPQNotFoundModule,
+    SPQAccessDeniedModule
 ];
 
 const matModules: Type<any>[] = [
