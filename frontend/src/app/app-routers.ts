@@ -7,7 +7,8 @@ export enum SPQRoutesString {
     SPQ_QUEST = "quest",
     SPQ_QUEST_STEP = "quest/:id",
     SPQ_USER_PROFILE = "profile",
-    SPQ_NOT_FOUND = "not-found"
+    SPQ_NOT_FOUND = "not-found",
+    SPQ_ACCESS_DENIED = "access-denied"
 }
 
 export const SPQRoutesMap: SPQTypedMap<string> = {

@@ -10,7 +10,7 @@ export class SPQSessionStorageService implements SPQStorageService {
     }
 
     public saveToken(token: string): void {
-        window.sessionStorage.setItem(SPAStorageKeys.TOKEN_KEY, token);
+        sessionStorage.setItem(SPAStorageKeys.TOKEN_KEY, token);
     }
 
     public getLogin(): string {
@@ -18,7 +18,7 @@ export class SPQSessionStorageService implements SPQStorageService {
     }
 
     public saveLogin(login: string): void {
-        window.sessionStorage.setItem(SPAStorageKeys.LOGIN_KEY, login);
+        sessionStorage.setItem(SPAStorageKeys.LOGIN_KEY, login);
     }
 
     public getRoles(): string[] {
@@ -27,7 +27,7 @@ export class SPQSessionStorageService implements SPQStorageService {
     }
 
     public saveRoles(roles: string[]): void {
-        window.sessionStorage.setItem(SPAStorageKeys.ROLES_KEY, JSON.stringify(roles));
+        sessionStorage.setItem(SPAStorageKeys.ROLES_KEY, JSON.stringify(roles));
     }
 
     public getFirstName(): string {
@@ -35,7 +35,7 @@ export class SPQSessionStorageService implements SPQStorageService {
     }
 
     public saveFirstName(name: string) {
-        window.sessionStorage.setItem(SPAStorageKeys.FIRST_NAME_KEY, name);
+        sessionStorage.setItem(SPAStorageKeys.FIRST_NAME_KEY, name);
     }
 
     public isLoggedIn(): boolean {
@@ -44,6 +44,6 @@ export class SPQSessionStorageService implements SPQStorageService {
 
     public goOut(): void {
         Array.from(Object.values(SPAStorageKeys))
-            .forEach(key => window.sessionStorage.removeItem(key));
+            .forEach(key => sessionStorage.removeItem(key));
     }
 }

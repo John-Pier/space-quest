@@ -10,8 +10,8 @@ import {SPQHintPopupComponent} from "./components/embed/hint-popup.component";
 import {SPQQuestDetailsAnswerComponent} from "./components/qd-answer.component";
 import {SPQQuestDetailsQuestionComponent} from "./components/qd-question.component";
 import {SPQQuestDetailsComponent} from "./quest-details.component";
+import {SPQQuestTaskResolver} from "./quest-task.resolver";
 import {SPQQuestDetailsService} from "./services/quest-details.service";
-import {SPQQuestTaskResolver} from "./services/quest-task.resolver";
 
 const QuestDetailsRoutes: Routes = [
     {

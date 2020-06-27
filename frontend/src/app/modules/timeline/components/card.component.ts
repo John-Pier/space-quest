@@ -4,7 +4,7 @@ import {take, tap} from "rxjs/operators";
 import {SPQRoutesMap, SPQRoutesString} from "../../../app-routers";
 import {SPQQuestFlowBrief, SPQQuestTaskBrief} from "../../../core/models/quest-task.type";
 import {SPQNavigationService} from "../../../services/navigation.service";
-import {SPQTimelineService} from "../sevrvices/timeline.service";
+import {SPQTimelineService} from "../services/timeline.service";
 
 @Component({
     selector: "spq-card",

@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {MatDialog} from "@angular/material";
 import {finalize, take, tap} from "rxjs/operators";
 import {ID} from "../../../core/base.types";
+import {flashAnimations} from "../../../core/core.animations";
 import {SPQQuestTask} from "../../../core/models/quest-task.type";
 import {SPQQuestDetailsNavigationService} from "../services/qd-navigation-helper.service";
 import {SPQQuestDetailsService} from "../services/quest-details.service";
@@ -15,6 +16,9 @@ import {SPQHintPopupComponent} from "./embed/hint-popup.component";
     templateUrl: "qd-answer.component.html",
     providers: [
         MatDialog
+    ],
+    animations: [
+        flashAnimations
     ]
 })
 export class SPQQuestDetailsAnswerComponent implements OnChanges, OnDestroy {
