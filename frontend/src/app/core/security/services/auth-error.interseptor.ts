@@ -16,8 +16,10 @@ export class SPQAuthErrorInterceptor implements HttpInterceptor {
             .pipe(
                 tap(() => {}, error => {
                     if (error instanceof HttpErrorResponse) {
-                        if (error.status === 403 || error.status === 401) {
+                        if (error.status === 401) {
                             this.navigationService.navigateWithoutHistory(SPQRoutesMap[SPQRoutesString.SPQ_AUTH]);
+                        } else if (error.status === 403) {
+                            // access id denied;
                         }
                     }
                 })
