@@ -7,6 +7,10 @@
 
     &__inner {
         width: 100%;
+
+        ._relative {
+            position: relative !important;
+        }
     }
 
     &__image {
@@ -15,6 +19,16 @@
 
     &__e-panel {
         transition: height 425ms cubic-bezier(.4, 0, .2, 1);
+
+        ._p-t {
+            padding-top: 8px;
+        }
+
+        ._title {
+            font-size: 17px;
+            font-weight: 500;
+            margin: 0 16px;
+        }
 
         &-content {
             width: 100%;
@@ -34,10 +48,6 @@
         justify-content: flex-start;
         user-select: none;
         width: 100%;
-
-        ._relative {
-            position: relative !important;
-        }
 
         .mat-list-item {
             display: flex;

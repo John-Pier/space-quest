@@ -117,7 +117,7 @@ export class SPQAuthComponent implements OnInit {
         this._registrationForm = new FormGroup({
             firstName: new FormControl("", [Validators.required, Validators.min(2)]),
             login: new FormControl("", this.getValidatorsForFields()),
-            email: new FormControl("", [...this.getValidatorsForFields(), Validators.email]),
+            email: new FormControl("", [Validators.required, Validators.min(5), Validators.email]),
             password: new FormControl("", this.getValidatorsForFields()),
         });
     }
@@ -131,7 +131,7 @@ export class SPQAuthComponent implements OnInit {
     }
 
     private getValidatorsForFields(): ValidatorFn[] {
-        return [Validators.required, Validators.min(5)];
+        return [Validators.required, Validators.min(5), Validators.pattern("[A-Za-z0-9_]*")];
     }
 
     public getErrorMessage(): string {

@@ -13,14 +13,10 @@
         <mat-card-content>
             <p>{{flowBrief.text}}</p>
         </mat-card-content>
-        <mat-expansion-panel class="spq-card__e-panel _no-shadow"
-                             *ngIf="_currentTaskBrief"
-                             (expandedChange)="_isCollapsed = !$event">
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    {{_isCollapsed ? 'Раверните чтобы увидеть текущее задание' : 'Текущее задание'}}
-                </mat-panel-title>
-            </mat-expansion-panel-header>
+        <div class="spq-card__e-panel _no-shadow"
+             *ngIf="_currentTaskBrief">
+            <mat-divider class="_relative _p-t"></mat-divider>
+            <span class="_title">{{'Текущее задание'}}</span>
             <div class="spq-card__e-panel-content">
                 <mat-list class="spq-card__task">
                     <mat-list-item>
@@ -45,6 +41,6 @@
                     </button>
                 </div>
             </div>
-        </mat-expansion-panel>
+        </div>
     </mat-card>
 </div>
