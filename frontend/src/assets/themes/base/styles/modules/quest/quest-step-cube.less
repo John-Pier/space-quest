@@ -1,10 +1,10 @@
 @import "./../../common/colors.less";
-@import "./../../common/common.less";
+@import "./../../common/mixins.less";
 
 .spq-quest-step-cube {
     display: flex;
-    width: 158px;
-    height: 128px;
+    width: 180px;
+    height: 132px;
 
     &__inner {
         height: 100%;
@@ -55,20 +55,30 @@
         width: 100%;
         height: 100%;
         color: @white;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        word-break: break-word;
 
         &-title {
+            width: 100%;
             font-weight: 800;
             font-size: 18px;
             line-height: 22px;
             text-overflow: ellipsis;
+            overflow: hidden;
+            max-height: 55%;
         }
 
         &-subtitle {
+            padding-top: 2px;
+            width: 100%;
             font-style: italic;
             font-weight: normal;
             font-size: 13px;
             line-height: 16px;
             text-overflow: ellipsis;
+            overflow: hidden;
+            height: 45%;
         }
     }
 
@@ -76,7 +86,7 @@
         position: absolute;
         height: 104px;
         left: 20px;
-        top: -10px;
+        top: 2px;
         font-style: normal;
         font-weight: 800;
         font-size: 100px;

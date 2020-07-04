@@ -44,7 +44,7 @@
             <button class="_button"
                     type="submit"
                     mat-raised-button color="primary"
-                    [disabled]="_localLoading || _answerFormGroupModel.invalid || !_answerFormGroupModel.dirty">
+                    [disabled]="_localLoading || _answerFormGroupModel.invalid || !input.value.length || !_answerFormGroupModel.dirty">
                 Отправить
             </button>
         </form>

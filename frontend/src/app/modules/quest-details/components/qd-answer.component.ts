@@ -65,11 +65,6 @@ export class SPQQuestDetailsAnswerComponent implements OnChanges, OnDestroy {
         }
     }
 
-    public s() {
-        this.initAnswerForm();
-        this.subscribeToGetTooltipsCount();
-    }
-
     public _onSubmitClick(answer: string): void {
         this.subscribeToCheckAnswer(answer);
     }
@@ -86,12 +81,11 @@ export class SPQQuestDetailsAnswerComponent implements OnChanges, OnDestroy {
     }
 
     public ngOnDestroy() {
-        // this.subscription.forEach(el => el.unsubscribe());
     }
 
     private initAnswerForm(): void {
         this._answerFormGroupModel = new FormGroup({
-            answerInput: new FormControl("", [Validators.required, Validators.min(1)])
+            answerInput: new FormControl("", [Validators.min(1)])
         });
     }
 
@@ -141,11 +135,7 @@ export class SPQQuestDetailsAnswerComponent implements OnChanges, OnDestroy {
     }
 
     private clearField(): void {
-        this._answerFormGroupModel.patchValue({
-            answerInput: ""
-        }, {
-            emitEvent: false
-        });
+        this._answerFormGroupModel.reset();
     }
 
     private openFinishDialogAndSubscribeToClose(hasNext: boolean): void {
