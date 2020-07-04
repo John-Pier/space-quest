@@ -1,8 +1,18 @@
 <div class="spq-qd-question__inner"
      [@flashAnimations]>
-    <div class="spq-qd-question__content"
-         *ngIf="_safeUrl && _taskType"
-         [ngSwitch]="_taskType">
+    <div class="spq-qd-question__content">
+        <ng-template [ngTemplateOutlet]="_safeUrl && _taskType ? existUrlTemplate  : defaultImageTemplate">
+        </ng-template>
+    </div>
+    <div class="spq-qd-question__question">
+        <div class="spq-qd-question__question-caption">
+            {{questTask.text}}
+        </div>
+    </div>
+</div>
+
+<ng-template #existUrlTemplate>
+    <ng-container [ngSwitch]="_taskType">
         <iframe class="spq-qd-question__content-video"
                 *ngSwitchCase="_questUrlType.VIDEO"
                 [src]="_safeUrl"
@@ -14,10 +24,12 @@
              [src]="_safeUrl"
              importance="high"
              alt="Question Picture">
-    </div>
-    <div class="spq-qd-question__question">
-        <div class="spq-qd-question__question-caption">
-            {{questTask.text}}
-        </div>
-    </div>
-</div>
+    </ng-container>
+</ng-template>
+
+<ng-template #defaultImageTemplate>
+    <svg width="300px"
+         height="300px">
+        <use xlink:href="#icon-astronaut"/>
+    </svg>
+</ng-template>
