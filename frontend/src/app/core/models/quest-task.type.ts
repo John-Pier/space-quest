@@ -1,5 +1,18 @@
 import {ID} from "../base.types";
 
+export type SQPQuestPart = {
+    uuid: ID,
+    name: string,
+    flows: SPQQuestFlow[],
+    currentFlowId: ID
+};
+
+export type SQPQuestPartBrief = {
+    uuid: ID,
+    name: string,
+    flowBriefs: SPQQuestFlowBrief[]
+};
+
 export type SPQQuestTask = Readonly<{
     uuid: ID,
     sectionUUID: ID,
@@ -25,8 +38,10 @@ export type SPQQuestTaskBrief = Readonly<{
 export type SPQQuestFlow = Readonly<{
     id: ID,
     name: string,
-    nodes: SPQQuestTaskBrief[],
-    currentTaskId: ID
+    nodes: SPQQuestTaskBrief[], // Если !passed и !selected - []
+    passed: boolean,
+    selected: boolean,
+    currentTaskId: ID // Если !passed и !selected - null
 }>;
 
 export type SPQQuestFlowBrief = Readonly<{
@@ -34,5 +49,7 @@ export type SPQQuestFlowBrief = Readonly<{
     name: string,
     text: string,
     url: string,
-    currentTaskId: ID
+    passed: boolean,
+    selected: boolean,
+    currentTaskId: ID // Если !passed и !selected - null
 }>;
